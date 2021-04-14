@@ -8,19 +8,35 @@ Start the app
 
 
 Install all dependencies
-1: Bulma `yarn add bulma`
-2: Gulp, after creating a gulpfile.js, do `npm install --global gulp-cli` (Allows to use "gulp" command)
-3: Gulp dependencies : `yarn add gulp gulp-sass gulp-clean-css gulp-uglify gulp-rename gulp-changed` (In this case these are the dependencies used in gulpfile.js, might not need to add everything)
+1: React  `yarn add react-helmet react-router react-router-dom`
+
+2: Bulma `yarn add bulma`
+
+3: Gulp, after creating a gulpfile.js, do `npm install --global gulp-cli` (Allows to use "gulp" command)
+
+4: Gulp dependencies : `yarn add gulp gulp-sass gulp-clean-css gulp-uglify gulp-rename gulp-changed` (In this case these are the dependencies used in gulpfile.js, might not need to add everything)
 
 
+5: Eslint, install `yarn add eslint`,
+init cfg file : `yarn run eslint --init`
+In the selector :
+Question 1 : To check syntax, find problems, and enforce code style
 
+Question 2 :  JavaScript modules (import/export)
 
+Question 3 : React
 
+Question 4 : No
 
+Question 5 : Node
 
+Question 6 : Popular style guide
 
+Question 7 : airbnb
 
+Question 8 : JSON
 
+Question 9 : Yes
 
 
 ##############
