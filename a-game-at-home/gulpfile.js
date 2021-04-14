@@ -1,5 +1,3 @@
-'use strict';
-
 // dependencies
 var gulp = require('gulp');
 var sass = require('gulp-sass');
@@ -14,7 +12,7 @@ var changed = require('gulp-changed');
 // - SCSS/CSS
 ///////////////
 
-var SCSS_SRC = './src/Assets/scss/**/*.scss';
+var SCSS_SRC  = './src/Assets/scss/**/*.scss';
 var SCSS_DEST = './src/Assets/css';
 
 // Compile SCSS

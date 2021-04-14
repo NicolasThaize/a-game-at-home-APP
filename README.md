@@ -16,6 +16,8 @@ Install all dependencies
 
 4: Gulp dependencies : `yarn add gulp gulp-sass gulp-clean-css gulp-uglify gulp-rename gulp-changed` (In this case these are the dependencies used in gulpfile.js, might not need to add everything)
 
+5: Node dependencies `yarn add node-sass`
+
 ########################################################################
                                                                        #
 5: Eslint, install `yarn add eslint`,                                  #
