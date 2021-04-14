@@ -22,23 +22,23 @@ Install all dependencies
 init cfg file : `yarn run eslint --init`                               #
 In the selector :                                                      #
 Question 1 : To check syntax, find problems, and enforce code style    #
-
-Question 2 :  JavaScript modules (import/export)
-
-Question 3 : React
-
-Question 4 : No
-
-Question 5 : Node
-
-Question 6 : Popular style guide
-
-Question 7 : airbnb
-
-Question 8 : JSON
-
-Question 9 : Yes
-
+                                                                       #
+Question 2 :  JavaScript modules (import/export)                       #
+                                                                       #
+Question 3 : React                                                     #
+                                                                       #
+Question 4 : No                                                        #
+                                                                       #
+Question 5 : Node                                                      #
+                                                                       #
+Question 6 : Popular style guide                                       #
+                                                                       #
+Question 7 : airbnb                                                    #
+                                                                       #
+Question 8 : JSON                                                      #
+                                                                       #
+Question 9 : Yes                                                       #
+                                                                       #
 ########################################################################
 ##############
 All about yarn
