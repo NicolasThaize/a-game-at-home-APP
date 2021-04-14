@@ -16,11 +16,12 @@ Install all dependencies
 
 4: Gulp dependencies : `yarn add gulp gulp-sass gulp-clean-css gulp-uglify gulp-rename gulp-changed` (In this case these are the dependencies used in gulpfile.js, might not need to add everything)
 
-
-5: Eslint, install `yarn add eslint`,
-init cfg file : `yarn run eslint --init`
-In the selector :
-Question 1 : To check syntax, find problems, and enforce code style
+########################################################################
+                                                                       #
+5: Eslint, install `yarn add eslint`,                                  #
+init cfg file : `yarn run eslint --init`                               #
+In the selector :                                                      #
+Question 1 : To check syntax, find problems, and enforce code style    #
 
 Question 2 :  JavaScript modules (import/export)
 
@@ -38,7 +39,7 @@ Question 8 : JSON
 
 Question 9 : Yes
 
-
+########################################################################
 ##############
 All about yarn
 ##############
