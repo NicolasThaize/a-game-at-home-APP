@@ -88,11 +88,11 @@ class Navbar extends React.Component {
             <NavbarNotLoggedIn/>
           }
           <div className="is-hidden-desktop columns is-mobile has-text-centered m-3">
-            <a href="https://www.google.com" target="_blank" className="column">
+            <a href="https://www.google.com" target="_blank" rel="noreferrer" className="column">
               <img src={svgFb} alt="logo facebook" className="navDropSvg"/>
              <p>Facebook</p>
             </a>
-            <a href="https://www.google.com" target="_blank" className="column">
+            <a href="https://www.google.com" target="_blank" rel="noreferrer" className="column">
               <img src={svgTwt} alt="logo twitter" className="navDropSvg"/>
               <p>Twitter</p>
             </a>
