@@ -1,10 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Helmet } from 'react-helmet';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-import Footer from './components/footerComponents/Footer'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Footer from './components/footerComponents/Footer';
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -18,13 +15,13 @@ class App extends Component {
         <main>
           <Helmet>
             {/*Tab Infos*/}
-            <title>Catalogue de services</title>
-            <link rel="icon" href="/favicons/favicon-16x16.png"/>
+            <title>At Home A Game</title>
+            <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
 
             {/* SEO */}
             <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>
             <meta name="description" content="Faites vos demandes de noms de domaine rapidement"/>
-            <meta name="author" content="Leo MASSEGLIA"/>
+            <meta name="author" content="Leo MASSEGLIA, Nicolas THAIZE"/>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
           </Helmet>
           <div className="App">
