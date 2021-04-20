@@ -10,7 +10,9 @@ $black-darker: hsl(0, 0%, 10%);
 
 // Set bulma variables
 $primary: $primary-color;
-
+$navbar-item-hover-color: $primary-color;
+$navbar-dropdown-arrow: $primary-color;
+$link: $primary-color;
 
 // Import only what you need from Bulma
-@import '~bulma/bulma.sass';
+@import '../node_modules/bulma/bulma';

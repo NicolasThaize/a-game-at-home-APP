@@ -11,8 +11,8 @@ const changed = require('gulp-changed');
 // - SCSS/CSS
 ///////////////
 
-const SCSS_SRC  = './src/Assets/scss/**/*.scss';
-const SCSS_DEST = './src/Assets/css';
+const SCSS_SRC  = './src/assets/scss/**/*.scss';
+const SCSS_DEST = './src/assets/css';
 
 // Compile SCSS
 //gulp.task('compile_scss', function(){
