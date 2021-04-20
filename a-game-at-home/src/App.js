@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/footerComponents/Footer';
-import Navbar from './components/navbarComponent/Navbar';
+import Navbar from './components/navbarComponents/Navbar';
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
