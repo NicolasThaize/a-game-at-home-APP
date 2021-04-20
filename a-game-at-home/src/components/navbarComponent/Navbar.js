@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import NavbarLoggedIn from "./NavbarLoggedIn";
-import "../../assets/css/navbar.min.css"
 import NavbarNotLoggedIn from "./NavbarNotLoggedIn";
+import "../../assets/css/navbar.min.css"
 
 class Navbar extends React.Component {
   state = {
@@ -46,7 +46,7 @@ class Navbar extends React.Component {
       burgerClassName += ' is-active'
     }
     return(
-      <nav className="navbar container is-fluid is-fixed-top has-text-centered-touch" role="navigation" aria-label="main navigation">
+      <nav className="navbar container is-fluid is-fixed-top has-text-centered-touch navShadow" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to="/" className="navbar-logo">
             <img src={logo} height="50" alt="logo"/>
@@ -88,11 +88,11 @@ class Navbar extends React.Component {
             <NavbarNotLoggedIn/>
           }
           <div className="is-hidden-desktop columns is-mobile has-text-centered m-3">
-            <a href="https://www.google.com" target="_blank" className="column">
+            <a href="https://www.google.com" target="_blank" rel="noreferrer" className="column">
               <img src={svgFb} alt="logo facebook" className="navDropSvg"/>
              <p>Facebook</p>
             </a>
-            <a href="https://www.google.com" target="_blank" className="column">
+            <a href="https://www.google.com" target="_blank" rel="noreferrer" className="column">
               <img src={svgTwt} alt="logo twitter" className="navDropSvg"/>
               <p>Twitter</p>
             </a>
