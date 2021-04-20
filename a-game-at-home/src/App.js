@@ -8,6 +8,7 @@ import Navbar from './components/navbarComponents/Navbar';
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
+import Home from "./components/homeComponent/Home";
 
 class App extends Component {
   render(){
@@ -27,6 +28,7 @@ class App extends Component {
           </Helmet>
           <div className="App">
             <Navbar/>
+            <Home/>
             <Footer/>
           </div>
         </main>
