@@ -15,4 +15,19 @@ $navbar-dropdown-arrow: $primary-color;
 $link: $primary-color;
 
 // Import only what you need from Bulma
-@import '../node_modules/bulma/bulma';
+@import "../node_modules/bulma/sass/utilities/_all.sass";
+@import "../node_modules/bulma/sass/base/_all.sass";
+@import '../node_modules/bulma/sass/components/navbar';
+@import '../node_modules/bulma/sass/components/dropdown';
+@import '../node_modules/bulma/sass/components/menu';
+@import '../node_modules/bulma/sass/elements/button';
+@import '../node_modules/bulma/sass/elements/container';
+@import '../node_modules/bulma/sass/elements/title';
+@import '../node_modules/bulma/sass/grid/columns';
+@import '../node_modules/bulma/sass/helpers/color';
+@import '../node_modules/bulma/sass/helpers/flexbox';
+@import '../node_modules/bulma/sass/helpers/position';
+@import '../node_modules/bulma/sass/helpers/spacing';
+@import '../node_modules/bulma/sass/helpers/typography';
+@import '../node_modules/bulma/sass/helpers/visibility';
+@import '../node_modules/bulma/sass/layout/_all';
