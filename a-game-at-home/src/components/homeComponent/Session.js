@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import '../../assets/css/home.min.css';
 
 class Session extends React.Component {
   state = {
@@ -33,7 +34,7 @@ class Session extends React.Component {
   render() {
     const { id, name, description, start_date, end_date, formattedStartDate, formattedEndDate, isFinished} = this.state;
     return(
-      <Link to={isFinished? "/": "/"} className="card column m-2 is-bordered">
+      <Link to={isFinished? "/": "/"} className="card column m-2 is-bordered shadowed">
         <div className="card-content">
           <div className="media">
             <div className="media-content">
