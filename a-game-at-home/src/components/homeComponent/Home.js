@@ -1,6 +1,8 @@
 import React from "react";
 import HomeCarousel from "./HomeCarousel";
 import "../../assets/css/home.min.css";
+import HomeSessions from "./HomeSessions";
+import HomePrices from "./HomePrices";
 
 class Home extends React.Component {
   render() {
@@ -17,7 +19,12 @@ class Home extends React.Component {
           gravida lacinia. Suspendisse eu mauris luctus, consequat purus vitae, tristique ante. Donec in vulputate n
           ibh. Integer est turpis, tristique tincidunt elementum vitae, pretium eu tellus.
         </p>
-        <div className="divider"/>
+        <div className="divider mt-6 mb-6"/>
+        <h2 className="title has-text-centered has-text-primary is-uppercase">Historique des sessions</h2>
+        <HomeSessions/>
+        <div className="divider mt-6 mb-6"/>
+        <h2 className="title has-text-centered has-text-primary is-uppercase">Les tarifs des sessions</h2>
+        <HomePrices/>
       </div>
     )
   }
