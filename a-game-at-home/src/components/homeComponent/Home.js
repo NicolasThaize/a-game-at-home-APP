@@ -20,7 +20,7 @@ class Home extends React.Component {
           ibh. Integer est turpis, tristique tincidunt elementum vitae, pretium eu tellus.
         </p>
         <div className="divider mt-6 mb-6"/>
-        <h2 className="title has-text-centered has-text-primary is-uppercase">Historique des sessions</h2>
+        <h2 className="title has-text-centered has-text-primary is-uppercase">L'historique des sessions</h2>
         <HomeSessions/>
         <div className="divider mt-6 mb-6"/>
         <h2 className="title has-text-centered has-text-primary is-uppercase">Les tarifs des sessions</h2>
