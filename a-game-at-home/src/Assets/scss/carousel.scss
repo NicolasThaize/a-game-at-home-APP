@@ -1,9 +1,10 @@
 @import "../../variable";
 
+/* DEFINIG CAROUSEL THINGS */
+
 .carouselContainer{
   min-height: 70vh;
   width: 100%;
-  background-size: cover;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -17,6 +18,29 @@
   background-color: hsla(0, 0%, 100%, 0.6);
 }
 
+/* END DEFINIG CAROUSEL THINGS */
+
+/* CAROUSEL BACKGROUND IMG ANIMATION */
+
+.carouselContainer{
+  background-position: center center;
+  background-size: 110%;
+
+  animation: zoominout 8s infinite alternate;
+}
+
+@keyframes zoominout {
+  0% {
+    background-size: 110%;
+  }
+  100% {
+    background-size: 100%;
+  }
+}
+
+/* END CAROUSEL BACKGROUND IMG ANIMATION */
+
+/* CUSTOMIZING CAROUSEL LIB */
 
 .rec.rec-dot_active{
   background: $primary-color;
@@ -51,3 +75,5 @@
   margin: 0;
   border: 0;
 }
+
+/* END CUSTOMIZING CAROUSEL LIB */
