@@ -32,7 +32,7 @@ class Session extends React.Component {
   }
 
   render() {
-    const { id, name, description, start_date, end_date, formattedStartDate, formattedEndDate, isFinished} = this.state;
+    const { name, description, formattedStartDate, formattedEndDate, isFinished} = this.state;
     return(
       <Link to={isFinished? "/": "/"} className="card column m-2 is-bordered shadowed">
         <div className="card-content">
@@ -51,8 +51,8 @@ class Session extends React.Component {
         </div>
         <footer className="card-footer">
           { isFinished ?
-            <Link href="#" className="card-footer-item">Voir plus</Link> :
-            <Link href="#" className="card-footer-item">Voir les résultats</Link>
+            <p className="card-footer-item">Voir plus</p> :
+            <p className="card-footer-item">Voir les résultats</p>
           }
         </footer>
       </Link>

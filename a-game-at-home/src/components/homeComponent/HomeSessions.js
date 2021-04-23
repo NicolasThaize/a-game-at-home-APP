@@ -32,7 +32,7 @@ class HomeSessions extends React.Component {
     return(
       <div className="columns sessionsWidth">
         { sessions.map(session => (
-          <Session session={session}/>
+          <Session session={session} key={session.id}/>
         ))}
       </div>
     )
