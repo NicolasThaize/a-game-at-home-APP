@@ -30,7 +30,7 @@ class HomeSessions extends React.Component {
   render() {
     const { sessions } = this.state;
     return(
-      <div className="columns ml-6 mr-6">
+      <div className="columns sessionsWidth">
         { sessions.map(session => (
           <Session session={session}/>
         ))}
