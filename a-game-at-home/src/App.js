@@ -3,12 +3,13 @@ import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Footer from './components/footerComponents/Footer';
 import Navbar from './components/navbarComponents/Navbar';
+import Home from "./components/homeComponent/Home";
+import Register from './components/authComponents/registerComponents/Register';
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
-import Home from "./components/homeComponent/Home";
 
 class App extends Component {
   render(){
@@ -28,7 +29,7 @@ class App extends Component {
           </Helmet>
           <div className="App">
             <Navbar/>
-            <Home/>
+            <Register/>
             <Footer/>
           </div>
         </main>
