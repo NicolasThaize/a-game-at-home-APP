@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Footer from './components/footerComponents/Footer';
 import Navbar from './components/navbarComponents/Navbar';
+
+//Importing components
 import Home from "./components/homeComponent/Home";
-import Register from './components/authComponents/registerComponents/Register';
+import Login from "./components/authComponents/loginComponents/Login";
+import Register from "./components/authComponents/registerComponents/Register";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -19,7 +22,7 @@ class App extends Component {
           <Helmet>
             {/*Tab Infos*/}
             <title>At Home A Game</title>
-            <link rel="icon" href="/public/favicon.ico"/>
+            <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
 
             {/* SEO */}
             <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>
@@ -29,7 +32,9 @@ class App extends Component {
           </Helmet>
           <div className="App">
             <Navbar/>
-            <Register/>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/Register" component={Register} />
             <Footer/>
           </div>
         </main>

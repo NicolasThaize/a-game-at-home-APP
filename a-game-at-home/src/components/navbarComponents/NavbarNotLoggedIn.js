@@ -8,10 +8,10 @@ class NavbarLoggedIn extends React.Component {
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons is-centered">
-            <Link to="/" className="button is-primary">
+            <Link to="/Register" className="button is-primary">
               <strong>Créer un compte</strong>
             </Link>
-            <Link to="/" className="button is-light">
+            <Link to="/Login" className="button is-light">
               Se connecter
             </Link>
           </div>
