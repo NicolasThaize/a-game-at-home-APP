@@ -166,7 +166,7 @@ class Register extends React.Component{
 
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-link">S'enregister</button>
+            <button className="button is-link">Valider</button>
           </div>
           <div className="control">
             <button className="button is-link is-light">Annuler</button>
