@@ -23,6 +23,7 @@ class LoginRegisterButton extends React.Component{
     this.setState({
       isActive: text
     })
+    window.history.pushState("", "", `/${text}`);
   }
 
   render() {
