@@ -9,6 +9,7 @@ import Navbar from './components/navbarComponents/Navbar';
 import Home from "./components/homeComponent/Home";
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 import Presentation from "./components/presentationComponents/Presentation";
+import Articles from "./components/articleComponents/Articles";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -39,6 +40,7 @@ class App extends Component {
             <Route exact path="/Login" component={LoginRegisterButton} />
             <Route exact path="/Register" component={LoginRegisterButton} />
             <Route exact path="/Presentation" component={Presentation} />
+            <Route exact path="/Articles" component={Articles} />
             <Footer/>
           </div>
         </main>
