@@ -1,19 +1,21 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
-import Footer from './components/footerComponents/Footer';
-import Navbar from './components/navbarComponents/Navbar';
+
 
 //Importing components
+import Footer from './components/footerComponents/Footer';
+import Navbar from './components/navbarComponents/Navbar';
 import Home from "./components/homeComponent/Home";
-import Login from "./components/authComponents/loginComponents/Login";
-import Register from "./components/authComponents/registerComponents/Register";
+import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
+import Presentation from "./components/presentationComponents/Presentation";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
-import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
+
+
 
 class App extends Component {
   render(){
@@ -36,6 +38,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/Login" component={LoginRegisterButton} />
             <Route exact path="/Register" component={LoginRegisterButton} />
+            <Route exact path="/Presentation" component={Presentation} />
             <Footer/>
           </div>
         </main>

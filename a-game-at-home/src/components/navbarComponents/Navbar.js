@@ -71,7 +71,7 @@ class Navbar extends React.Component {
               Accueil
             </Link>
 
-            <Link to="/" className="navbar-item">
+            <Link to="/Presentation" className="navbar-item">
               Presentation
             </Link>
 
