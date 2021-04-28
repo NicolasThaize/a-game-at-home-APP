@@ -31,8 +31,16 @@ class LoginRegisterButton extends React.Component{
     return(
       <div>
         <div className="buttons ml-3 mr-3 is-centered mt-6 mb-6">
-          <p onClick={() => this.switchForm('login')} className={`is-one-quarter button p-5 ${isActive === "login" ? "is-primary" : ""}`}>Se connecter</p>
-          <p onClick={() => this.switchForm('register')} className={`is-one-quarter button p-5 ${isActive === "register" ? "is-primary" : ""}`}>S'enregistrer</p>
+          <p
+            onClick={() => this.switchForm('register')}
+            className={`is-one-quarter button p-5 ${isActive === "register" ? "is-primary" : ""}`}>
+            S'enregistrer
+          </p>
+          <p
+            onClick={() => this.switchForm('login')}
+            className={`is-one-quarter button p-5 ${isActive === "login" ? "is-primary" : ""}`}>
+            Se connecter
+          </p>
         </div>
         {isActive === "register" ? <Register/> : <Login className="mb-6"/> }
       </div>
