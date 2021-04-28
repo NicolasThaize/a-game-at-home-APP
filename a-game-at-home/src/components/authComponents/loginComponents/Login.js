@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import Input from "../Input";
+import "../../../assets/css/login.min.css";
 
 class Login extends React.Component{
     handleSubmit = (e) => {
@@ -18,16 +19,6 @@ class Login extends React.Component{
 
     getInputData = (data) => {
         switch (data.label){
-            case "Nom":
-                this.setState({
-                    lastName: data.value
-                })
-                break;
-            case "Prenom":
-                this.setState({
-                    firstName: data.value
-                })
-                break;
             case "Nom d\'utilisateur":
                 this.setState({
                     username: data.value
@@ -45,7 +36,7 @@ class Login extends React.Component{
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit} className="loginContainer mt-6 mb-6">
+            <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
                 <Input onSubmit={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Hamood69', type: 'text'}}/>
                 <Input onSubmit={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '', type: 'password'}}/>
                 <div className="field is-grouped">

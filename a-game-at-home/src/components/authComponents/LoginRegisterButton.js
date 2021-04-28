@@ -33,7 +33,7 @@ class LoginRegisterButton extends React.Component{
           <p onClick={() => this.switchForm('login')} className={`is-one-quarter button p-5 ${isActive === "login" ? "is-primary" : ""}`}>Se connecter</p>
           <p onClick={() => this.switchForm('register')} className={`is-one-quarter button p-5 ${isActive === "register" ? "is-primary" : ""}`}>S'enregistrer</p>
         </div>
-        {isActive === "register" ? <Register/> : <Login/> }
+        {isActive === "register" ? <Register/> : <Login className="mb-6"/> }
       </div>
     )
   }
