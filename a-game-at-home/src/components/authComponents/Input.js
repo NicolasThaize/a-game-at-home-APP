@@ -33,13 +33,11 @@ class Input extends React.Component {
           break;
         case 'password':
           this.updateValue(event.target.value);
-          console.log(event.target.value);
           break;
         default:
           return;
       }
     }
-
     this.sendToParent(event.target.value);
   }
 
