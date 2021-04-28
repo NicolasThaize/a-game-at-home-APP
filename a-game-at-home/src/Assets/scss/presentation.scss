@@ -8,8 +8,10 @@
     text-align: center;
   }
   hr {
+    margin:25px auto;
     border: none;
     border-top: 3px double #333;
+    width:90%;
     color: #333;
     overflow: visible;
     text-align: center;
@@ -27,7 +29,7 @@
   blockquote{
     text-align:center;
     position  : relative;
-    padding : 1em 2em;
+    padding : 3em 2em;
   }
   blockquote::before,
   blockquote::after {
@@ -54,57 +56,66 @@
     font-style: italic;
     text-align: right;
   }
+
+  .tile{
+    border-radius:0;
+  }
 }
 
-@media screen and (min-width: 1650px) {
+@media screen and (min-width: 800px) and(max-width: 1500px) {
   .Presentation {
     blockquote::before {
       content: '“';
-      top: 0.3rem;
       left: 0.9rem;
-      padding-left: 100px;
+      padding-right: 150px;
+    }
+
+    blockquote::after {
+      content: '”';
+      bottom: 0.3rem;
+      right: 0.9rem;
+      padding-right: 40px;
+    }
+    blockquote i {
+      display: block;
+      position:absolute;
+      font-size: 0.8em;
+      margin-top:7px;
+      padding-right:100px;
+      padding-bottom:10px;
+      right:0;
+      font-style: italic;
+      text-align: right;
+    }
+  }
+}
+
+@media screen and (min-width: 1500px){
+  .Presentation {
+    blockquote::before {
+      content: '“';
+      left: 0.9rem;
+      padding-left: 200px;
     }
 
     blockquote::after {
       content: '”';
       bottom: 0.3rem;
       right: 0.8rem;
-      padding-right: 100px;
+      padding-right: 200px;
     }
 
     blockquote i {
       display: block;
+      position:absolute;
       font-size: 0.8em;
-      margin-right: 8rem;
-      margin-top: 1rem;
+      margin-top:7px;
+      padding-right:260px;
+      padding-bottom:10px;
+      right:0;
       font-style: italic;
       text-align: right;
     }
   }
 }
-@media screen and (min-width: 1300px)and (max-width: 1650px){
-  .Presentation {
-    blockquote::before {
-      content: '“';
-      top: 0.3rem;
-      left: 0.9rem;
-      padding-left: 100px;
-    }
 
-    blockquote::after {
-      content: '”';
-      bottom: 0.3rem;
-      right: 0.8rem;
-      padding-right: 100px;
-    }
-
-    blockquote i {
-      display: block;
-      font-size: 0.8em;
-      margin-right: 8rem;
-      margin-top: 1rem;
-      font-style: italic;
-      text-align: right;
-    }
-  }
-}
