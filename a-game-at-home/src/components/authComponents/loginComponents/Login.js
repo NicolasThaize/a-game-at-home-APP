@@ -4,12 +4,15 @@ import Input from "../Input";
 import "../../../assets/css/login.min.css";
 
 class Login extends React.Component{
+    state = {
+        username:"",
+        password:"",
+    }
     handleSubmit = (e) => {
         e.preventDefault()
         if (
             this.state.username !== "" &&
-            this.state.password !== "" &&
-            this.state.passError === ""
+            this.state.password !== ""
         ) {
             console.log("Formulaire valide, faire requete post")
         } else {
@@ -18,6 +21,7 @@ class Login extends React.Component{
     }
 
     getInputData = (data) => {
+        console.log(data);
         switch (data.label){
             case "Nom d\'utilisateur":
                 this.setState({
@@ -41,10 +45,10 @@ class Login extends React.Component{
                 <Input onSubmit={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '', type: 'password'}}/>
                 <div className="field is-grouped">
                     <div className="control">
-                        <button className="button is-link">Submit</button>
+                        <button className="button is-link">Valider</button>
                     </div>
                     <div className="control">
-                        <button className="button is-link is-light">Cancel</button>
+                        <button className="button is-link is-light">Annuler</button>
                     </div>
                 </div>
             </form>

@@ -32,12 +32,8 @@ class Input extends React.Component {
           }
           break;
         case 'password':
-          try {
-            authValidators.passwordField(event.target.value);
-          } catch (e) {
-            this.setState({errors: e.message});
-            return this.updateValue(event.target.value);
-          }
+          this.updateValue(event.target.value);
+          console.log(event.target.value);
           break;
         default:
           return;
