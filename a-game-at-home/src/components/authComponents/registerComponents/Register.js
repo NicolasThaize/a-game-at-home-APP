@@ -71,7 +71,7 @@ class Register extends React.Component{
           firstName: data.value
         })
         break;
-      case "Nom d\'utilisateur":
+      case "Nom d'utilisateur":
         this.setState({
           username: data.value
         })
@@ -114,7 +114,7 @@ class Register extends React.Component{
       <form onSubmit={this.handleSubmit} className="registerContainer mt-6 mb-6">
         <Input onChange={this.getInputData} inputValues={ {label: 'Nom', placeholder: 'Marlo', type:"text"} }/>
         <Input onChange={this.getInputData} inputValues={ {label: 'Prenom', placeholder: 'Grégoire', type:"text"} }/>
-        <Input onChange={this.getInputData} inputValues={ {label: 'Nom d\'utilisateur', placeholder: 'Grégoire12', type:"text"} }/>
+        <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Grégoire12', type:"text"} }/>
         <Input onChange={this.getInputData} inputValues={ {label: 'Adresse Email', placeholder: 'exemple@gmail.com', type:"email"} }/>
 
         <div className="field">
