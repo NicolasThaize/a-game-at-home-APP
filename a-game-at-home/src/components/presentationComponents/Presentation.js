@@ -12,7 +12,7 @@ class Presentation extends React.Component{
                     metus sollicitudin enim, ac aliquet mauris tellus quis mi.<i>Karim Binon</i>
                 </blockquote>
                 <div className="tile is-ancestor">
-                    <div className="tile is-vertical is-8">
+                    <div className="tile is-vertical radius-rounded is-8">
                         <div className="tile">
                             <div className="tile is-parent is-vertical">
                                 <article className="tile is-child notification is-primary">
@@ -39,7 +39,7 @@ class Presentation extends React.Component{
                                 <p className="title">Wide tile</p>
                                 <p className="subtitle">Aligned with the right tile</p>
                                 <div className="content">
-                                    <p>fermo ta gel gelp</p>
+
                                 </div>
                             </article>
                         </div>
@@ -50,7 +50,7 @@ class Presentation extends React.Component{
                                 <p className="title">Tall tile</p>
                                 <p className="subtitle">With even more content</p>
                                 <div className="content">
-                                    <p>fermo ta gel gel</p>
+
                                 </div>
                             </div>
                         </article>

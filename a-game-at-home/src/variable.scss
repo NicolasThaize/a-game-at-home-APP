@@ -34,5 +34,6 @@ $link: $primary-color;
 @import '../node_modules/bulma/sass/layout/_all';
 @import '../node_modules/bulma/sass/form/all';
 @import '../node_modules/bulma/sass/grid/tiles';
-@import '../node_modules/bulma/sass/helpers/color';
+@import '../node_modules/bulma/sass/elements/content';
+@import '../node_modules/bulma/sass/elements/notification';
 
