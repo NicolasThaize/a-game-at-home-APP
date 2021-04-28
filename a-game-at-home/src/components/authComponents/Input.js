@@ -54,7 +54,7 @@ class Input extends React.Component {
   sendToParent = (value) => {
     this.setState({value: value}, () => {
       if (this.props.onChange) {
-        this.props.onChange({label: this.state.inputValues.label, error: this.state.errors, value: this.state.value});
+        this.props.onChange({label: this.state.inputValues.label, value: this.state.value});
       }
     });
   }

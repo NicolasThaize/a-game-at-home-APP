@@ -13,6 +13,7 @@ import Register from "./components/authComponents/registerComponents/Register";
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
+import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 
 class App extends Component {
   render(){
@@ -33,8 +34,8 @@ class App extends Component {
           <div className="App">
             <Navbar/>
             <Route exact path="/" component={Home} />
-            <Route exact path="/Login" component={Login} />
-            <Route exact path="/Register" component={Register} />
+            <Route exact path="/Login" component={LoginRegisterButton} />
+            <Route exact path="/Register" component={LoginRegisterButton} />
             <Footer/>
           </div>
         </main>
