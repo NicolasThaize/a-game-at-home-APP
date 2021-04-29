@@ -1,5 +1,4 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import Input from "../Input";
 import "../../../assets/css/login.min.css";
 
@@ -23,7 +22,7 @@ class Login extends React.Component{
 
     getInputData = (data) => {
         switch (data.label){
-            case "Nom d\'utilisateur":
+            case "Nom d'utilisateur":
                 this.setState({
                     username: data.value
                 })

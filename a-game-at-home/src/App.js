@@ -6,11 +6,10 @@ import Navbar from './components/navbarComponents/Navbar';
 
 //Importing components
 import Home from "./components/homeComponent/Home";
-import Login from "./components/authComponents/loginComponents/Login";
-import Register from "./components/authComponents/registerComponents/Register";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
+
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
@@ -23,7 +22,7 @@ class App extends Component {
           <Helmet>
             {/*Tab Infos*/}
             <title>At Home A Game</title>
-            <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
+            <link rel="icon" href="/favicon.ico"/>
 
             {/* SEO */}
             <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>

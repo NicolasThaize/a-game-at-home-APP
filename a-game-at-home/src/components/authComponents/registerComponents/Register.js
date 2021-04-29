@@ -71,7 +71,7 @@ class Register extends React.Component{
           firstName: data.value
         })
         break;
-      case "Nom d\'utilisateur":
+      case "Nom d'utilisateur":
         this.setState({
           username: data.value
         })
