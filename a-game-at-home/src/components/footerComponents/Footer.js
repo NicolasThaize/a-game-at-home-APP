@@ -1,14 +1,19 @@
 import React from "react";
+import "../../assets/css/footer.min.css"
+import {Link} from "react-router-dom";
+import FooterSvg from './FooterSvg'
+
 
 class Footer extends React.Component {
   render() {
     return(
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <p>
-            <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-            <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-            is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+      <footer className="footer has-text-centered">
+        <p className="is-size-3 mb-6">Suivez nous sur les <b>réseaux</b></p>
+        <FooterSvg/>
+        <div className="content">
+          <p className="columns is-centered is-vcentered">
+           © 2021&nbsp;<b>At Home a Game</b>.&nbsp;<Link to="/" className="noWrap">Conditions générales d'utilisation</Link>,
+            &nbsp;<Link to="link" className="button is-primary">Nous contacter</Link>
           </p>
         </div>
       </footer>
