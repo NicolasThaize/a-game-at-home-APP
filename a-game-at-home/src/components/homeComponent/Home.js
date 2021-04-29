@@ -36,10 +36,11 @@ class Home extends React.Component {
           gravida lacinia. Suspendisse eu mauris luctus, consequat purus vitae, tristique ante. Donec in vulputate n
           ibh. Integer est turpis, tristique tincidunt elementum vitae, pretium eu tellus.
           </span>
+          <span className={`has-text-primary readMoreLink mb-6 pl-3`} onClick={this.toggleParagraph}>
+            Voir {isParagraphFull ? "moins." : "plus."}
+          </span>
         </p>
-        <p className={`has-text-primary readMoreLink mb-6 pl-3`} onClick={this.toggleParagraph}>
-          Voir {isParagraphFull ? "moins." : "plus."}
-        </p>
+
         <div className="divider mt-6 mb-6"/>
         <h2 className="title has-text-centered has-text-primary is-uppercase">L'historique des sessions</h2>
         <HomeSessions/>
