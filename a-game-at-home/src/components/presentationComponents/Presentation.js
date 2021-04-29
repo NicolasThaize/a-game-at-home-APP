@@ -40,7 +40,7 @@ class Presentation extends React.Component{
                             </article>
                         </div>
                     </div>
-                    <div className="tile is-parent" style={{backgroundImage:"url('/img/mountain-png.png')",backgroundPosition:"center",backgroundSize:"cover"}}>
+                    <div className="tile is-parent">
                         <article className="tile is-child">
                             <div className="content">
                                 <p className="title">Tall tile</p>

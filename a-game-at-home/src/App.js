@@ -27,7 +27,7 @@ class App extends Component {
             <Helmet>
               {/*Tab Infos*/}
               <title>At Home A Game</title>
-              <link rel="icon" href={process.env.PUBLIC_URL + "/img/favicon.ico"}/>
+              <link rel="icon" href={"favicon.ico"}/>
 
               {/* SEO */}
               <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>
