@@ -18,6 +18,24 @@ import './variable.scss';
 
 
 class App extends Component {
+  state = {
+    logged_in: localStorage.getItem('token') ? true : false
+  }
+  componentDidMount() {
+    if (this.state.logged_in) {
+      fetch('http://localhost:8000/current_user/', {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('token')}`
+        }
+      })
+        .then(res => res.json())
+        .then(json => {
+          console.log('appjs res', json)
+          this.setState({ username: json.username });
+        });
+    }
+  }
+
   render(){
     return (
       <Router>
@@ -25,7 +43,7 @@ class App extends Component {
           <Helmet>
             {/*Tab Infos*/}
             <title>At Home A Game</title>
-            <link rel="icon" href="%PUBLIC_URL%/favicon.ico"/>
+            <link rel="icon" href="/favicon.ico"/>
 
             {/* SEO */}
             <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>

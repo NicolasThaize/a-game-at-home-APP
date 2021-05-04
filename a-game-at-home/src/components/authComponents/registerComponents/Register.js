@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import Input from "../Input";
 import "../../../assets/css/register.min.css";
 import authValidators from "../validationFunctions";
+import Logout from "../logoutComponents/Logout";
 
 class Register extends React.Component{
   state = {
@@ -87,7 +88,7 @@ class Register extends React.Component{
   }
 
   /**
-   * Lorsque le formulaire est envoyé
+   * Lorsque le formulaire est envoyé vérifie si toutles champs sont valides
    * @param e
    */
   handleSubmit = (e) => {
@@ -102,7 +103,23 @@ class Register extends React.Component{
       this.state.validPassError === "" &&
       this.state.passError === ""
     ){
-      console.log("Formulaire valide, faire requete post")
+      e.preventDefault();
+      fetch('http://localhost:8000/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: this.state.username, password: this.state.password})
+      })
+        .then(res => res.json())
+        .then(json => {
+          localStorage.setItem('token', json.token);
+          this.setState({
+            logged_in: true,
+            displayed_form: '',
+            username: json.username
+          });
+        });
     } else {
       console.log("Formulaire invalide")
     }

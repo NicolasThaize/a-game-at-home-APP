@@ -8,14 +8,22 @@ class Login extends React.Component{
         username:"",
         password:"",
     }
+
     handleSubmit = (e) => {
         console.log(this.state);
         e.preventDefault()
-        if (
-            this.state.username !== "" &&
-            this.state.password !== ""
-        ) {
-            console.log("Formulaire valide, faire requete post")
+        if (this.state.username !== "" && this.state.password !== "") {
+            fetch('http://localhost:8000/token-auth/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.state)
+            }).then(res => res.json())
+              .then(json => {
+                  localStorage.setItem('token', json.token);
+                  console.log(localStorage.getItem('token'));
+              });
         } else {
             console.log("Formulaire invalide")
         }
