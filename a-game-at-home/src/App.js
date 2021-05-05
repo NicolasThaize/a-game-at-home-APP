@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
+import axiosInstance from "./axiosApi";
 
 
 //Importing components
@@ -19,6 +20,21 @@ import './variable.scss';
 
 
 class App extends Component {
+  handleLogout = async() => {
+    try {
+      const response = await axiosInstance.post('/blacklist/', {
+        "refresh_token": localStorage.getItem("refresh_token")
+      });
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      axiosInstance.defaults.headers['Authorization'] = null;
+      return response;
+    }
+    catch (e) {
+      throw e;
+    }
+  };
+
   render(){
     return (
       <Router>
@@ -36,6 +52,7 @@ class App extends Component {
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Helmet>
             <div className="App">
+              <button type='button' onClick={this.handleLogout}>Logout</button>
               <Navbar/>
               <Route exact path="/" component={Home} />
               <Route exact path="/Login" component={LoginRegisterButton} />
