@@ -7,6 +7,7 @@ class Login extends React.Component{
     state = {
         username:"",
         password:"",
+        isLoading: false,
     }
 
     /**
@@ -18,18 +19,19 @@ class Login extends React.Component{
         e.preventDefault()
         if (this.state.username !== "" && this.state.password !== "") {
             // Formulaire valide, faire requete post
-
+            this.setState({isLoading: true});
             await axiosInstance.post('/token/obtain/', {
                 username: this.state.username,
                 password: this.state.password
             }).then(response => {
+                this.setState({isLoading: false});
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
                 localStorage.setItem('access_token', response.data.access);
                 localStorage.setItem('refresh_token', response.data.refresh);
                 this.setState({apiError: undefined});
                 return response.data;
             }).catch(err => {
-                this.setState({apiError: "Nom d'utilisateur et/ou mot de passe invalide."});
+                this.setState({apiError: "Nom d'utilisateur et/ou mot de passe invalide.", isLoading: false});
                 throw err;
             });
 
@@ -59,9 +61,10 @@ class Login extends React.Component{
     }
 
     render(){
-        const {apiError} = this.state;
+        const {apiError, isLoading} = this.state;
         return(
             <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
+                {isLoading ? <p>loading</p> : <p/>}
                 <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Gregoire12', type: 'text'}}/>
                 <Input onChange={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '**********', type: 'password'}}/>
                 <div className="field is-grouped">
