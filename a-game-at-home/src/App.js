@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import { Helmet, HelmetProvider } from 'react-helmet-async';
-import { BrowserRouter as Router,Route } from 'react-router-dom';
+import React, {Component} from 'react'
+import {Helmet, HelmetProvider} from 'react-helmet-async';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 
 //Importing components
@@ -17,38 +17,37 @@ import './assets/css/default.min.css';
 import './variable.scss';
 
 
-
 class App extends Component {
-  render(){
-    return (
-      <Router>
-        <HelmetProvider>
-          <main>
-            <Helmet>
-              {/*Tab Infos*/}
-              <title>At Home A Game</title>
-              <link rel="icon" href={"favicon.ico"}/>
+    render() {
+        return (
+            <Router>
+                <HelmetProvider>
+                    <main>
+                        <Helmet>
+                            {/*Tab Infos*/}
+                            <title>At Home A Game</title>
+                            <link rel="icon" href={"favicon.ico"}/>
 
-              {/* SEO */}
-              <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>
-              <meta name="description" content="Faites vos demandes de noms de domaine rapidement"/>
-              <meta name="author" content="Leo MASSEGLIA, Nicolas THAIZE"/>
-              <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            </Helmet>
-            <div className="App">
-              <Navbar/>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/Login" component={LoginRegisterButton} />
-              <Route exact path="/Register" component={LoginRegisterButton} />
-              <Route exact path="/Presentation" component={Presentation} />
-              <Route exact path="/Articles" component={Articles} />
-              <Footer/>
-            </div>
-          </main>
-        </HelmetProvider>
-      </Router>
-    );
-  }
+                            {/* SEO */}
+                            <meta name="keywords" content="HTML, CSS, JavaScript, React, Sass, Gulp"/>
+                            <meta name="description" content="Faites vos demandes de noms de domaine rapidement"/>
+                            <meta name="author" content="Leo MASSEGLIA, Nicolas THAIZE"/>
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                        </Helmet>
+                        <div className="App">
+                            <Navbar/>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/Login" component={LoginRegisterButton}/>
+                            <Route exact path="/Register" component={LoginRegisterButton}/>
+                            <Route exact path="/Presentation" component={Presentation}/>
+                            <Route exact path="/Articles" component={Articles}/>
+                            <Footer/>
+                        </div>
+                    </main>
+                </HelmetProvider>
+            </Router>
+        );
+    }
 }
 
 export default App;

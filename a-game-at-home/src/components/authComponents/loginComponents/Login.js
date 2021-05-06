@@ -2,10 +2,10 @@ import React from "react";
 import Input from "../Input";
 import "../../../assets/css/login.min.css";
 
-class Login extends React.Component{
+class Login extends React.Component {
     state = {
-        username:"",
-        password:"",
+        username: "",
+        password: "",
     }
     handleSubmit = (e) => {
         console.log(this.state);
@@ -21,7 +21,7 @@ class Login extends React.Component{
     }
 
     getInputData = (data) => {
-        switch (data.label){
+        switch (data.label) {
             case "Nom d'utilisateur":
                 this.setState({
                     username: data.value
@@ -37,11 +37,13 @@ class Login extends React.Component{
         }
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
-                <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Hamood69', type: 'text'}}/>
-                <Input onChange={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '', type: 'password'}}/>
+                <Input onChange={this.getInputData}
+                       inputValues={{label: "Nom d'utilisateur", placeholder: 'Hamood69', type: 'text'}}/>
+                <Input onChange={this.getInputData}
+                       inputValues={{label: "Mot de passe", placeholder: '', type: 'password'}}/>
                 <div className="field is-grouped">
                     <div className="control">
                         <button className="button is-link">Valider</button>

@@ -1,16 +1,16 @@
 /* Mobile rules */
 
-.loginContainer{
-  width:90%;
-  margin:auto;
+.loginContainer {
+  width: 90%;
+  margin: auto;
 }
 
 /* Desktop rules */
 
-@media screen and (min-width: 720px){
+@media screen and (min-width: 720px) {
 
-  .loginContainer{
-    width:20%;
+  .loginContainer {
+    width: 20%;
     min-width: 480px;
     margin-bottom: 150px !important;
   }

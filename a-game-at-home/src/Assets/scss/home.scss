@@ -6,22 +6,22 @@
   margin: 0 auto;
 }
 
-.shadowed{
-  box-shadow: 0 0 5px 0 rgba(0,0,0,0.40);
+.shadowed {
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.40);
 }
 
-.sessionsWidth{
+.sessionsWidth {
   margin: 0 auto;
 }
 
 @media (min-width: 720px) {
-  .sessionsWidth{
+  .sessionsWidth {
     width: 90%;
   }
 }
 
 @media (min-width: 1024px) {
-  .sessionsWidth{
+  .sessionsWidth {
     width: 80%;
   }
 }
