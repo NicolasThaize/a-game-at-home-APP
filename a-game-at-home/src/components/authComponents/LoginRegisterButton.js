@@ -4,7 +4,8 @@ import Login from "./loginComponents/Login";
 
 class LoginRegisterButton extends React.Component{
   state={
-    isActive: ""
+    isActive: "",
+    updateLogin: this.props.updateLogin
   }
 
   componentDidMount() {
@@ -27,7 +28,7 @@ class LoginRegisterButton extends React.Component{
   }
 
   render() {
-    const { isActive } = this.state;
+    const { isActive, updateLogin } = this.state;
     return(
       <div>
         <div className="buttons ml-3 mr-3 is-centered mt-6 mb-6">
@@ -42,7 +43,7 @@ class LoginRegisterButton extends React.Component{
             Se connecter
           </p>
         </div>
-        {isActive === "register" ? <Register/> : <Login className="mb-6"/> }
+        {isActive === "register" ? <Register/> : <Login className="mb-6" updateLogin={updateLogin}/> }
       </div>
     )
   }

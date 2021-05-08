@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router,Route } from 'react-router-dom';
-import axiosInstance from "./axiosApi";
-
 
 //Importing components
 import Footer from './components/footerComponents/Footer';
@@ -11,6 +9,7 @@ import Home from "./components/homeComponent/Home";
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 import Presentation from "./components/presentationComponents/Presentation";
 import Articles from "./components/articleComponents/Articles";
+import Logout from "./components/authComponents/Logout";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -20,22 +19,37 @@ import './variable.scss';
 
 
 class App extends Component {
-  handleLogout = async() => {
-    try {
-      const response = await axiosInstance.post('/blacklist/', {
-        "refresh_token": localStorage.getItem("refresh_token")
-      });
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('refresh_token');
-      axiosInstance.defaults.headers['Authorization'] = null;
-      return response;
-    }
-    catch (e) {
-      throw e;
-    }
-  };
+  state = {
+    isLogged: false
+  }
+
+  /**
+   * Change the isLogged state which is supposed to be passed to
+   * child components who needs a custom display when logged or not
+   */
+  updateLogin = () => {
+    this.setState({isLogged: true});
+  }
+  /**
+   * Change the isLogged state which is supposed to be passed to
+   * child components who needs a custom display when logged or not
+   */
+  updateLogout = () => {
+    this.setState({isLogged: false});
+  }
+
+  /**
+   * If the user is logged when comming on app sets isLogged if token is stored
+   * Change the isLogged state which is supposed to be passed to
+   * child components who needs a custom display when logged or not
+   */
+  componentDidMount() {
+    const isLogged = !!localStorage.getItem("refresh_token");
+    this.setState({isLogged: isLogged});
+  }
 
   render(){
+    const { isLogged } = this.state;
     return (
       <Router>
         <HelmetProvider>
@@ -52,10 +66,10 @@ class App extends Component {
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Helmet>
             <div className="App">
-              <button type='button' onClick={this.handleLogout}>Logout</button>
-              <Navbar/>
+              <Logout updateLogout={this.updateLogout} />
+              <Navbar isLogged={isLogged}/>
               <Route exact path="/" component={Home} />
-              <Route exact path="/Login" component={LoginRegisterButton} />
+              <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />

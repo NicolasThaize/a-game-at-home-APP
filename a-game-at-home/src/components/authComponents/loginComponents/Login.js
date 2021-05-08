@@ -2,12 +2,15 @@ import React from "react";
 import Input from "../Input";
 import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
+import {Redirect} from "react-router";
 
 class Login extends React.Component{
     state = {
         username:"",
         password:"",
         isLoading: false,
+        redirect: false,
+        updateLogin: this.props.updateLogin
     }
 
     /**
@@ -28,7 +31,8 @@ class Login extends React.Component{
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
                 localStorage.setItem('access_token', response.data.access);
                 localStorage.setItem('refresh_token', response.data.refresh);
-                this.setState({apiError: undefined});
+                this.setState({apiError: undefined, redirect: true});
+                this.state.updateLogin()
                 return response.data;
             }).catch(err => {
                 this.setState({apiError: "Nom d'utilisateur et/ou mot de passe invalide.", isLoading: false});
@@ -60,10 +64,13 @@ class Login extends React.Component{
         }
     }
 
+
     render(){
-        const {apiError, isLoading} = this.state;
+        const {apiError, isLoading, redirect} = this.state;
         return(
             <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
+                {redirect ? (<Redirect to='/'/>) : undefined}
+
                 {isLoading ? <p>loading</p> : <p/>}
                 <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Gregoire12', type: 'text'}}/>
                 <Input onChange={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '**********', type: 'password'}}/>
