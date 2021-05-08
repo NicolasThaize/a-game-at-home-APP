@@ -3,6 +3,7 @@ import Input from "../Input";
 import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
 import {Redirect} from "react-router";
+import jwt from 'jwt-decode';
 
 class Login extends React.Component{
     state = {
@@ -27,6 +28,7 @@ class Login extends React.Component{
                 username: this.state.username,
                 password: this.state.password
             }).then(response => {
+                console.log(jwt(response.data.access)) // Stocker ces valeurs dans u objet dans le localstorage
                 this.setState({isLoading: false});
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
                 localStorage.setItem('access_token', response.data.access);
