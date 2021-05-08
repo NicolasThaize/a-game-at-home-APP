@@ -46,17 +46,12 @@ class Login extends React.Component{
     getInputData = (data) => {
         switch (data.label){
             case "Nom d'utilisateur":
-                this.setState({
-                    username: data.value
-                })
+                this.setState({username: data.value});
                 break;
             case "Mot de passe":
-                this.setState({
-                    password: data.value
-                })
+                this.setState({password: data.value});
                 break;
-            default:
-                return;
+            default: return;
         }
     }
 

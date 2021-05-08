@@ -76,27 +76,18 @@ class Register extends React.Component{
   getInputData = (data) => {
     switch (data.label){
       case "Nom":
-        this.setState({
-          lastName: data.value
-        })
+        this.setState({lastName: data.value});
         break;
       case "Prenom":
-        this.setState({
-          firstName: data.value
-        })
+        this.setState({firstName: data.value});
         break;
       case "Nom d'utilisateur":
-        this.setState({
-          username: data.value
-        })
+        this.setState({username: data.value});
         break;
       case "Adresse Email":
-        this.setState({
-          email: data.value
-        })
+        this.setState({email: data.value});
         break;
-      default:
-        return;
+      default: return;
     }
   }
 
