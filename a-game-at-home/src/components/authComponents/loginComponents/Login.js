@@ -38,12 +38,8 @@ class Login extends React.Component{
                 this.setState({apiError: "Nom d'utilisateur et/ou mot de passe invalide.", isLoading: false});
                 throw err;
             });
-
-
-
         } else {
             // Formulaire invalide
-
         }
     }
 

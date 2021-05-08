@@ -12,6 +12,9 @@ class LoginRegisterButton extends React.Component{
     this.getUrlPath();
   }
 
+  /**
+   * Get the last word of url (in 'localhost/login' returns 'login')
+   */
   getUrlPath = () => {
     let n = window.location.href.split("/");
     n = n[n.length - 1].toLowerCase();
@@ -20,6 +23,10 @@ class LoginRegisterButton extends React.Component{
     })
   }
 
+  /**
+   * When clicked on one of the buttons displays the asked form
+   * @param text
+   */
   switchForm = (text) => {
     this.setState({
       isActive: text

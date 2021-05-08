@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 import Input from "../Input";
 import "../../../assets/css/register.min.css";
 import authValidators from "../validationFunctions";
+import axiosInstance from "../../../axiosApi";
+import {Redirect} from "react-router";
 
 class Register extends React.Component{
   state = {
@@ -14,7 +16,13 @@ class Register extends React.Component{
     username:"",
     firstName:"",
     lastName:"",
+    birthDate:"",
+    terms: false,
     svgWarning: process.env.PUBLIC_URL + "/img/svgWarning.svg",
+    redirect: false,
+    isLoading: false,
+    apiError: "",
+    isSuccess: false
   }
 
   /**
@@ -38,6 +46,12 @@ class Register extends React.Component{
         this.setState({validatePassword: event.target.value}, () => {
           this.checkPasswordsMatch();
         });
+        break;
+      case "birthDate":
+        this.setState({birthDate: event.target.value});
+        break;
+      case "terms":
+        this.setState({terms: event.target.checked});
         break;
       default:
         return;
@@ -90,7 +104,7 @@ class Register extends React.Component{
    * Lorsque le formulaire est envoyé
    * @param e
    */
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     if (
       this.state.firstName !== "" &&
@@ -100,10 +114,39 @@ class Register extends React.Component{
       this.state.password !== "" &&
       this.state.validatePassword !== "" &&
       this.state.validPassError === "" &&
-      this.state.passError === ""
-    ){
+      this.state.passError === "" &&
+      this.state.terms === true
+    ) {
       // Formulaire valide, faire requete post
 
+      // Set date in good format dd-mm-yyyy
+      let date = this.state.birthDate.split("-")
+      date = `${date[2]}-${date[1]}-${date[0]}`
+
+      this.setState({isLoading: true, birthDate: date}, async () => {
+        await axiosInstance.post('/users/', {
+          username: this.state.username,
+          first_name: this.state.firstName,
+          last_name: this.state.lastName,
+          email: this.state.email,
+          password: this.state.password,
+          birthDate: this.state.birthDate,
+          team: []
+        })
+          .then(response => {
+          this.setState({isLoading: false, isSuccess: true});
+          setTimeout(() => {
+            this.setState({redirect: true});
+          }, 3000);
+          return response.data;
+          })
+
+          .catch(err => {
+          this.setState({apiError: "Erreur, veuillez contacter l'administrateur du site", isLoading: false});
+          throw err;
+          });
+
+      });
     } else {
       // Formulaire invalide
 
@@ -111,14 +154,30 @@ class Register extends React.Component{
   }
 
   render() {
-    const { passError, validPassError, password, validatePassword, svgWarning } = this.state;
+    const { passError, validPassError, password, validatePassword, svgWarning, redirect, apiError, isSuccess } = this.state;
     return(
       <form onSubmit={this.handleSubmit} className="registerContainer mt-6 mb-6">
+        { isSuccess ?  (
+          <div className="notification is-primary">
+            Compte bien enregistré, vous allez être redirigé vers la page de connexion.
+          </div>) : undefined}
+        {redirect ? (<Redirect to='/login'/>) : undefined}
         <Input onChange={this.getInputData} inputValues={ {label: 'Nom', placeholder: 'Marlo', type:"text"} }/>
         <Input onChange={this.getInputData} inputValues={ {label: 'Prenom', placeholder: 'Grégoire', type:"text"} }/>
         <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Gregoire12', type:"text"} }/>
         <Input onChange={this.getInputData} inputValues={ {label: 'Adresse Email', placeholder: 'exemple@gmail.com', type:"email"} }/>
-
+        <div className="field">
+          <label htmlFor="birthDate" className='label'>
+            Date de naissance
+            <input
+              type="date"
+              id="birthDate"
+              name="birthDate"
+              className="input"
+              onChange={this.handleChange}
+            />
+          </label>
+        </div>
         <div className="field">
           <label className="label">Mot de passe</label>
           <div className="control has-icons-right">
@@ -160,7 +219,11 @@ class Register extends React.Component{
         <div className="field">
           <div className="control">
             <label className="checkbox">
-              <input type="checkbox"/>
+              <input
+                name="terms"
+                type="checkbox"
+                onChange={this.handleChange}
+              />
               &nbsp;J'accepte les <Link to="/">conditions d'utilisation</Link>.
             </label>
           </div>
@@ -174,6 +237,7 @@ class Register extends React.Component{
             <button className="button is-link is-light">Annuler</button>
           </div>
         </div>
+        {apiError ? <p className="has-text-danger has-text-weight-bold">{apiError}</p> : ''}
       </form>
     )
   }
