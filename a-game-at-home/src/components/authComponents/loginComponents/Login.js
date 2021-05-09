@@ -3,7 +3,7 @@ import Input from "../Input";
 import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
 import {Redirect} from "react-router";
-import jwt from 'jwt-decode';
+import User from '../../../User';
 
 class Login extends React.Component{
     state = {
@@ -11,7 +11,8 @@ class Login extends React.Component{
         password:"",
         isLoading: false,
         redirect: false,
-        updateLogin: this.props.updateLogin
+        updateLogin: this.props.updateLogin,
+        user: User.prototype
     }
 
     /**
@@ -28,13 +29,12 @@ class Login extends React.Component{
                 username: this.state.username,
                 password: this.state.password
             }).then(response => {
-                console.log(jwt(response.data.access)) // Stocker ces valeurs dans u objet dans le localstorage
                 this.setState({isLoading: false});
                 axiosInstance.defaults.headers['Authorization'] = "JWT " + response.data.access;
                 localStorage.setItem('access_token', response.data.access);
                 localStorage.setItem('refresh_token', response.data.refresh);
                 this.setState({apiError: undefined, redirect: true});
-                this.state.updateLogin()
+                this.state.updateLogin();
                 return response.data;
             }).catch(err => {
                 this.setState({apiError: "Nom d'utilisateur et/ou mot de passe invalide.", isLoading: false});
