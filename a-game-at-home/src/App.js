@@ -9,12 +9,12 @@ import Home from "./components/homeComponent/Home";
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 import Presentation from "./components/presentationComponents/Presentation";
 import Articles from "./components/articleComponents/Articles";
-import Logout from "./components/authComponents/Logout";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
+import MyAccount from "./components/myAccountComponents/MyAccount";
 
 
 
@@ -66,14 +66,14 @@ class App extends Component {
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Helmet>
             <div className="App">
-              <Logout updateLogout={this.updateLogout} />
               <Navbar isLogged={isLogged}/>
               <Route exact path="/" component={Home} />
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
+              <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
-              <Footer/>
+              <Footer/>updateLogout
             </div>
           </main>
         </HelmetProvider>

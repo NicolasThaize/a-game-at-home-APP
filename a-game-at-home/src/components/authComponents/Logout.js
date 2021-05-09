@@ -1,9 +1,11 @@
 import React from "react";
 import axiosInstance from "../../axiosApi";
+import {Redirect} from "react-router";
 
 class Logout extends React.Component {
   state = {
-    updateLogout: this.props.updateLogout
+    updateLogout: this.props.updateLogout,
+    redirect: false
   }
 
   handleLogout = async() => {
@@ -14,6 +16,7 @@ class Logout extends React.Component {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
       axiosInstance.defaults.headers['Authorization'] = null;
+      this.setState({redirect: true})
       this.state.updateLogout();
       return response;
     }
@@ -23,9 +26,13 @@ class Logout extends React.Component {
   };
 
   render() {
+    const { redirect } = this.state;
     return(
-      <button className='button is-danger' onClick={this.handleLogout}>Se déconnecter</button>
-    )
+      <div>
+        {redirect ? <Redirect to="/"/> : undefined}
+        <button className='button is-danger' onClick={this.handleLogout}>Se déconnecter</button>
+      </div>
+  )
   }
 }
 
