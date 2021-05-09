@@ -3,7 +3,6 @@ import Input from "../Input";
 import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
 import {Redirect} from "react-router";
-import User from '../../../User';
 
 class Login extends React.Component{
     state = {
@@ -11,8 +10,7 @@ class Login extends React.Component{
         password:"",
         isLoading: false,
         redirect: false,
-        updateLogin: this.props.updateLogin,
-        user: User.prototype
+        updateLogin: this.props.updateLogin
     }
 
     /**
