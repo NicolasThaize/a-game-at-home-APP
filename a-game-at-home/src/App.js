@@ -73,7 +73,7 @@ class App extends Component {
               <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
-              <Footer/>updateLogout
+              <Footer/>
             </div>
           </main>
         </HelmetProvider>
