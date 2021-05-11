@@ -12,7 +12,9 @@ class User {
         username: decoded.username
       });
     } else {
-      throw new Error("No user token stored in localStorage");
+      throw Object.assign(
+        new Error("No user token stored in localStorage")
+      );
     }
   }
 }
