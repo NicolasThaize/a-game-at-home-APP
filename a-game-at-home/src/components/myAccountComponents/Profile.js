@@ -1,13 +1,10 @@
 import React from "react";
 import Input from "./Input";
+import User from "../../User";
 
 class Profile extends React.Component {
   state = {
-    user: this.props.user,
-  }
-
-  componentDidMount() {
-    console.log(this.state.user)
+    user: User.prototype.getUserData(),
   }
 
   render() {
