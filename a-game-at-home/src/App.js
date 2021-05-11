@@ -27,7 +27,7 @@ class App extends Component {
    * Change the isLogged state which is supposed to be passed to
    * child components who needs a custom display when logged or not
    */
-  updateLogin = () => {
+  updateLogin = async (e) => {
     this.setState({isLogged: true});
   }
   /**
