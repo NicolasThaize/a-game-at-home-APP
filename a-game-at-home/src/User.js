@@ -9,7 +9,8 @@ class User {
         first_name: decoded.first_name,
         id: decoded.id,
         last_name: decoded.last_name,
-        username: decoded.username
+        username: decoded.username,
+        birth_date: decoded.birth_date
       });
     } else {
       throw Object.assign(

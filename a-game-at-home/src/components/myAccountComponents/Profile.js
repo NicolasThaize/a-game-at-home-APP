@@ -28,6 +28,11 @@ class Profile extends React.Component {
             value: user.first_name
           }} />
           <Input input={{
+            label: "Adresse email",
+            name: "email",
+            value: user.email
+          }} />
+          <Input input={{
             label: "Date de naissance",
             name: "birth_date",
             value: user.birth_date
