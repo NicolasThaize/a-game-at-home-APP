@@ -4,10 +4,10 @@ import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
 import {Redirect} from "react-router";
 
-class Login extends React.Component{
+class Login extends React.Component {
     state = {
-        username:"",
-        password:"",
+        username: "",
+        password: "",
         isLoading: false,
         redirect: false,
         updateLogin: this.props.updateLogin
@@ -44,27 +44,32 @@ class Login extends React.Component{
     }
 
     getInputData = (data) => {
-        switch (data.label){
+        switch (data.label) {
             case "Nom d'utilisateur":
                 this.setState({username: data.value});
                 break;
             case "Mot de passe":
                 this.setState({password: data.value});
                 break;
-            default: return;
+            default:
+                return;
         }
     }
 
 
-    render(){
+    render() {
         const {apiError, isLoading, redirect} = this.state;
-        return(
+        return (
             <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
-                {redirect ? (<Redirect to='/'/>) : undefined}
+                {redirect ? (
+                    <Redirect to='/'/>
+                ) : undefined}
 
                 {isLoading ? <p>loading</p> : <p/>}
-                <Input onChange={this.getInputData} inputValues={ {label: "Nom d'utilisateur", placeholder: 'Gregoire12', type: 'text'}}/>
-                <Input onChange={this.getInputData} inputValues={ {label: "Mot de passe", placeholder: '**********', type: 'password'}}/>
+                <Input onChange={this.getInputData}
+                       inputValues={{label: "Nom d'utilisateur", placeholder: 'Gregoire12', type: 'text'}}/>
+                <Input onChange={this.getInputData}
+                       inputValues={{label: "Mot de passe", placeholder: '**********', type: 'password'}}/>
                 <div className="field is-grouped">
                     <div className="control">
                         <button className="button is-link">Valider</button>

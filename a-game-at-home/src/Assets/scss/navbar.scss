@@ -1,28 +1,28 @@
 /** Navbar fixes **/
 
-body{
+body {
   padding-top: 4rem;
 }
 
-.navbar-logo img, .navbar-logo{
+.navbar-logo img, .navbar-logo {
   max-height: 4rem;
 }
 
-.navbar-brand > .navbar-burger{
+.navbar-brand > .navbar-burger {
   height: auto;
 }
 
-.navDropSvg{
+.navDropSvg {
   width: 60%;
   max-height: 100px;
 }
 
-.navbar > .navbar-menu{
-  overflow-x: hidden!important;
+.navbar > .navbar-menu {
+  overflow-x: hidden !important;
 }
 
 .navShadow {
-  box-shadow: 0 5px 22px 0 rgba(0,0,0,0.20);
+  box-shadow: 0 5px 22px 0 rgba(0, 0, 0, 0.20);
 }
 
 /** END Navbar fixes **/
