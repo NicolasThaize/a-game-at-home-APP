@@ -14,21 +14,25 @@ class MyAccount extends React.Component {
     tabList: [
       {
         id: 1,
+        label: 'profile',
         name: 'Informations du profil',
         link: '/',
       },
       {
         id: 2,
+        label: 'modify',
         name: 'Modifier les informations du profil',
         link: '/modify',
       },
       {
         id: 3,
+        label: 'sessions',
         name: 'Historique des sessions',
         link: '/sessions',
       },
       {
         id: 4,
+        label: 'teams',
         name: 'Equipes',
         link: '/teams',
       },
@@ -44,14 +48,14 @@ class MyAccount extends React.Component {
    */
   getUrlPath = () => {
     let n = window.location.href.split("/");
-    n = n[n.length - 1].toLowerCase();
+    n = "/" + n[n.length - 1].toLowerCase();
     this.setState({
-      currentActive: n
+      currentActive: n === "/profile" ? "/" : n
     })
   }
 
-  handleClick = (id) => {
-    this.setState({currentActive: id});
+  handleClick = (text) => {
+    this.setState({currentActive: text});
   }
 
   render() {
@@ -62,18 +66,18 @@ class MyAccount extends React.Component {
           <ul>
             {tabList.map(tab =>
               <li
-                className={tab.id === currentActive ? "is-active" : ""}
-                key={tab.id} onClick={() => this.handleClick(tab.id)}
+                className={tab.link === currentActive ? "is-active" : ""}
+                key={tab.id} onClick={() => this.handleClick(tab.link)}
               >
                 <Link to={`/profile${tab.link}`}>{tab.name}</Link>
               </li>
             )}
           </ul>
         </div>
-        {currentActive === '' ? <Profile/> : undefined}
-        {currentActive === 'modify' ? <Modify/> : undefined}
-        {currentActive === 'sessions' ? <Sessions/> : undefined}
-        {currentActive === 'teams' ? <Teams/> : undefined}
+        {currentActive === '/' || currentActive === '/profile' ? <Profile/> : undefined}
+        {currentActive === '/modify' ? <Modify/> : undefined}
+        {currentActive === '/sessions' ? <Sessions/> : undefined}
+        {currentActive === '/teams' ? <Teams/> : undefined}
         <Logout updateLogout={updateLogout} />
       </div>
     )
