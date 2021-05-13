@@ -27,7 +27,7 @@ class App extends Component {
    * Change the isLogged state which is supposed to be passed to
    * child components who needs a custom display when logged or not
    */
-  updateLogin = async (e) => {
+  updateLogin = async () => {
     this.setState({isLogged: true});
   }
   /**
@@ -71,6 +71,9 @@ class App extends Component {
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
               <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+              <Route exact path="/Profile/modify" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+              <Route exact path="/Profile/sessions" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+              <Route exact path="/Profile/teams" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
               <Footer/>

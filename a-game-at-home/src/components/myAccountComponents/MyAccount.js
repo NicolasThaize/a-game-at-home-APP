@@ -9,7 +9,7 @@ import Logout from "../authComponents/Logout";
 
 class MyAccount extends React.Component {
   state = {
-    currentActive: 1,
+    currentActive: '',
     updateLogout: this.props.updateLogout,
     tabList: [
       {
@@ -20,19 +20,34 @@ class MyAccount extends React.Component {
       {
         id: 2,
         name: 'Modifier les informations du profil',
-        link: '/',
+        link: '/modify',
       },
       {
         id: 3,
         name: 'Historique des sessions',
-        link: '/',
+        link: '/sessions',
       },
       {
         id: 4,
         name: 'Equipes',
-        link: '/',
+        link: '/teams',
       },
     ],
+  }
+
+  componentDidMount() {
+    this.getUrlPath();
+  }
+
+  /**
+   * Get the last word of url (in 'localhost/login' returns 'login')
+   */
+  getUrlPath = () => {
+    let n = window.location.href.split("/");
+    n = n[n.length - 1].toLowerCase();
+    this.setState({
+      currentActive: n
+    })
   }
 
   handleClick = (id) => {
@@ -50,15 +65,15 @@ class MyAccount extends React.Component {
                 className={tab.id === currentActive ? "is-active" : ""}
                 key={tab.id} onClick={() => this.handleClick(tab.id)}
               >
-                <Link to='/profile'>{tab.name}</Link>
+                <Link to={`/profile${tab.link}`}>{tab.name}</Link>
               </li>
             )}
           </ul>
         </div>
-        {currentActive === 1 ? <Profile/> : undefined}
-        {currentActive === 2 ? <Modify/> : undefined}
-        {currentActive === 3 ? <Sessions/> : undefined}
-        {currentActive === 4 ? <Teams/> : undefined}
+        {currentActive === '' ? <Profile/> : undefined}
+        {currentActive === 'modify' ? <Modify/> : undefined}
+        {currentActive === 'sessions' ? <Sessions/> : undefined}
+        {currentActive === 'teams' ? <Teams/> : undefined}
         <Logout updateLogout={updateLogout} />
       </div>
     )
