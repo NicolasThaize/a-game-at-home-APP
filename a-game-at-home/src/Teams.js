@@ -1,6 +1,6 @@
 import axiosInstance from "./axiosApi";
 
-class Teams {
+class TeamsFuncs {
   async getTeamsFromUserId(id) {
     let teamsId;
     let teams = [];
@@ -51,4 +51,4 @@ class Teams {
   }
 }
 
-export default Teams;
+export default TeamsFuncs;

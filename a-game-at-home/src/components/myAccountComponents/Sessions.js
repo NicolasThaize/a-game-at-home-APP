@@ -6,7 +6,6 @@ import Teams from "../../Teams";
 class Sessions extends React.Component {
   state = {
     user: User.prototype.getUserData(),
-    teams: '',
     sessionsArray: []
   }
 
@@ -60,6 +59,7 @@ class Sessions extends React.Component {
                 <p key={session.id}>{team.name}</p>
               ))}
             </div>
+            <p className='is-hidden-tablet has-text-weight-bold'>Score de l'équipe:</p>
             <div className="column">
               {session.teams.map(team => (
                 <p key={session.id}>{team.total_points}</p>
