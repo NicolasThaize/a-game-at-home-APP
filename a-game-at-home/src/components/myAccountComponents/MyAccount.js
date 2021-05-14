@@ -39,12 +39,15 @@ class MyAccount extends React.Component {
     ],
   }
 
+  /**
+   * Get path after component get mounted
+   */
   componentDidMount() {
     this.getUrlPath();
   }
 
   /**
-   * Get the last word of url (in 'localhost/login' returns 'login')
+   * Get the last word of url (in 'localhost/login' returns 'login') and set it to currentActive
    */
   getUrlPath = () => {
     let n = window.location.href.split("/");
@@ -54,6 +57,10 @@ class MyAccount extends React.Component {
     })
   }
 
+  /**
+   * Switches the current active tab
+   * @param text
+   */
   handleClick = (text) => {
     this.setState({currentActive: text});
   }

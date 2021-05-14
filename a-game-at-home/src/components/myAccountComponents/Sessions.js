@@ -2,18 +2,23 @@ import React from "react";
 import SessionsFuncs from "../../Sessions";
 import User from "../../User";
 import Teams from "../../Teams";
+import TeamPoints from "../../TeamPoints";
 
 class Sessions extends React.Component {
   state = {
     user: User.prototype.getUserData(),
-    sessionsArray: []
+    sessionsArray: [],
+    sessionPoints: []
   }
 
+  /**
+   * Get session infos from user id
+   * @returns {Promise<void>}
+   */
   async componentDidMount() {
     await SessionsFuncs.prototype.getSessionsByUserId(this.state.user.id).then(response => {
       this.setState({sessionsArray: response})
     })
-
     let actualSessions = this.state.sessionsArray;
     actualSessions.map(async session => {
       await Teams.prototype.getTeamFromId(session.id).then(response => {
@@ -23,6 +28,40 @@ class Sessions extends React.Component {
         this.setState({sessionsArray: actualSessions})
       })
     })
+
+
+    await this.getSessionPoints();
+  }
+
+  /**
+   * Get all session points with session id
+   * @returns {Promise<void>}
+   */
+  getSessionPoints = async () => {
+    for (let session of this.state.sessionsArray){
+      let pointsIds = session.team_point;
+      let pointsArray = [];
+      for (let pointsId of pointsIds){
+        await TeamPoints.prototype.getTeamPointFromId(pointsId).then(r => {
+          pointsArray.push(r)
+        })
+      }
+      this.setState({sessionPoints: pointsArray});
+    }
+  }
+
+  /**
+   * Verifies if the point belongs to the team id specified, if yes returns the value
+   * @param teamId
+   * @returns {string|string|string|SVGPointList|*}
+   */
+  verifyPoints = (teamId) => {
+    for (let point of this.state.sessionPoints){
+      if (point.teams[0] === teamId){
+        return point.points
+      }
+    }
+    return "";
   }
 
   render() {
@@ -61,9 +100,15 @@ class Sessions extends React.Component {
             </div>
             <p className='is-hidden-tablet has-text-weight-bold'>Score de l'équipe:</p>
             <div className="column">
-              {session.teams.map(team => (
-                <p key={session.id}>{team.total_points}</p>
-              ))}
+              {session.teams.map(team => {
+                const value = this.verifyPoints(team.id);
+                return (
+                  <p
+                    key={session.id}>
+                    {value !== "" ? value : "Pas de score"}
+                  </p>
+                )
+              })}
             </div>
           </div>
         ))

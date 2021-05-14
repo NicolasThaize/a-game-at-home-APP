@@ -14,6 +14,9 @@ class Teams extends React.Component {
     teamSessions: []
   }
 
+  /**
+   * Get teams infos from user id
+   */
   componentDidMount() {
     TeamsFuncs.prototype.getTeamsFromUserId(this.state.user.id).then(response => {
       this.setState({teams: response})
@@ -27,7 +30,12 @@ class Teams extends React.Component {
     this.setState({isModalActive: !this.state.isModalActive});
   }
 
-  getTeamInfos = async (team) => {
+  /**
+   * Set session infos into state
+   * @param team
+   * @returns {Promise<void>}
+   */
+  getSessionInfos = async(team) => {
     let result = [];
     team.session.map(async sessionId => {
       await SessionsFuncs.prototype.getSessionById(sessionId).then(response => {
@@ -42,11 +50,26 @@ class Teams extends React.Component {
       teamName: team.name,
       teamUsers: team.users
     })
+  }
+
+  /**
+   * Get session infos and show modal
+   * @param team
+   * @returns {Promise<void>}
+   */
+  openSessionModal = async (team) => {
+    await this.getSessionInfos(team);
     this.triggerModal();
   }
 
-  test = () => {
-    console.log(this.state.teamUsers[0].first_name)
+  /**
+   * Get session infos and deletes the user from the session
+   * @param team
+   * @returns {Promise<void>}
+   */
+  leaveTeam = async (team) => {
+    await this.getSessionInfos(team);
+    // Faire une requete post pour supprimer cet user de la team
   }
 
   render() {
@@ -69,8 +92,8 @@ class Teams extends React.Component {
                   </p>
                 </div>
                 <footer className="card-footer">
-                  <Link to="/profile" className="card-footer-item p-2" onClick={() => this.getTeamInfos(team)}>Plus d'options</Link>
-                  <Link to="/profile" className="card-footer-item p-2">Quitter l'équipe</Link>
+                  <Link to="/profile/teams" className="card-footer-item p-2" onClick={() => this.openSessionModal(team)}>Plus d'options</Link>
+                  <Link to="/profile/teams" className="card-footer-item p-2" onClick={() => this.leaveTeam(team)}>Quitter l'équipe</Link>
                 </footer>
               </div>
             </div>
@@ -87,7 +110,7 @@ class Teams extends React.Component {
                 <p className="has-text-weight-bold has-text-primary">Joueurs:</p>
                 <ul>
                   {teamUsers.map(user => (
-                    <li>{user.username}</li>
+                    <li key={user.name}>{user.username}</li>
                   ))}
                 </ul>
               </div>
@@ -95,7 +118,7 @@ class Teams extends React.Component {
                 <p className="has-text-weight-bold has-text-primary">Sessions:</p>
                 <ul>
                   {teamSessions.map(session => (
-                    <li>{session.name}</li>
+                    <li key={session.id}>{session.name}</li>
                   ))}
                 </ul>
               </div>
