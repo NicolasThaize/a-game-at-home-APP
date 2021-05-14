@@ -121,8 +121,9 @@ class Register extends React.Component{
           last_name: this.state.lastName,
           email: this.state.email,
           password: this.state.password,
-          birthDate: this.state.birthDate,
-          team: []
+          birth_date: this.state.birthDate,
+          team: [],
+          authorized_team: []
         })
           .then(response => {
           this.setState({isLoading: false, isSuccess: true});

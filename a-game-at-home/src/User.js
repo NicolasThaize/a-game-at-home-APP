@@ -1,4 +1,5 @@
 import jwt from 'jwt-decode';
+import axiosInstance from "./axiosApi";
 
 class User {
   getUserData() {
@@ -14,9 +15,25 @@ class User {
       });
     } else {
       throw Object.assign(
-        new Error("No user token stored in localStorage")
+        new Error("No valid token stored in localStorage")
       );
     }
+  }
+
+  async getAllUsersUsernames() {
+    let users = {
+      usernames: [],
+      ids: []
+    };
+    await axiosInstance.get('/users/').then(r => {
+      for (const user of r.data){
+        users.usernames.push(user.username)
+        users.ids.push(user.id)
+      }
+    })
+    return users.ids.map(function (value, index){
+      return {id: value, username: users.usernames[index]}
+    });
   }
 }
 

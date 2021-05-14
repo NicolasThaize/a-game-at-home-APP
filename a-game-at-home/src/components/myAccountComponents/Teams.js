@@ -3,6 +3,7 @@ import TeamsFuncs from "../../Teams";
 import SessionsFuncs from "../../Sessions";
 import User from "../../User";
 import {Link} from "react-router-dom";
+import {Redirect} from "react-router";
 
 class Teams extends React.Component {
   state = {
@@ -11,7 +12,9 @@ class Teams extends React.Component {
     isModalActive: false,
     teamName: '',
     teamUsers: [],
-    teamSessions: []
+    teamSessions: [],
+    teamId: "",
+    addPlayerRedirect: false
   }
 
   /**
@@ -48,7 +51,8 @@ class Teams extends React.Component {
     })
     this.setState({
       teamName: team.name,
-      teamUsers: team.users
+      teamUsers: team.users,
+      teamId: team.id
     })
   }
 
@@ -72,10 +76,12 @@ class Teams extends React.Component {
     // Faire une requete post pour supprimer cet user de la team
   }
 
+
   render() {
-    const { teams, isModalActive, teamName, teamUsers, teamSessions} = this.state;
+    const { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect} = this.state;
     return (
       <div className="columns is-multiline m-6">
+        {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
         {teams.map(team => {
           return (
             <div key={team.id} className="card column is-one-quarter mb-4">
@@ -118,13 +124,18 @@ class Teams extends React.Component {
                 <p className="has-text-weight-bold has-text-primary">Sessions:</p>
                 <ul>
                   {teamSessions.map(session => (
-                    <li key={session.id}>{session.name}</li>
+                    <li key={session.name}>{session.name}</li>
                   ))}
                 </ul>
               </div>
             </section>
             <footer className="modal-card-foot">
-              <button className="button is-primary">Ajouter un joueur</button>
+              <button
+                className="button is-primary"
+                onClick={() => {this.setState({addPlayerRedirect: true})}}
+              >
+                Ajouter un joueur
+              </button>
               <button className="button" onClick={this.triggerModal}>Fermer</button>
             </footer>
           </div>

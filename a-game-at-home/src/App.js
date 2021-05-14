@@ -9,6 +9,8 @@ import Home from "./components/homeComponent/Home";
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 import Presentation from "./components/presentationComponents/Presentation";
 import Articles from "./components/articleComponents/Articles";
+import AddPlayerToTeam from "./components/myAccountComponents/AddTeam/AddPlayerToTeam";
+
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -67,15 +69,21 @@ class App extends Component {
             </Helmet>
             <div className="App">
               <Navbar isLogged={isLogged}/>
+
               <Route exact path="/" component={Home} />
+
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
+
               <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Profile/modify" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Profile/sessions" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Profile/teams" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+              <Route exact path="/Profile/teams/:id" component={AddPlayerToTeam}/>
+
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
+
               <Footer/>
             </div>
           </main>
