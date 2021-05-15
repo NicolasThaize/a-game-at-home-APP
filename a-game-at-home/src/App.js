@@ -19,6 +19,7 @@ import './assets/css/default.min.css';
 import './variable.scss';
 import MyAccount from "./components/myAccountComponents/MyAccount";
 import User from "./User";
+import Admin from "./components/adminComponents/Admin";
 
 
 
@@ -98,6 +99,12 @@ class App extends Component {
 
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
+
+              <Route exact path="/Admin" component={Admin}/>
+              <Route exact path="/Admin/sessions" component={Admin}/>
+              <Route exact path="/Admin/challenges" component={Admin}/>
+              <Route exact path="/Admin/proofs" component={Admin}/>
+              <Route exact path="/Admin/notValidated" component={Admin}/>
 
               <Footer/>
             </div>

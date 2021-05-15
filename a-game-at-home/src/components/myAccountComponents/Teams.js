@@ -93,103 +93,105 @@ class Teams extends React.Component {
       { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect, isConfirmModalActive,
       selectionnedTeam, error} = this.state;
     return (
-      <div className="columns is-multiline m-6">
-        {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
-        {error ? <p className="has-text-danger has-text-weight-bold">{error}</p> : <span/>}
+      <div>
         <Link to="/profile/join/team"><button className="button is-primary">Rejoindre une équipe</button></Link>
-        {teams.map(team => {
-          return (
-            <div key={team.id} className="card column is-one-quarter mb-4">
-              <div className="card-content p-0">
-                <header className="card-header">
-                  <p className="card-header-title">
-                    {team.name}
-                  </p>
-                </header>
-                <div className="content p-2">
-                  <p className="has-text-weight-bold">
-                    Nombre de joueurs dans l'équipe:
-                    <span className='has-text-weight-normal'> {team.users.length}</span>
-                  </p>
+        <div className="columns is-multiline m-6">
+            {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
+            {error ? <p className="has-text-danger has-text-weight-bold">{error}</p> : <span/>}
+            {teams.map(team => {
+              return (
+                <div key={team.id} className="card column is-one-quarter mb-4">
+                  <div className="card-content p-0">
+                    <header className="card-header">
+                      <p className="card-header-title">
+                        {team.name}
+                      </p>
+                    </header>
+                    <div className="content p-2">
+                      <p className="has-text-weight-bold">
+                        Nombre de joueurs dans l'équipe:
+                        <span className='has-text-weight-normal'> {team.users.length}</span>
+                      </p>
+                    </div>
+                    <footer className="card-footer">
+                      <Link
+                        to="/profile/teams"
+                        className="card-footer-item p-2"
+                        onClick={() => this.openTeamModal(team)}
+                      >
+                        Plus d'options
+                      </Link>
+                      <Link
+                        to="/profile/teams"
+                        className="card-footer-item p-2"
+                        onClick={() => this.triggerLeaveTeamModal(team)}
+                      >
+                        Quitter l'équipe
+                      </Link>
+                    </footer>
+                  </div>
                 </div>
-                <footer className="card-footer">
-                  <Link
-                    to="/profile/teams"
-                    className="card-footer-item p-2"
-                    onClick={() => this.openTeamModal(team)}
+              )
+            })}
+            <div className={`modal ${isModalActive ? "is-active" : ""}`}>
+              <div className="modal-background" />
+              <div className="modal-card">
+                <header className="modal-card-head">
+                  <p className="modal-card-title">Equipe {teamName}</p>
+                </header>
+                <section className="modal-card-body content mb-0">
+                  <div className='box'>
+                    <p className="has-text-weight-bold has-text-primary">Joueurs:</p>
+                    <ul>
+                      {teamUsers.map(user => (
+                        <li key={user.name}>{user.username}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className='box'>
+                    <p className="has-text-weight-bold has-text-primary">Sessions:</p>
+                    <ul>
+                      {teamSessions.map(session => (
+                        <li key={session.name}>{session.name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+                <footer className="modal-card-foot">
+                  <button
+                    className="button is-primary"
+                    onClick={() => {this.setState({addPlayerRedirect: true})}}
                   >
-                    Plus d'options
-                  </Link>
-                  <Link
-                    to="/profile/teams"
-                    className="card-footer-item p-2"
-                    onClick={() => this.triggerLeaveTeamModal(team)}
-                  >
-                    Quitter l'équipe
-                  </Link>
+                    Ajouter un joueur
+                  </button>
+                  <button className="button" onClick={this.triggerModal}>Fermer</button>
                 </footer>
               </div>
+              <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerModal}/>
             </div>
-          )
-        })}
-        <div className={`modal ${isModalActive ? "is-active" : ""}`}>
-          <div className="modal-background" />
-          <div className="modal-card">
-            <header className="modal-card-head">
-              <p className="modal-card-title">Equipe {teamName}</p>
-            </header>
-            <section className="modal-card-body content mb-0">
-              <div className='box'>
-                <p className="has-text-weight-bold has-text-primary">Joueurs:</p>
-                <ul>
-                  {teamUsers.map(user => (
-                    <li key={user.name}>{user.username}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className='box'>
-                <p className="has-text-weight-bold has-text-primary">Sessions:</p>
-                <ul>
-                  {teamSessions.map(session => (
-                    <li key={session.name}>{session.name}</li>
-                  ))}
-                </ul>
-              </div>
-            </section>
-            <footer className="modal-card-foot">
-              <button
-                className="button is-primary"
-                onClick={() => {this.setState({addPlayerRedirect: true})}}
-              >
-                Ajouter un joueur
-              </button>
-              <button className="button" onClick={this.triggerModal}>Fermer</button>
-            </footer>
-          </div>
-          <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerModal}/>
-        </div>
 
-        <div className={`modal ${isConfirmModalActive ? "is-active" : ""}`}>
-          <div className="modal-background" />
-          <div className="modal-content">
-            <section className="modal-card-body">
-              <div className="m-3">
-                <p>Etes vous sur de vouloir quitter cette équipe ?</p><br/>
-                <p>Votre historique des sessions lié à cette équipe disparaitra aussi.</p>
+            <div className={`modal ${isConfirmModalActive ? "is-active" : ""}`}>
+              <div className="modal-background" />
+              <div className="modal-content">
+                <section className="modal-card-body">
+                  <div className="m-3">
+                    <p>Etes vous sur de vouloir quitter cette équipe ?</p><br/>
+                    <p>Votre historique des sessions lié à cette équipe disparaitra aussi.</p>
+                  </div>
+                </section>
+                <footer className="modal-card-foot">
+                  <button
+                    className="button"
+                    onClick={() => {this.leaveTeam(selectionnedTeam)}}
+                  >
+                    Quitter l'équipe
+                  </button>
+                  <button className="button is-danger" onClick={this.triggerModal}>Annuler</button>
+                </footer>
               </div>
-            </section>
-            <footer className="modal-card-foot">
-              <button
-                className="button"
-                onClick={() => {this.leaveTeam(selectionnedTeam)}}
-              >
-                Quitter l'équipe
-              </button>
-              <button className="button is-danger" onClick={this.triggerModal}>Annuler</button>
-            </footer>
+              <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerLeaveTeamModal}/>
+            </div>
           </div>
-          <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerLeaveTeamModal}/>
-        </div>
       </div>
     );
   }

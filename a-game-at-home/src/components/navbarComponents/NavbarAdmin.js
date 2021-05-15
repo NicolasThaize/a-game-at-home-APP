@@ -7,11 +7,11 @@ class NavbarAdmin extends React.Component{
       <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons is-centered">
-            <Link to="/" className="button is-primary">
-              <strong>test</strong>
+            <Link to="/admin/sessions" className="button is-primary">
+              <strong>Panel admin</strong>
             </Link>
-            <Link to="/" className="button is-light">
-              test
+            <Link to="/profile" className="button">
+              Mon compte
             </Link>
           </div>
         </div>
