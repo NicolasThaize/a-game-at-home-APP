@@ -10,6 +10,7 @@ import LoginRegisterButton from "./components/authComponents/LoginRegisterButton
 import Presentation from "./components/presentationComponents/Presentation";
 import Articles from "./components/articleComponents/Articles";
 import AddPlayerToTeam from "./components/myAccountComponents/AddTeam/AddPlayerToTeam";
+import JoinTeam from "./components/myAccountComponents/JoinTeamComponents/JoinTeam";
 
 
 // Importing css for global css in the app
@@ -80,6 +81,7 @@ class App extends Component {
               <Route exact path="/Profile/sessions" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Profile/teams" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
               <Route exact path="/Profile/teams/:id" component={AddPlayerToTeam}/>
+              <Route exact path="/Profile/join/team" component={JoinTeam}/>
 
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />

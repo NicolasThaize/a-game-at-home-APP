@@ -2,22 +2,18 @@ import axiosInstance from "./axiosApi";
 
 class TeamsFuncs {
   async addPlayerToTeam(team, userId){
-    const id = team.authorized_user[0];
     let result;
-    await axiosInstance.get(`/user_team_authorized/${id}/`).then(async r => {
-      const users = r.data.users;
-      users.push(userId);
-      await axiosInstance.patch(`/user_team_authorized/${id}/`, {users: users}).then(r => {
-        result = r.data
-      })
-    }).catch(() => {throw Object.assign(new Error("No team authorized user table with this id."));})
+    await axiosInstance.post(`/user_team_authorized/`, {users: [userId], teams: [team.id]}).then(r => {
+      result = r.data
+      console.log(result)
+    });
+
     return result;
   }
 
   async getTeamsFromUserId(id) {
     let teamsId;
     let teams = [];
-
     await axiosInstance.get(`/users/${id}/`).then(response => {
       teamsId = response.data.team
     }).catch(() => {throw Object.assign(new Error("No user with this id."));})
@@ -46,6 +42,7 @@ class TeamsFuncs {
   }
 
   async getTeamFromId(id) {
+    console.log(id)
     let team;
     await axiosInstance.get(`/teams/${id}/`).then(response => {
       team = response.data
@@ -71,6 +68,17 @@ class TeamsFuncs {
       response = r.data;
     }).catch(() => {throw Object.assign(new Error("Error while patching data."));})
     return response;
+  }
+
+  async getTeamFromUserTeamAuthorizedId(id){
+    let teamId, result;
+    await axiosInstance.get(`/user_team_authorized/${id}`).then(r => {
+      teamId = r.data.teams[0];
+    });
+    await TeamsFuncs.prototype.getTeamFromId(teamId).then(r => {
+      result = r;
+    })
+    return result;
   }
 }
 

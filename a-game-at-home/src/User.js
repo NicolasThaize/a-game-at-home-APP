@@ -1,5 +1,7 @@
 import jwt from 'jwt-decode';
 import axiosInstance from "./axiosApi";
+import TeamsFuncs from "./Teams";
+import UserTeamAuthorized from "./components/UserTeamAuthorized";
 
 class User {
   getUserData() {
@@ -39,6 +41,47 @@ class User {
     return users.ids.map(function (value, index){
       return {id: value, username: users.usernames[index]}
     });
+  }
+
+  async getJoinableTeamsByUserId(id) {
+    let joinableUserTeamsIds = [];
+    await this.getUserDataFromId(id).then(r => {
+      joinableUserTeamsIds = r.authorized_team;
+    })
+    let teams = [];
+    for (const userTeamAuthorizedId of joinableUserTeamsIds){
+      await TeamsFuncs.prototype.getTeamFromUserTeamAuthorizedId(userTeamAuthorizedId).then(r => {
+        teams.push(r)
+      })
+    }
+    return teams;
+  }
+
+  async addUserToTeamByUserId(userId, team){
+    const teamUsers = team.users.map(user => {
+      return user.id
+    })
+    teamUsers.push(userId);
+
+    let idToDelete;
+    for (const id of team.authorized_user){
+      let test = [];
+      await UserTeamAuthorized.prototype.getUserTeamAuthorizedById(id).then(r => {
+        test = r;
+      });
+      if (team.id === test.teams[0] && userId === test.users[0]){
+        idToDelete = test.id;
+      }
+    }
+    let response;
+    await axiosInstance.patch(`/teams/${team.id}/`, {users: teamUsers})
+      .then(r => {
+      response = r.data;
+      }).catch(() => {throw Object.assign(new Error("Error while adding an user to a team."));})
+    await axiosInstance.delete(`/user_team_authorized/${idToDelete}/`).then(r => {
+      console.log(r)
+    }).catch(() => {throw Object.assign(new Error("Error while deleting an user team authorized."));})
+    return response;
   }
 }
 
