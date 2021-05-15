@@ -1,11 +1,13 @@
 import React from "react";
 import User from "../../../User";
 import {Link} from "react-router-dom";
+import {Redirect} from "react-router";
 
 class JoinTeam extends React.Component{
   state = {
     user: User.prototype.getUserData(),
     teams: [],
+    redirect: false
   }
 
   componentDidMount() {
@@ -16,15 +18,16 @@ class JoinTeam extends React.Component{
 
   joinTeam = async (team) => {
     await User.prototype.addUserToTeamByUserId(this.state.user.id, team);
-    User.prototype.getJoinableTeamsByUserId(this.state.user.id).then(r => {
-      this.setState({teams: r})
+    User.prototype.getJoinableTeamsByUserId(this.state.user.id).then(() => {
+      this.setState({redirect: true})
     })
   }
 
   render() {
-    const { teams } = this.state;
+    const { teams, redirect} = this.state;
     return(
       <div className="mt-6 mb-6 section">
+        {redirect ? <Redirect to={`/profile/teams/`}/> : undefined}
         <h3 className="title is-3">Vous avez été invité à rejoindre les équipes suivantes:</h3>
         {teams.length === 0 ? <p>Vous n'avez aucune invitation</p> : undefined}
         <div className="columns is-multiline m-3">

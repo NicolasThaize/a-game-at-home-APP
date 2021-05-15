@@ -92,6 +92,7 @@ class Teams extends React.Component {
     return (
       <div className="columns is-multiline m-6">
         {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
+        <Link to="/profile/join/team"><button className="button is-primary">Rejoindre une équipe</button></Link>
         {teams.map(team => {
           return (
             <div key={team.id} className="card column is-one-quarter mb-4">
