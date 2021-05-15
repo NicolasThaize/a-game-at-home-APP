@@ -14,7 +14,9 @@ class Teams extends React.Component {
     teamUsers: [],
     teamSessions: [],
     teamId: "",
-    addPlayerRedirect: false
+    addPlayerRedirect: false,
+    isConfirmModalActive: false,
+    selectionnedTeam: '',
   }
 
   /**
@@ -61,7 +63,7 @@ class Teams extends React.Component {
    * @param team
    * @returns {Promise<void>}
    */
-  openSessionModal = async (team) => {
+  openTeamModal = async (team) => {
     await this.getSessionInfos(team);
     this.triggerModal();
   }
@@ -72,13 +74,21 @@ class Teams extends React.Component {
    * @returns {Promise<void>}
    */
   leaveTeam = async (team) => {
-    await this.getSessionInfos(team);
-    // Faire une requete post pour supprimer cet user de la team
+    await TeamsFuncs.prototype.leaveTeam(team, this.state.user);
+    TeamsFuncs.prototype.getTeamsFromUserId(this.state.user.id).then(response => {
+      this.setState({teams: response, isConfirmModalActive: false})
+    });
   }
 
+  /**
+   * Trigger the validation modal before leaving a team
+   */
+  triggerLeaveTeamModal = (team) => {
+    this.setState({isConfirmModalActive: !this.state.isConfirmModalActive, selectionnedTeam: team});
+  }
 
   render() {
-    const { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect} = this.state;
+    const { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect, isConfirmModalActive, selectionnedTeam} = this.state;
     return (
       <div className="columns is-multiline m-6">
         {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
@@ -98,8 +108,20 @@ class Teams extends React.Component {
                   </p>
                 </div>
                 <footer className="card-footer">
-                  <Link to="/profile/teams" className="card-footer-item p-2" onClick={() => this.openSessionModal(team)}>Plus d'options</Link>
-                  <Link to="/profile/teams" className="card-footer-item p-2" onClick={() => this.leaveTeam(team)}>Quitter l'équipe</Link>
+                  <Link
+                    to="/profile/teams"
+                    className="card-footer-item p-2"
+                    onClick={() => this.openTeamModal(team)}
+                  >
+                    Plus d'options
+                  </Link>
+                  <Link
+                    to="/profile/teams"
+                    className="card-footer-item p-2"
+                    onClick={() => this.triggerLeaveTeamModal(team)}
+                  >
+                    Quitter l'équipe
+                  </Link>
                 </footer>
               </div>
             </div>
@@ -140,6 +162,28 @@ class Teams extends React.Component {
             </footer>
           </div>
           <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerModal}/>
+        </div>
+
+        <div className={`modal ${isConfirmModalActive ? "is-active" : ""}`}>
+          <div className="modal-background" />
+          <div className="modal-content">
+            <section className="modal-card-body">
+              <div className="m-3">
+                <p>Etes vous sur de vouloir quitter cette équipe ?</p><br/>
+                <p>Votre historique des sessions lié à cette équipe disparaitra aussi.</p>
+              </div>
+            </section>
+            <footer className="modal-card-foot">
+              <button
+                className="button"
+                onClick={() => {this.leaveTeam(selectionnedTeam)}}
+              >
+                Quitter l'équipe
+              </button>
+              <button className="button is-danger" onClick={this.triggerModal}>Annuler</button>
+            </footer>
+          </div>
+          <button className="modal-close is-large" aria-label="close" type="button" onClick={this.triggerLeaveTeamModal}/>
         </div>
       </div>
     );

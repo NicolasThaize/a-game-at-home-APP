@@ -13,11 +13,16 @@ class User {
         username: decoded.username,
         birth_date: decoded.birth_date
       });
-    } else {
-      throw Object.assign(
-        new Error("No valid token stored in localStorage")
-      );
+    } else {throw Object.assign(new Error("No valid token stored in localStorage"));
     }
+  }
+
+  async getUserDataFromId(id) {
+    let user;
+    await axiosInstance.get(`/users/${id}/`).then(r => {
+      user = r.data;
+    }).catch(() => {throw Object.assign(new Error("No user with this id."));})
+    return user;
   }
 
   async getAllUsersUsernames() {
@@ -30,7 +35,7 @@ class User {
         users.usernames.push(user.username)
         users.ids.push(user.id)
       }
-    })
+    }).catch(() => {throw Object.assign(new Error("Error while getting users."));})
     return users.ids.map(function (value, index){
       return {id: value, username: users.usernames[index]}
     });

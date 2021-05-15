@@ -52,6 +52,26 @@ class TeamsFuncs {
     }).catch(() => {throw Object.assign(new Error("No team with this id."));})
     return team;
   }
+
+  async leaveTeam(team, user){
+    let teamId = team.id;
+    let teamUsers = [];
+    let response;
+    await this.getTeamFromId(teamId).then(r => {
+      teamUsers = r.users;
+    })
+    let newUsers = teamUsers.filter(function(value){
+      return value.id !== user.id;
+    });
+    console.log(teamUsers, newUsers)
+    newUsers = newUsers.map(function (i) {
+      return i.id
+    });
+    await axiosInstance.patch(`/teams/${teamId}/`,{users: newUsers}).then(r => {
+      response = r.data;
+    }).catch(() => {throw Object.assign(new Error("Error while patching data."));})
+    return response;
+  }
 }
 
 export default TeamsFuncs;
