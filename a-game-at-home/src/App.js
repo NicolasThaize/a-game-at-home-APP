@@ -9,7 +9,7 @@ import Home from "./components/homeComponent/Home";
 import LoginRegisterButton from "./components/authComponents/LoginRegisterButton";
 import Presentation from "./components/presentationComponents/Presentation";
 import Articles from "./components/articleComponents/Articles";
-import AddPlayerToTeam from "./components/myAccountComponents/AddTeam/AddPlayerToTeam";
+import AddPlayerToTeam from "./components/myAccountComponents/AddTeamComponents/AddPlayerToTeam";
 import JoinTeam from "./components/myAccountComponents/JoinTeamComponents/JoinTeam";
 
 
