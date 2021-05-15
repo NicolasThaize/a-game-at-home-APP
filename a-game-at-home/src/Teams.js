@@ -46,7 +46,7 @@ class TeamsFuncs {
     let team;
     await axiosInstance.get(`/teams/${id}/`).then(response => {
       team = response.data
-    }).catch(() => {throw Object.assign(new Error("No team with this id."));})
+    }).catch(() => {throw Object.assign(new Error("No team with this id: " + id));})
     return team;
   }
 
@@ -79,6 +79,21 @@ class TeamsFuncs {
       result = r;
     })
     return result;
+  }
+
+  async getTeamPointsFromTeamPointAndSessionId(pointsIds, sessionId){
+    let points = [];
+    for (const pointsId of pointsIds){
+      await axiosInstance.get(`/team_points/${pointsId}`).then(r => {
+        points.push(r.data)
+      }).catch(() => {throw Object.assign(new Error("No points with this id: " + pointsId));})
+    }
+
+    for (const point of points){
+      if (point.sessions[0] === sessionId){
+        return point
+      }
+    }
   }
 }
 

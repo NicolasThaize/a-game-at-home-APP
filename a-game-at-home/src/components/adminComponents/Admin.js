@@ -1,5 +1,5 @@
 import React from "react";
-import Sessions from "./Sessions";
+import Sessions from "./adminSessionsComponents/Sessions";
 import Challenges from "./Challenges";
 import Proofs from "./Proofs";
 import NotValidatedProofs from "./NotValidatedProofs";
