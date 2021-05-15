@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import NavbarLoggedIn from "./NavbarLoggedIn";
 import NavbarNotLoggedIn from "./NavbarNotLoggedIn";
 import "../../assets/css/navbar.min.css"
+import NavbarAdmin from "./NavbarAdmin";
 
 class Navbar extends React.Component {
 
@@ -13,7 +14,8 @@ class Navbar extends React.Component {
     logo: process.env.PUBLIC_URL + "/img/logo.png",
     svgFb: process.env.PUBLIC_URL + "/img/svgFb.svg",
     svgTwt: process.env.PUBLIC_URL + "/img/svgTwt.svg",
-    loggedIn: this.props.isLogged
+    loggedIn: this.props.isLogged,
+    isAdmin: this.props.isAdmin
   }
 
   /**
@@ -23,11 +25,12 @@ class Navbar extends React.Component {
    */
   static getDerivedStateFromProps(props, state) {
     // Change the state loggedIn to update navbar look
+    state.isAdmin = props.isAdmin
     return state.loggedIn = props.isLogged
   }
 
   componentDidMount() {
-    this.setState({loggedIn: this.props.isLogged})
+    this.setState({loggedIn: this.props.isLogged, isAdmin: this.props.isAdmin})
     // If on mobile disable the menu by default
     if (this.state.windowWidth < 1024) {
       this.setState({
@@ -52,7 +55,7 @@ class Navbar extends React.Component {
   }
 
   render() {
-    const { logo, burgerActive, dropMenuActive,loggedIn, svgFb, svgTwt } = this.state;
+    const { logo, burgerActive, dropMenuActive,loggedIn, svgFb, svgTwt, isAdmin } = this.state;
     let burgerClassName = "navbar-burger";
     if(burgerActive){
       burgerClassName += ' is-active'
@@ -98,6 +101,10 @@ class Navbar extends React.Component {
           {loggedIn ?
             <NavbarLoggedIn/> :
             <NavbarNotLoggedIn/>
+          }
+          {isAdmin ?
+            <NavbarAdmin/> :
+            undefined
           }
           <div className="is-hidden-desktop columns is-mobile has-text-centered m-3">
             <a href="https://www.google.com" target="_blank" rel="noreferrer" className="column">

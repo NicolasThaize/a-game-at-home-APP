@@ -18,27 +18,35 @@ import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
 import MyAccount from "./components/myAccountComponents/MyAccount";
+import User from "./User";
 
 
 
 class App extends Component {
   state = {
-    isLogged: false
+    isLogged: false,
+    isAdmin: false
   }
 
   /**
    * Change the isLogged state which is supposed to be passed to
    * child components who needs a custom display when logged or not
+   * checks if the value admin in the token is true and set isAdmin belonging to this value
    */
   updateLogin = async () => {
-    this.setState({isLogged: true});
+    this.setState({isLogged: true} , () => {
+      if (this.state.isLogged){
+        const user = User.prototype.getUserData();
+        this.setState({isAdmin: user.admin})
+      }
+    });
   }
   /**
    * Change the isLogged state which is supposed to be passed to
    * child components who needs a custom display when logged or not
    */
   updateLogout = () => {
-    this.setState({isLogged: false});
+    this.setState({isLogged: false, isAdmin: false});
   }
 
   /**
@@ -48,11 +56,16 @@ class App extends Component {
    */
   componentDidMount() {
     const isLogged = !!localStorage.getItem("refresh_token");
-    this.setState({isLogged: isLogged});
+    this.setState({isLogged: isLogged} , () => {
+      if (this.state.isLogged){
+        const user = User.prototype.getUserData();
+        this.setState({isAdmin: user.admin})
+      }
+    });
   }
 
   render(){
-    const { isLogged } = this.state;
+    const { isLogged, isAdmin } = this.state;
     return (
       <Router>
         <HelmetProvider>
@@ -69,7 +82,7 @@ class App extends Component {
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             </Helmet>
             <div className="App">
-              <Navbar isLogged={isLogged}/>
+              <Navbar isLogged={isLogged} isAdmin={isAdmin}/>
 
               <Route exact path="/" component={Home} />
 
