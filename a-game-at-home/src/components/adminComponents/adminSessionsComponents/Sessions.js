@@ -3,6 +3,7 @@ import SessionsFuncs from "../../../Sessions";
 import '../../../assets/css/adminSessions.min.css';
 import ShowSession from "./ShowSession";
 import ModifySession from "./ModifySession";
+import DeleteSession from "./DeleteSession";
 
 class Sessions extends React.Component{
   state = {
@@ -10,7 +11,8 @@ class Sessions extends React.Component{
     sessions: [],
     showedSession: '',
     isShowActive: false,
-    isModifyActive: false
+    isModifyActive: false,
+    isDeleteActive: false
   }
 
   componentDidMount() {
@@ -35,6 +37,15 @@ class Sessions extends React.Component{
     this.setState({isModifyActive: !this.state.isModifyActive})
   }
 
+  deleteSession = (session) => {
+    this.setState({showedSession:session})
+    this.triggerDeleteModal();
+  }
+
+  triggerDeleteModal = () => {
+    this.setState({isDeleteActive: !this.state.isDeleteActive})
+  }
+
   refreshSessions = () => {
     SessionsFuncs.prototype.getAllSessions().then(r => {
       this.setState({sessions: r, isLoading: false})
@@ -42,7 +53,7 @@ class Sessions extends React.Component{
   }
 
   render() {
-    const { isLoading, sessions, isShowActive, showedSession, isModifyActive} = this.state;
+    const { isLoading, sessions, isShowActive, showedSession, isModifyActive, isDeleteActive} = this.state;
     return (
       <div className="">
         {isLoading ? "Loading" : undefined}
@@ -60,7 +71,7 @@ class Sessions extends React.Component{
             <div className="column">
               <button className='button' onClick={() => this.showSession(session)}>Voir</button>
               <button className='button is-warning' onClick={() => this.modifySession(session)}>Modifier</button>
-              <button className='button is-danger'>Supprimer</button>
+              <button className='button is-danger' onClick={() => this.deleteSession(session)}>Supprimer</button>
             </div>
           </div>
         ))}
@@ -71,6 +82,13 @@ class Sessions extends React.Component{
           triggerModal={this.triggerModifyModal}
           refreshSessions={this.refreshSessions}
           /> : undefined}
+        {isDeleteActive ?
+          <DeleteSession
+            session={showedSession}
+            triggerModal={this.triggerDeleteModal}
+            refreshSessions={this.refreshSessions}
+          /> : undefined}
+
       </div>
     );
   }
