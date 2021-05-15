@@ -16,9 +16,7 @@ class AddPlayerToTeam extends React.Component{
   async componentDidMount() {
     await TeamsFuncs.prototype.getTeamFromId(this.props.match.params.id).then(r => {
       this.setState({team: r});
-    }).catch( () => {
-      this.setState({isTeamNotFound: true});
-    })
+    }).catch( () => {this.setState({isTeamNotFound: true});})
 
     for (const user of this.state.team.users){
       if (user.id === this.state.user.id){

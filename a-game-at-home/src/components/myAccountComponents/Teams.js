@@ -17,6 +17,7 @@ class Teams extends React.Component {
     addPlayerRedirect: false,
     isConfirmModalActive: false,
     selectionnedTeam: '',
+    error:''
   }
 
   /**
@@ -25,7 +26,7 @@ class Teams extends React.Component {
   componentDidMount() {
     TeamsFuncs.prototype.getTeamsFromUserId(this.state.user.id).then(response => {
       this.setState({teams: response})
-    });
+    }).catch(e => this.setState({error: e}));
   }
 
   /**
@@ -49,7 +50,7 @@ class Teams extends React.Component {
         this.setState({
           teamSessions: result
         })
-      })
+      }).catch(e => this.setState({error: e}));
     })
     this.setState({
       teamName: team.name,
@@ -88,10 +89,13 @@ class Teams extends React.Component {
   }
 
   render() {
-    const { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect, isConfirmModalActive, selectionnedTeam} = this.state;
+    const
+      { teams, isModalActive, teamName, teamUsers, teamSessions, teamId, addPlayerRedirect, isConfirmModalActive,
+      selectionnedTeam, error} = this.state;
     return (
       <div className="columns is-multiline m-6">
         {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
+        {error ? <p className="has-text-danger has-text-weight-bold">{error}</p> : <span/>}
         <Link to="/profile/join/team"><button className="button is-primary">Rejoindre une équipe</button></Link>
         {teams.map(team => {
           return (

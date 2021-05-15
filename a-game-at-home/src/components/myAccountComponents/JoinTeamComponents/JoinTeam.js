@@ -7,26 +7,28 @@ class JoinTeam extends React.Component{
   state = {
     user: User.prototype.getUserData(),
     teams: [],
-    redirect: false
+    redirect: false,
+    error:''
   }
 
   componentDidMount() {
     User.prototype.getJoinableTeamsByUserId(this.state.user.id).then(r => {
       this.setState({teams: r})
-    })
+    }).catch(e => this.setState({error: e}));
   }
 
   joinTeam = async (team) => {
     await User.prototype.addUserToTeamByUserId(this.state.user.id, team);
     User.prototype.getJoinableTeamsByUserId(this.state.user.id).then(() => {
       this.setState({redirect: true})
-    })
+    }).catch(e => this.setState({error: e}));
   }
 
   render() {
-    const { teams, redirect} = this.state;
+    const { teams, redirect, error} = this.state;
     return(
       <div className="mt-6 mb-6 section">
+        {error ? <p className="has-text-danger has-text-weight-bold">{error}</p> : <span/>}
         {redirect ? <Redirect to={`/profile/teams/`}/> : undefined}
         <h3 className="title is-3">Vous avez été invité à rejoindre les équipes suivantes:</h3>
         {teams.length === 0 ? <p>Vous n'avez aucune invitation</p> : undefined}

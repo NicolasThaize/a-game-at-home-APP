@@ -16,7 +16,7 @@ class TeamFound extends React.Component {
     let values;
     await User.prototype.getAllUsersUsernames().then(r => {
       values = r;
-    }).catch(() => this.setState({usersError: "Erreur lors du chargement des utiisateurs"}))
+    }).catch(() => this.setState({usersError: "Erreur lors du chargement des utilisateurs"}))
     this.setState({users: values});
   }
 
