@@ -2,32 +2,47 @@ import React from "react";
 import SessionsFuncs from "../../../Sessions";
 import '../../../assets/css/adminSessions.min.css';
 import ShowSession from "./ShowSession";
+import ModifySession from "./ModifySession";
 
 class Sessions extends React.Component{
   state = {
     isLoading: true,
     sessions: [],
     showedSession: '',
-    isModalActive: false
+    isShowActive: false,
+    isModifyActive: false
   }
 
   componentDidMount() {
+    this.refreshSessions();
+  }
+
+  showSession = (session) => {
+    this.setState({showedSession:session})
+    this.triggerShowModal();
+  }
+
+  triggerShowModal = () => {
+    this.setState({isShowActive: !this.state.isShowActive})
+  }
+
+  modifySession = (session) => {
+    this.setState({showedSession:session})
+    this.triggerModifyModal();
+  }
+
+  triggerModifyModal = () => {
+    this.setState({isModifyActive: !this.state.isModifyActive})
+  }
+
+  refreshSessions = () => {
     SessionsFuncs.prototype.getAllSessions().then(r => {
       this.setState({sessions: r, isLoading: false})
     }).catch(e => this.setState({error: e}));
   }
 
-  showSession = (session) => {
-    this.setState({showedSession:session})
-    this.triggerModal();
-  }
-
-  triggerModal = () => {
-    this.setState({isModalActive: !this.state.isModalActive})
-  }
-
   render() {
-    const { isLoading, sessions, isModalActive, showedSession} = this.state;
+    const { isLoading, sessions, isShowActive, showedSession, isModifyActive} = this.state;
     return (
       <div className="">
         {isLoading ? "Loading" : undefined}
@@ -44,12 +59,18 @@ class Sessions extends React.Component{
             </div>
             <div className="column">
               <button className='button' onClick={() => this.showSession(session)}>Voir</button>
-              <button className='button is-warning'>Modifier</button>
+              <button className='button is-warning' onClick={() => this.modifySession(session)}>Modifier</button>
               <button className='button is-danger'>Supprimer</button>
             </div>
           </div>
         ))}
-        {isModalActive ? <ShowSession session={showedSession} triggerModal={this.triggerModal}/> : undefined}
+        {isShowActive ? <ShowSession session={showedSession} triggerModal={this.triggerShowModal}/> : undefined}
+        {isModifyActive ?
+          <ModifySession
+          session={showedSession}
+          triggerModal={this.triggerModifyModal}
+          refreshSessions={this.refreshSessions}
+          /> : undefined}
       </div>
     );
   }
