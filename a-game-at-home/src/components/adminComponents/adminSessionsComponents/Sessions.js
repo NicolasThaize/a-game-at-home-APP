@@ -25,7 +25,6 @@ class Sessions extends React.Component{
     this.setState({showedSession:session})
     this.triggerShowModal();
   }
-
   triggerShowModal = () => {
     this.setState({isShowActive: !this.state.isShowActive})
   }
@@ -34,7 +33,6 @@ class Sessions extends React.Component{
     this.setState({showedSession:session})
     this.triggerModifyModal();
   }
-
   triggerModifyModal = () => {
     this.setState({isModifyActive: !this.state.isModifyActive})
   }
@@ -43,7 +41,6 @@ class Sessions extends React.Component{
     this.setState({showedSession:session})
     this.triggerDeleteModal();
   }
-
   triggerDeleteModal = () => {
     this.setState({isDeleteActive: !this.state.isDeleteActive})
   }
@@ -51,11 +48,13 @@ class Sessions extends React.Component{
   createSession = () => {
     this.triggerCreateModal();
   }
-
   triggerCreateModal = () => {
     this.setState({isCreateActive: !this.state.isCreateActive})
   }
 
+  /**
+   * Get all sessions
+   */
   refreshSessions = () => {
     SessionsFuncs.prototype.getAllSessions().then(r => {
       this.setState({sessions: r, isLoading: false})

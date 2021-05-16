@@ -4,6 +4,7 @@ import axiosInstance from "../../../axiosApi";
 class CreateSession extends React.Component{
   state = {
     triggerModal: this.props.triggerModal,
+    challenges: [],
     inputs: [
       {
         index: 0,
@@ -45,7 +46,9 @@ class CreateSession extends React.Component{
     this.state.triggerModal();
   }
 
-
+  /**
+   * Makes a post request on /sessions/ with data
+   */
   createTheSession = () => {
     let result = {};
     for (const input of this.state.inputs){

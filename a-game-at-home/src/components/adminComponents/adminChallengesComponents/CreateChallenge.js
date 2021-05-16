@@ -39,6 +39,9 @@ class CreateChallenge extends React.Component{
   }
 
 
+  /**
+   * Makes a post request on /challenges/ with values
+   */
   createTheChallenge = () => {
     let result = {};
     for (const input of this.state.inputs){

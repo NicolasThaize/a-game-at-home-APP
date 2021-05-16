@@ -11,6 +11,7 @@ class ShowSession extends React.Component{
   }
 
   async componentDidMount() {
+    // Get all teams that plays this session
     await TeamsFuncs.prototype.getTeamsFromSessionId(this.state.session.id).then(r => {
       this.setState({teams: r})
     }).catch((e) => this.setState({error: e}));

@@ -25,7 +25,6 @@ class Challenges extends React.Component{
     this.setState({showedSession:session})
     this.triggerShowModal();
   }
-
   triggerShowModal = () => {
     this.setState({isShowActive: !this.state.isShowActive})
   }
@@ -34,7 +33,6 @@ class Challenges extends React.Component{
     this.setState({showedChallenge:Challenge})
     this.triggerModifyModal();
   }
-
   triggerModifyModal = () => {
     this.setState({isModifyActive: !this.state.isModifyActive})
   }
@@ -43,7 +41,6 @@ class Challenges extends React.Component{
     this.setState({showedChallenge:Challenge})
     this.triggerDeleteModal();
   }
-
   triggerDeleteModal = () => {
     this.setState({isDeleteActive: !this.state.isDeleteActive})
   }
@@ -51,11 +48,14 @@ class Challenges extends React.Component{
   createChallenge = () => {
     this.triggerCreateModal();
   }
-
   triggerCreateModal = () => {
     this.setState({isCreateActive: !this.state.isCreateActive})
   }
 
+  /**
+   * Get all challenges
+   * @returns {Promise<void>}
+   */
   refreshChallenges =  async () => {
     await ChallengesFuncs.prototype.getAllChallenges().then(r => {
       this.setState({challenges: r, isLoading: false})

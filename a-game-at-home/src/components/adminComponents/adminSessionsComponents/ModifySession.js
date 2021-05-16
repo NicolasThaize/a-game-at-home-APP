@@ -34,14 +34,20 @@ class ModifySession extends React.Component{
     error: ''
   }
 
+
   componentDidMount() {
     let values = this.state.inputs;
-
+    // Put dates in the good format
     values[2].value = this.formatDate(values[2].value)
     values[3].value = this.formatDate(values[3].value)
     this.setState({inputs: values})
   }
 
+  /**
+   * From yyyy-mm-dd to dd-mm-yyyy
+   * @param date
+   * @returns {string}
+   */
   formatDate = (date) => {
     let result;
     result = date.split("-");
@@ -66,6 +72,9 @@ class ModifySession extends React.Component{
     this.setState({input: newInputs});
   }
 
+  /**
+   * Makes a patch request on /sessions/:id/ with the new values
+   */
   saveChanges = () => {
     let result = {};
     for (const input of this.state.inputs){

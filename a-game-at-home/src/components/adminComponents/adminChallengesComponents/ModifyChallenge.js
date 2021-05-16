@@ -38,8 +38,10 @@ class ModifyChallenge extends React.Component{
     this.state.triggerModal();
   }
 
-
-  createTheChallenge = () => {
+  /**
+   * Makes a patch request on /challenges/:id with new values
+   */
+  modifyTheChallenge = () => {
     let result = {};
     for (const input of this.state.inputs){
       result[input.name] = input.value
@@ -87,7 +89,7 @@ class ModifyChallenge extends React.Component{
             {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">
-            <button className="button" onClick={this.createTheChallenge}>Créer</button>
+            <button className="button" onClick={this.modifyTheChallenge}>Créer</button>
             <button className="button" onClick={this.closeModal}>Fermer</button>
           </footer>
         </div>
