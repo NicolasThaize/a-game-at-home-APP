@@ -1,9 +1,9 @@
 import React from "react";
 import '../../../assets/css/adminSessions.min.css';
-import ShowSession from "./ShowChallenge";
-import ModifySession from "./ModifyChallenge";
-import DeleteSession from "./DeleteChallenge";
-import CreateSession from "./CreateChallenge";
+import ShowChallenge from "./ShowChallenge";
+import ModifyChallenge from "./ModifyChallenge";
+import DeleteChallenge from "./DeleteChallenge";
+import CreateChallenge from "./CreateChallenge";
 import ChallengesFuncs from "../../../Challenges";
 
 class Challenges extends React.Component{
@@ -17,8 +17,8 @@ class Challenges extends React.Component{
     isCreateActive: false
   }
 
-  componentDidMount() {
-    this.refreshChallenges();
+  async componentDidMount() {
+    await this.refreshChallenges();
   }
 
   showChallenge = (session) => {
@@ -56,9 +56,8 @@ class Challenges extends React.Component{
     this.setState({isCreateActive: !this.state.isCreateActive})
   }
 
-  refreshChallenges = () => {
-    ChallengesFuncs.prototype.getAllChallenges().then(r => {
-      console.log(r)
+  refreshChallenges =  async () => {
+    await ChallengesFuncs.prototype.getAllChallenges().then(r => {
       this.setState({challenges: r, isLoading: false})
     }).catch(e => this.setState({error: e}));
   }
@@ -69,39 +68,36 @@ class Challenges extends React.Component{
       <div className="">
         <button className='button is-primary' onClick={this.createChallenge}>Créer un défi</button>
         {isLoading ? "Loading" : undefined}
-        {challenges.map(session => (
-          <div className="columns mb-3 mt-3 sessionsContainer is-align-items-center" key={session.id}>
+        {challenges.map(challenge => (
+          <div className="columns mb-3 mt-3 sessionsContainer is-align-items-center" key={challenge.id}>
             <div className="column">
-              <p>#{session.id}</p>
+              <p>#{challenge.id}</p>
             </div>
             <div className="column">
-              <p>{session.name}</p>
+              <p>{challenge.name}</p>
             </div>
             <div className="column">
-              <p>du {session.start_date} au {session.end_date}</p>
-            </div>
-            <div className="column">
-              <button className='button' onClick={() => this.showSession(session)}>Voir</button>
-              <button className='button is-warning' onClick={() => this.modifySession(session)}>Modifier</button>
-              <button className='button is-danger' onClick={() => this.deleteSession(session)}>Supprimer</button>
+              <button className='button' onClick={() => this.showChallenge(challenge)}>Voir</button>
+              <button className='button is-warning' onClick={() => this.modifyChallenge(challenge)}>Modifier</button>
+              <button className='button is-danger' onClick={() => this.deleteChallenge(challenge)}>Supprimer</button>
             </div>
           </div>
         ))}
-        {isShowActive ? <ShowSession session={showedChallenge} triggerModal={this.triggerShowModal}/> : undefined}
+        {isShowActive ? <ShowChallenge challenge={showedChallenge} triggerModal={this.triggerShowModal}/> : undefined}
         {isModifyActive ?
-          <ModifySession
-            session={showedChallenge}
+          <ModifyChallenge
+            challenge={showedChallenge}
             triggerModal={this.triggerModifyModal}
             refreshChallenges={this.refreshChallenges}
           /> : undefined}
         {isDeleteActive ?
-          <DeleteSession
-            session={showedChallenge}
+          <DeleteChallenge
+            challenge={showedChallenge}
             triggerModal={this.triggerDeleteModal}
             refreshChallenges={this.refreshChallenges}
           /> : undefined}
         {isCreateActive ?
-          <CreateSession
+          <CreateChallenge
             triggerModal={this.triggerCreateModal}
             refreshChallenges={this.refreshChallenges}
           /> : undefined}
