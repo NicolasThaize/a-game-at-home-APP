@@ -17,7 +17,7 @@ class HomeCarousel extends React.Component {
       <Carousel enableAutoPlay={true} autoPlaySpeed={10000}>
         {items.map(item => (
           <div key={item.id} className="carouselContainer" style={{backgroundImage: `url(${item.image})`}}>
-            <p className="is-size-2-tablet">{item.title}</p>
+
           </div>
         ))}
       </Carousel>
