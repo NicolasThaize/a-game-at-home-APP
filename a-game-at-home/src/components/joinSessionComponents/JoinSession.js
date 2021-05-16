@@ -66,8 +66,7 @@ class JoinSession extends React.Component{
           }}
         /> : undefined}
         <h2 className="title is-2">Rejoindre une session</h2>
-        {availableSessions.length === 0  ? <p>Aucune session à venir.</p> : undefined}
-        <div className="columns">
+        <div className="columns section">
           <div className="columns">
             <div className="column is-one-quarter has-text-centered">
               <h3 className="title is-3">Sélectionnez l'équipe qui rejoindra la session</h3>
@@ -90,6 +89,8 @@ class JoinSession extends React.Component{
                   : undefined}
               </h3>
               <div className="columns is-justify-content-center">
+                {availableSessions.length === 0  ? <p>Aucune session à venir.</p> : undefined}
+
                 {availableSessions.map(session => {
                   return (
                     <div key={session.id} className="card column is-multiline is-one-quarter ml-2 mr-2">
@@ -112,7 +113,7 @@ class JoinSession extends React.Component{
           </div>
         </div>
         {error ? <p className='has-text-danger has-text-weight-bold'>{error}</p> : undefined}
-        <button className="button is-primary" onClick={this.validateEntries}>Valider les selections</button>
+        <button className="button is-primary mt-5" onClick={this.validateEntries}>Valider les selections</button>
       </div>
     );
   }

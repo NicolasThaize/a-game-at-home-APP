@@ -5,7 +5,6 @@ class TeamsFuncs {
     let result;
     await axiosInstance.post(`/user_team_authorized/`, {users: [userId], teams: [team.id]}).then(r => {
       result = r.data
-      console.log(result)
     });
 
     return result;
@@ -42,7 +41,6 @@ class TeamsFuncs {
   }
 
   async getTeamFromId(id) {
-    console.log(id)
     let team;
     await axiosInstance.get(`/teams/${id}/`).then(response => {
       team = response.data
@@ -60,7 +58,6 @@ class TeamsFuncs {
     let newUsers = teamUsers.filter(function(value){
       return value.id !== user.id;
     });
-    console.log(teamUsers, newUsers)
     newUsers = newUsers.map(function (i) {
       return i.id
     });

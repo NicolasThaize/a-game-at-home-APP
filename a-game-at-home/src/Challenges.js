@@ -9,6 +9,11 @@ class ChallengesFuncs {
     return result;
   }
 
+  /**
+   * Makes requests to return all challenges of a session
+   * @param id
+   * @returns {Promise<*[]>}
+   */
   async getChallengesFromSessionId(id) {
     let challengesId;
     let challenges = [];
@@ -23,6 +28,29 @@ class ChallengesFuncs {
       }).catch(() => {throw Object.assign(new Error("No challenge with this id."));})
     }
     return challenges;
+  }
+
+  async getNotCompletedChallenges(sessionId, proofs){
+    let challenges = [];
+    let result = [];
+    let proofsIds = [];
+
+    for (const proof of proofs){
+      proofsIds.push(proof.challenge[0].id)
+    }
+
+    await this.getChallengesFromSessionId(sessionId).then(r => {
+      challenges = r
+    }).catch(() => {throw Object.assign(new Error("No challenge with this id."));})
+
+    for (const challenge of challenges){
+      for (const challengeId of proofsIds){
+        if (challenge.id !== challengeId){
+          result.push(challenge);
+        }
+      }
+    }
+    return result;
   }
 }
 

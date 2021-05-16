@@ -45,7 +45,11 @@ class ModifySession extends React.Component{
 
     // Get challenges that are apart of the session
     await ChallengesFuncs.prototype.getChallengesFromSessionId(this.state.session.id).then(r => {
-      this.setState({selectedChallenges: r});
+      let ids = [];
+      for (const challenge of r){
+        ids.push(challenge.id)
+      }
+      this.setState({selectedChallenges: ids});
     }).catch((e) => this.setState({error: e}));
 
     // Get all challenges
@@ -93,6 +97,7 @@ class ModifySession extends React.Component{
     {
       if (option.selected) {
         selected.push(parseInt(option.value));
+        console.log(option.value)
       }
     }
     this.setState({selectedChallenges: selected})
@@ -107,6 +112,7 @@ class ModifySession extends React.Component{
       result[input.name] = input.value
     }
     result['challenges'] = this.state.selectedChallenges;
+    console.log(this.state.selectedChallenges)
     axiosInstance.patch(`/sessions/${this.state.session.id}/`, result).then(() => {
       this.props.refreshSessions();
       this.setState({selectedChallenges: [], challenges: []})
@@ -138,7 +144,7 @@ class ModifySession extends React.Component{
             <div className="select is-multiple">
               <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
                 {challenges.map(challenge => {
-                  const isSelected = !!selectedChallenges.find(element => element.id === challenge.id)
+                  const isSelected = !!selectedChallenges.find(element => element === challenge.id)
                   return (<option
                     key={challenge.id}
                     value={challenge.id}

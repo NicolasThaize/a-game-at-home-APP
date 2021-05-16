@@ -65,13 +65,14 @@ class SessionsFuncs {
     }).catch(() => {throw Object.assign(new Error("Error while retreviewing sessions."));})
 
     const dateObj = new Date();
-    const today = new Date(dateObj.getMonth()  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
+    const today = new Date(dateObj.getMonth()+1  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
     for (const session of sessions) {
       const sessionDate = new Date(session.start_date)
       if(sessionDate > today){
         result.push(session);
       }
     }
+    console.log(result)
     return result;
   }
 
@@ -82,10 +83,11 @@ class SessionsFuncs {
    */
   async getActualSessionByUserId(userId) {
     let sessions = [];
-    this.getSessionsByUserId(userId).then(r => {
+    let result;
+    await this.getSessionsByUserId(userId).then(r => {
       sessions = r
       const dateObj = new Date();
-      const today = new Date(dateObj.getMonth()  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
+      const today = new Date(dateObj.getMonth()+1  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
       for (const session of sessions) {
         let sessionStartDate = session.start_date.split('-');
         sessionStartDate = sessionStartDate[1] + '/' + sessionStartDate[2] + '/' + sessionStartDate[0]
@@ -94,13 +96,14 @@ class SessionsFuncs {
         let sessionEndDate = session.end_date.split('-');
         sessionEndDate = sessionEndDate[1] + '/' + sessionEndDate[2] + '/' + sessionEndDate[0]
         sessionEndDate = new Date(sessionEndDate)
-        // Check if today is in session date range MARCHE PO A FIX
-        if(sessionStartDate > today && sessionEndDate < today ){
-          console.log(session)
-          return session;
+        // Check if today is in session date range
+        if(sessionStartDate < today && sessionEndDate > today){
+          result = session;
+          break;
         }
       }
     })
+    return result;
   }
 }
 

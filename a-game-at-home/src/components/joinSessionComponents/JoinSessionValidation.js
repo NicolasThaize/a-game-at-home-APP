@@ -41,7 +41,7 @@ class JoinSessionValidation extends React.Component {
   handlePay = () => {
     this.setState({hasPayed: true}, async () => {
       let newTeams = this.state.session.teams;
-      newTeams.push(this.state.sessionId)
+      newTeams.push(this.state.teamId)
       let values = {
         teams: newTeams
       }

@@ -147,7 +147,7 @@ class Teams extends React.Component {
                     <p className="has-text-weight-bold has-text-primary">Joueurs:</p>
                     <ul>
                       {teamUsers.map(user => (
-                        <li key={user.name}>{user.username}</li>
+                        <li key={user.id}>{user.username}</li>
                       ))}
                     </ul>
                   </div>
@@ -155,7 +155,7 @@ class Teams extends React.Component {
                     <p className="has-text-weight-bold has-text-primary">Sessions:</p>
                     <ul>
                       {teamSessions.map(session => (
-                        <li key={session.name}>{session.name}</li>
+                        <li key={session.id}>{session.name}</li>
                       ))}
                     </ul>
                   </div>

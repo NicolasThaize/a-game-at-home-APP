@@ -19,7 +19,7 @@ class NavbarLoggedIn extends React.Component {
         </Link>
 
         {isInSession &&
-          <Link to="/" className="navbar-item">
+          <Link to="/session/actual" className="navbar-item">
             Session en cours
           </Link>
         }

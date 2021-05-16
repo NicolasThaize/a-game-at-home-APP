@@ -21,12 +21,14 @@ class Sessions extends React.Component {
     })
     let actualSessions = this.state.sessionsArray;
     actualSessions.map(async session => {
-      await Teams.prototype.getTeamFromId(session.id).then(response => {
-        session.teams.shift()
-        session.teams.push(response)
-      }).finally(() => {
-        this.setState({sessionsArray: actualSessions})
-      })
+      for (const teamId of session.teams){
+        await Teams.prototype.getTeamFromId(teamId).then(response => {
+          session.teams.shift()
+          session.teams.push(response)
+        }).finally(() => {
+          this.setState({sessionsArray: actualSessions})
+        })
+      }
     })
 
 
