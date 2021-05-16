@@ -119,16 +119,18 @@ class CreateSession extends React.Component{
                 />
               </label>
             ))}
-            <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
-              {challenges.map(challenge => (
-                <option
-                  key={challenge.id}
-                  value={challenge.id}
-                >
-                  {challenge.id}: {challenge.name}
-                </option>
-              ))}
-            </select>
+            <div className="select is-multiple">
+              <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
+                {challenges.map(challenge => (
+                  <option
+                    key={challenge.id}
+                    value={challenge.id}
+                  >
+                    {challenge.id}: {challenge.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">

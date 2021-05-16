@@ -135,18 +135,20 @@ class ModifySession extends React.Component{
                 />
               </label>
             ))}
-            <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
-              {challenges.map(challenge => {
-                const isSelected = !!selectedChallenges.find(element => element.id === challenge.id)
-                return (<option
-                  key={challenge.id}
-                  value={challenge.id}
-                  selected={isSelected ? "selected" : undefined}
-                >
-                  {challenge.id}: {challenge.name}
-                </option>)
-              })}
-            </select>
+            <div className="select is-multiple">
+              <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
+                {challenges.map(challenge => {
+                  const isSelected = !!selectedChallenges.find(element => element.id === challenge.id)
+                  return (<option
+                    key={challenge.id}
+                    value={challenge.id}
+                    selected={isSelected ? "selected" : undefined}
+                  >
+                    {challenge.id}: {challenge.name}
+                  </option>)
+                })}
+              </select>
+            </div>
             {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">
