@@ -21,6 +21,8 @@ import './variable.scss';
 import MyAccount from "./components/myAccountComponents/MyAccount";
 import User from "./User";
 import Admin from "./components/adminComponents/Admin";
+import JoinSession from "./components/joinSessionComponents/JoinSession";
+import JoinSessionValidation from "./components/joinSessionComponents/JoinSessionValidation";
 
 
 class App extends Component {
@@ -97,6 +99,9 @@ class App extends Component {
               <Route exact path="/Profile/teams/:id" component={AddPlayerToTeam}/>
               <Route exact path="/Profile/join/team" component={JoinTeam}/>
               <Route exact path="/Profile/create/team" component={CreateTeam}/>
+
+              <Route exact path="/join/session" component={JoinSession}/>
+              <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
 
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />

@@ -14,7 +14,7 @@ class NavbarLoggedIn extends React.Component {
           Mon compte
         </Link>
 
-        <Link to="/" className="navbar-item">
+        <Link to="/join/session" className="navbar-item">
           Participer à une session
         </Link>
 

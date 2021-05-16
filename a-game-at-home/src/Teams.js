@@ -94,6 +94,7 @@ class TeamsFuncs {
         return point
       }
     }
+    return {}
   }
 }
 

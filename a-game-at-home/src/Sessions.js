@@ -51,6 +51,38 @@ class SessionsFuncs {
     }).catch(() => {throw Object.assign(new Error("Error while retreviewing sessions."));})
     return sessions;
   }
+
+  /**
+   * Makes a request on /sessions/ and return all sessions not started
+   * @returns {Promise<*[]>}
+   */
+  async getSessionsNotStartedYet(){
+    let sessions = [];
+    let result = [];
+
+    await this.getAllSessions().then(r => {
+      sessions = r
+    }).catch(() => {throw Object.assign(new Error("Error while retreviewing sessions."));})
+
+    const dateObj = new Date();
+    const today = new Date(dateObj.getMonth()  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
+    for (const session of sessions) {
+      const sessionDate = new Date(session.start_date)
+      if(sessionDate > today){
+        result.push(session);
+      }
+    }
+    return result;
+  }
+
+  /**
+   * G
+   * @returns {Promise<void>}
+   * @constructor
+   */
+  async AddTeamToSessionByIds(teamId, sessionId) {
+
+  }
 }
 
 export default SessionsFuncs;
