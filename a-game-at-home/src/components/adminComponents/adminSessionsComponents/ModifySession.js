@@ -67,7 +67,6 @@ class ModifySession extends React.Component{
   }
 
   saveChanges = () => {
-    console.log(this.state.inputs)
     let result = {};
     for (const input of this.state.inputs){
       result[input.name] = input.value

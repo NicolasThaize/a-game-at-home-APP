@@ -1,9 +1,10 @@
 import React from "react";
 import Sessions from "./adminSessionsComponents/Sessions";
-import Challenges from "./Challenges";
+import Challenges from "./adminChallengesComponents/Challenges";
 import Proofs from "./Proofs";
 import NotValidatedProofs from "./NotValidatedProofs";
 import {Link} from "react-router-dom";
+import '../../assets/css/adminSessions.min.css'
 
 class Admin extends React.Component{
   state = {
@@ -76,6 +77,7 @@ class Admin extends React.Component{
             </li>
           </ul>
         </aside>
+        <div className="divider is-hidden-tablet mt-3 mb-3"/>
         <div className="column">
           {currentActive === "sessions" ? <Sessions/> : undefined}
           {currentActive === "challenges" ? <Challenges/> : undefined}

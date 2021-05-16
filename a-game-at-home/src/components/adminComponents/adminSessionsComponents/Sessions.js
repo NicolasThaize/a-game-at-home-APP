@@ -4,6 +4,7 @@ import '../../../assets/css/adminSessions.min.css';
 import ShowSession from "./ShowSession";
 import ModifySession from "./ModifySession";
 import DeleteSession from "./DeleteSession";
+import CreateSession from "./CreateSession";
 
 class Sessions extends React.Component{
   state = {
@@ -12,7 +13,8 @@ class Sessions extends React.Component{
     showedSession: '',
     isShowActive: false,
     isModifyActive: false,
-    isDeleteActive: false
+    isDeleteActive: false,
+    isCreateActive: false
   }
 
   componentDidMount() {
@@ -46,6 +48,14 @@ class Sessions extends React.Component{
     this.setState({isDeleteActive: !this.state.isDeleteActive})
   }
 
+  createSession = () => {
+    this.triggerCreateModal();
+  }
+
+  triggerCreateModal = () => {
+    this.setState({isCreateActive: !this.state.isCreateActive})
+  }
+
   refreshSessions = () => {
     SessionsFuncs.prototype.getAllSessions().then(r => {
       this.setState({sessions: r, isLoading: false})
@@ -53,12 +63,13 @@ class Sessions extends React.Component{
   }
 
   render() {
-    const { isLoading, sessions, isShowActive, showedSession, isModifyActive, isDeleteActive} = this.state;
+    const { isLoading, sessions, isShowActive, showedSession, isModifyActive, isDeleteActive, isCreateActive} = this.state;
     return (
       <div className="">
+        <button className='button is-primary' onClick={this.createSession}>Créer une session</button>
         {isLoading ? "Loading" : undefined}
         {sessions.map(session => (
-          <div className="columns mb-3 sessionsContainer is-align-items-center" key={session.id}>
+          <div className="columns mb-3 mt-3 sessionsContainer is-align-items-center" key={session.id}>
             <div className="column">
               <p>#{session.id}</p>
             </div>
@@ -86,6 +97,11 @@ class Sessions extends React.Component{
           <DeleteSession
             session={showedSession}
             triggerModal={this.triggerDeleteModal}
+            refreshSessions={this.refreshSessions}
+          /> : undefined}
+        {isCreateActive ?
+          <CreateSession
+            triggerModal={this.triggerCreateModal}
             refreshSessions={this.refreshSessions}
           /> : undefined}
 
