@@ -94,7 +94,10 @@ class Teams extends React.Component {
       selectionnedTeam, error} = this.state;
     return (
       <div>
-        <Link to="/profile/join/team"><button className="button is-primary">Rejoindre une équipe</button></Link>
+        <div className="buttons is-centered">
+          <Link to="/profile/join/team"><button className="button is-primary">Rejoindre une équipe</button></Link>
+          <Link to="/profile/create/team"><button className="button is-primary ml-1">Créer une équipe</button></Link>
+        </div>
         <div className="columns is-multiline m-6">
             {addPlayerRedirect ? <Redirect to={`/profile/teams/${teamId}`}/> : undefined}
             {error ? <p className="has-text-danger has-text-weight-bold">{error}</p> : <span/>}
