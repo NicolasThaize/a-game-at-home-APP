@@ -5,6 +5,7 @@ import NavbarNotLoggedIn from "./NavbarNotLoggedIn";
 import "../../assets/css/navbar.min.css"
 
 class Navbar extends React.Component {
+
   state = {
     burgerActive: false,
     dropMenuActive: true,
@@ -12,10 +13,21 @@ class Navbar extends React.Component {
     logo: process.env.PUBLIC_URL + "/img/logo.png",
     svgFb: process.env.PUBLIC_URL + "/img/svgFb.svg",
     svgTwt: process.env.PUBLIC_URL + "/img/svgTwt.svg",
-    loggedIn: false
+    loggedIn: this.props.isLogged
+  }
+
+  /**
+   * Is executed when prop isLogged changes
+   * @param props
+   * @param state
+   */
+  static getDerivedStateFromProps(props, state) {
+    // Change the state loggedIn to update navbar look
+    return state.loggedIn = props.isLogged
   }
 
   componentDidMount() {
+    this.setState({loggedIn: this.props.isLogged})
     // If on mobile disable the menu by default
     if (this.state.windowWidth < 1024) {
       this.setState({
@@ -71,7 +83,7 @@ class Navbar extends React.Component {
               Accueil
             </Link>
 
-            <Link to="/" className="navbar-item">
+            <Link to="/Presentation" className="navbar-item">
               Presentation
             </Link>
 
@@ -79,7 +91,7 @@ class Navbar extends React.Component {
               Classements
             </Link>
 
-            <Link to="/" className="navbar-item">
+            <Link to="/Articles" className="navbar-item">
               Articles
             </Link>
           </div>

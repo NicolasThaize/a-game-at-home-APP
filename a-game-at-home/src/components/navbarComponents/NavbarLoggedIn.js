@@ -10,7 +10,7 @@ class NavbarLoggedIn extends React.Component {
     const { isInSession } = this.state;
     return(
       <div className="navbar-end is-centered">
-        <Link to="/" className="navbar-item">
+        <Link to="/Profile" className="navbar-item">
           Mon compte
         </Link>
 
