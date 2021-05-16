@@ -65,7 +65,6 @@ class CreateSession extends React.Component{
     result['teams'] = [];
     result['team_point'] = [];
     result['challenges'] = this.state.selectedChallenges;
-    console.log(result)
     axiosInstance.post(`/sessions/`, result).then(() => {
       this.props.refreshSessions();
       this.closeModal();
