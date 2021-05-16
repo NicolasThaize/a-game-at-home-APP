@@ -1,5 +1,6 @@
 import React from "react";
 import axiosInstance from "../../../axiosApi";
+import ChallengesFuncs from "../../../Challenges";
 
 class CreateSession extends React.Component{
   state = {
@@ -35,8 +36,15 @@ class CreateSession extends React.Component{
         placeholder: "Ex: 23-06-2021"
       },
     ],
+    selectedChallenges: [],
     error: ''
+  }
 
+  async componentDidMount() {
+    // Get all challenges
+    await ChallengesFuncs.prototype.getAllChallenges().then(r => {
+      this.setState({challenges: r});
+    }).catch((e) => this.setState({error: e}));
   }
 
   /**
@@ -56,12 +64,28 @@ class CreateSession extends React.Component{
     }
     result['teams'] = [];
     result['team_point'] = [];
+    result['challenges'] = this.state.selectedChallenges;
+    console.log(result)
     axiosInstance.post(`/sessions/`, result).then(() => {
       this.props.refreshSessions();
       this.closeModal();
     }).catch(() => {this.setState({error: 'Erreur lors de la création de la session.'})})
   }
 
+  /**
+   * Once a option is selected or not add or remove the value from selectedChallenges array
+   * @param e
+   */
+  handleSelectChange = (e) => {
+    let selected = [];
+    for (const option of e.target.options)
+    {
+      if (option.selected) {
+        selected.push(parseInt(option.value));
+      }
+    }
+    this.setState({selectedChallenges: selected})
+  }
 
   /**
    * Handle the change of the inputs
@@ -75,7 +99,7 @@ class CreateSession extends React.Component{
   }
 
   render() {
-    const { error, inputs } = this.state;
+    const { error, inputs, challenges } = this.state;
     return (
       <div className="modal is-active">
         <div className="modal-background"/>
@@ -96,10 +120,20 @@ class CreateSession extends React.Component{
                 />
               </label>
             ))}
+            <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
+              {challenges.map(challenge => (
+                <option
+                  key={challenge.id}
+                  value={challenge.id}
+                >
+                  {challenge.id}: {challenge.name}
+                </option>
+              ))}
+            </select>
             {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">
-            <button className="button" onClick={this.createTheSession}>Créer</button>
+            <button className="button" onClick={(e) => this.createTheSession(e)}>Créer</button>
             <button className="button" onClick={this.closeModal}>Fermer</button>
           </footer>
         </div>

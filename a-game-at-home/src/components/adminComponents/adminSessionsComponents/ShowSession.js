@@ -1,11 +1,13 @@
 import React from "react";
 import TeamsFuncs from "../../../Teams";
+import ChallengesFuncs from "../../../Challenges";
 
 class ShowSession extends React.Component{
   state = {
     session: this.props.session,
     triggerModal: this.props.triggerModal,
     teams: [],
+    challenges: [],
     points: [],
     error: ''
   }
@@ -14,6 +16,11 @@ class ShowSession extends React.Component{
     // Get all teams that plays this session
     await TeamsFuncs.prototype.getTeamsFromSessionId(this.state.session.id).then(r => {
       this.setState({teams: r})
+    }).catch((e) => this.setState({error: e}));
+
+    // Get all challenges that are associated to this session
+    await ChallengesFuncs.prototype.getChallengesFromSessionId(this.state.session.id).then(r => {
+      this.setState({challenges: r})
     }).catch((e) => this.setState({error: e}));
 
     let tempPoints = [];
@@ -46,7 +53,7 @@ class ShowSession extends React.Component{
   }
 
   render() {
-    const {session,teams, points} = this.state;
+    const {session,teams, points, challenges} = this.state;
     return (
       <div className="modal is-active">
         <div className="modal-background"/>
@@ -71,6 +78,16 @@ class ShowSession extends React.Component{
                       }
                       return undefined;
                     })} points
+                  </li>
+                )
+              })}
+            </ul>
+            <p className="mb-2"><strong>Défis associés:</strong></p>
+            <ul>
+              {challenges.map(challenge => {
+                return (
+                  <li key={challenge.id}>
+                    #{challenge.id}: {challenge.name}
                   </li>
                 )
               })}
