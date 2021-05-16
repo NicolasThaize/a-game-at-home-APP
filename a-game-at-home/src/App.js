@@ -12,17 +12,19 @@ import Articles from "./components/articleComponents/Articles";
 import AddPlayerToTeam from "./components/myAccountComponents/AddTeamComponents/AddPlayerToTeam";
 import JoinTeam from "./components/myAccountComponents/JoinTeamComponents/JoinTeam";
 import CreateTeam from "./components/myAccountComponents/createTeamComponents/CreateTeam";
-
+import Admin from "./components/adminComponents/Admin";
+import JoinSession from "./components/joinSessionComponents/JoinSession";
+import JoinSessionValidation from "./components/joinSessionComponents/JoinSessionValidation";
+import ActualSession from "./components/actualSessionComponents/ActualSession";
+import MyAccount from "./components/myAccountComponents/MyAccount";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
 import './variable.scss';
-import MyAccount from "./components/myAccountComponents/MyAccount";
+
 import User from "./User";
-import Admin from "./components/adminComponents/Admin";
-import JoinSession from "./components/joinSessionComponents/JoinSession";
-import JoinSessionValidation from "./components/joinSessionComponents/JoinSessionValidation";
+
 
 
 class App extends Component {
@@ -102,6 +104,8 @@ class App extends Component {
 
               <Route exact path="/join/session" component={JoinSession}/>
               <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
+
+              <Route exact path="/session/actual" component={ActualSession}/>
 
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />

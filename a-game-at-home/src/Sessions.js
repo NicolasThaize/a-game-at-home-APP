@@ -76,12 +76,31 @@ class SessionsFuncs {
   }
 
   /**
-   * G
+   * Get the actual session joined by an user
    * @returns {Promise<void>}
    * @constructor
    */
-  async AddTeamToSessionByIds(teamId, sessionId) {
+  async getActualSessionByUserId(userId) {
+    let sessions = [];
+    this.getSessionsByUserId(userId).then(r => {
+      sessions = r
+      const dateObj = new Date();
+      const today = new Date(dateObj.getMonth()  + '/'+ String(dateObj.getDate()).padStart(2, '0')  + '/' + dateObj.getFullYear());
+      for (const session of sessions) {
+        let sessionStartDate = session.start_date.split('-');
+        sessionStartDate = sessionStartDate[1] + '/' + sessionStartDate[2] + '/' + sessionStartDate[0]
+        sessionStartDate = new Date(sessionStartDate)
 
+        let sessionEndDate = session.end_date.split('-');
+        sessionEndDate = sessionEndDate[1] + '/' + sessionEndDate[2] + '/' + sessionEndDate[0]
+        sessionEndDate = new Date(sessionEndDate)
+        // Check if today is in session date range MARCHE PO A FIX
+        if(sessionStartDate > today && sessionEndDate < today ){
+          console.log(session)
+          return session;
+        }
+      }
+    })
   }
 }
 
