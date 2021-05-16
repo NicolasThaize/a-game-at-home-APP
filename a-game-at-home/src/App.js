@@ -12,7 +12,7 @@ import Articles from "./components/articleComponents/Articles";
 import AddPlayerToTeam from "./components/myAccountComponents/AddTeamComponents/AddPlayerToTeam";
 import JoinTeam from "./components/myAccountComponents/JoinTeamComponents/JoinTeam";
 import CreateTeam from "./components/myAccountComponents/createTeamComponents/CreateTeam";
-
+import Ranking from "./components/rankingComponent/Ranking";
 
 // Importing css for global css in the app
 import './assets/css/default.min.css';
@@ -105,6 +105,7 @@ class App extends Component {
 
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
+              <Route exact path="/Ranking" component={Ranking} />
 
               <Route exact path="/Admin" component={Admin}/>
               <Route exact path="/Admin/sessions" component={Admin}/>

@@ -1,14 +1,7 @@
 import React from "react";
-import axiosApi from "../../axiosApi";
 import "../../assets/css/articles.min.css";
 
 class Articles extends React.Component{
-    async componentDidMount() {
-            await axiosApi.get(/Articles/).then(response => {
-                console.log(response)
-            })
-    }
-
     render() {
     return(
         <div className="Articles">
