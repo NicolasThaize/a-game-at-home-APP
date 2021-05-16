@@ -1,9 +1,12 @@
 import React from "react";
 import axiosInstance from "../../../axiosApi";
+import ChallengesFuncs from "../../../Challenges";
 
 class ModifySession extends React.Component{
   state = {
     session: this.props.session,
+    selectedChallenges: [],
+    challenges: [],
     inputs: [
       {
         index: 0,
@@ -33,14 +36,22 @@ class ModifySession extends React.Component{
     triggerModal: this.props.triggerModal,
     error: ''
   }
-
-
-  componentDidMount() {
+  async componentDidMount() {
     let values = this.state.inputs;
     // Put dates in the good format
     values[2].value = this.formatDate(values[2].value)
     values[3].value = this.formatDate(values[3].value)
     this.setState({inputs: values})
+
+    // Get challenges that are apart of the session
+    await ChallengesFuncs.prototype.getChallengesFromSessionId(this.state.session.id).then(r => {
+      this.setState({selectedChallenges: r});
+    }).catch((e) => this.setState({error: e}));
+
+    // Get all challenges
+    await ChallengesFuncs.prototype.getAllChallenges().then(r => {
+      this.setState({challenges: r});
+    }).catch((e) => this.setState({error: e}));
   }
 
   /**
@@ -73,6 +84,21 @@ class ModifySession extends React.Component{
   }
 
   /**
+   * Once a option is selected or not add or remove the value from selectedChallenges array
+   * @param e
+   */
+  handleSelectChange = (e) => {
+    let selected = [];
+    for (const option of e.target.options)
+    {
+      if (option.selected) {
+        selected.push(parseInt(option.value));
+      }
+    }
+    this.setState({selectedChallenges: selected})
+  }
+
+  /**
    * Makes a patch request on /sessions/:id/ with the new values
    */
   saveChanges = () => {
@@ -80,14 +106,16 @@ class ModifySession extends React.Component{
     for (const input of this.state.inputs){
       result[input.name] = input.value
     }
+    result['challenges'] = this.state.selectedChallenges;
     axiosInstance.patch(`/sessions/${this.state.session.id}/`, result).then(() => {
       this.props.refreshSessions();
+      this.setState({selectedChallenges: [], challenges: []})
       this.closeModal();
     }).catch(() => {this.setState({error: 'Erreur lors de la modification de la session.'})})
   }
 
   render() {
-    const { session, inputs, error } = this.state;
+    const { session, inputs, error, challenges, selectedChallenges } = this.state;
     return (
       <div className="modal is-active">
         <div className="modal-background"/>
@@ -107,6 +135,18 @@ class ModifySession extends React.Component{
                 />
               </label>
             ))}
+            <select multiple="multiple" name="challenges" id="challenges" onChange={this.handleSelectChange}>
+              {challenges.map(challenge => {
+                const isSelected = !!selectedChallenges.find(element => element.id === challenge.id)
+                return (<option
+                  key={challenge.id}
+                  value={challenge.id}
+                  selected={isSelected ? "selected" : undefined}
+                >
+                  {challenge.id}: {challenge.name}
+                </option>)
+              })}
+            </select>
             {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">
