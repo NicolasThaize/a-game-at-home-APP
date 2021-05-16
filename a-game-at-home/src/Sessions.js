@@ -39,6 +39,18 @@ class SessionsFuncs {
     }).catch(() => {throw Object.assign(new Error("No teams with this userid."));})
     return sessions;
   }
+
+  /**
+   * Makes a requesto to get all sessions
+   * @returns {Promise<*[]>}
+   */
+  async getAllSessions(){
+    let sessions = [];
+    await axiosInstance.get("/sessions/").then(r => {
+      sessions = r.data
+    }).catch(() => {throw Object.assign(new Error("Error while retreviewing sessions."));})
+    return sessions;
+  }
 }
 
 export default SessionsFuncs;
