@@ -54,6 +54,7 @@ class ShowSession extends React.Component{
             <p className="modal-card-title"><strong>Session:</strong> {session.name}</p>
           </header>
           <section className="modal-card-body content mb-0">
+            <p className="mb-2"><strong>Nom:</strong> {session.name}</p>
             <p className="mb-2"><strong>Description:</strong> {session.description}</p>
             <p className="mb-2"><strong>Date de début:</strong> {session.start_date}</p>
             <p className="mb-2"><strong>Date de fin:</strong> {session.end_date}</p>

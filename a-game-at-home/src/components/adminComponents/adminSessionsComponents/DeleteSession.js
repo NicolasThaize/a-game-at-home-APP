@@ -8,6 +8,9 @@ class DeleteSession extends React.Component{
     error: ''
   }
 
+  /**
+   * Makes a delete request on /sessions/:id
+   */
   deleteSession = () => {
     axiosInstance.delete(`/sessions/${this.state.session.id}/`).then(() => {
       this.props.refreshSessions();
