@@ -98,6 +98,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
+              <Route exact path="/Ranking" component={Ranking} />
 
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
@@ -115,9 +116,7 @@ class App extends Component {
                 <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
 
                 <Route exact path="/session/actual" component={ActualSession}/>
-                <Route exact path="/Presentation" component={Presentation} />
-                <Route exact path="/Articles" component={Articles} />
-                <Route exact path="/Ranking" component={Ranking} />
+
 
                 <AdminRoute authed={this.state.isAdmin}>
                   <Route exact path="/Admin" component={Admin}/>
