@@ -6,6 +6,7 @@ import TeamsFuncs from "../../Teams";
 import ProofsFuncs from "../../Proofs";
 import ProofsState from "./ProofsState";
 import ChallengesFuncs from "../../Challenges";
+import {Helmet} from "react-helmet-async";
 
 class ActualSession extends React.Component{
   state = {
@@ -57,6 +58,9 @@ class ActualSession extends React.Component{
     const { session, error, proofs, notFinishedChallenges, team } = this.state;
     return (
       <div className="section">
+        <Helmet>
+          <title>Session en cours - At Home A Game</title>
+        </Helmet>
         {session.name !== '' ?
           <div>
             <h2 className='title is-2'>Session: {session.name}</h2>

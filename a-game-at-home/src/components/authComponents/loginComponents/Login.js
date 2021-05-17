@@ -3,6 +3,7 @@ import Input from "../Input";
 import "../../../assets/css/login.min.css";
 import axiosInstance from '../../../axiosApi'
 import {Redirect} from "react-router";
+import {Helmet} from "react-helmet-async";
 
 class Login extends React.Component {
     state = {
@@ -61,6 +62,9 @@ class Login extends React.Component {
         const {apiError, isLoading, redirect} = this.state;
         return (
             <form onSubmit={this.handleSubmit} className="loginContainer mt-6   ">
+                <Helmet>
+                    <title>Se connecter - At Home A Game</title>
+                </Helmet>
                 {redirect ? (
                     <Redirect to='/'/>
                 ) : undefined}

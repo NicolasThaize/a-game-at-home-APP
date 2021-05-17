@@ -3,6 +3,7 @@ import SessionsFuncs from "../../Sessions";
 import TeamsFuncs from "../../Teams";
 import axiosInstance from "../../axiosApi";
 import {Redirect} from "react-router";
+import {Helmet} from "react-helmet-async";
 
 class JoinSessionValidation extends React.Component {
   state = {
@@ -63,6 +64,9 @@ class JoinSessionValidation extends React.Component {
     const { session, hasPayed, isLoading, error, secureSvg, team, redirect} = this.state;
     return (
       <div className="section">
+        <Helmet>
+          <title>Validation de la session - At Home A Game</title>
+        </Helmet>
         {redirect ? <Redirect to="/"/> : undefined}
         <h2 className="title is-2">Validation de l'inscription à la session</h2>
         { hasPayed ?  (

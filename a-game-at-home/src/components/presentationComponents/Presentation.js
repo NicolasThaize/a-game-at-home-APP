@@ -1,10 +1,14 @@
 import React from "react";
 import "../../assets/css/presentation.min.css"
+import {Helmet} from "react-helmet-async";
 
 class Presentation extends React.Component {
     render() {
         return (
             <div className="Presentation">
+                <Helmet>
+                    <title>Presentation - At Home A Game</title>
+                </Helmet>
                 <h1>Presentation du concept</h1>
                 <hr/>
                 <blockquote>

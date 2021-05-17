@@ -5,6 +5,7 @@ import "../../../assets/css/register.min.css";
 import authValidators from "../validationFunctions";
 import axiosInstance from "../../../axiosApi";
 import {Redirect} from "react-router";
+import {Helmet} from "react-helmet-async";
 
 class Register extends React.Component {
     state = {
@@ -162,6 +163,9 @@ class Register extends React.Component {
         } = this.state;
         return (
             <form onSubmit={this.handleSubmit} className="registerContainer mt-6 mb-6">
+                <Helmet>
+                    <title>Créer un compte - At Home A Game</title>
+                </Helmet>
                 {isSuccess ? (
                     <div className="notification is-primary">
                         Compte bien enregistré, vous allez être redirigé vers la page de connexion.

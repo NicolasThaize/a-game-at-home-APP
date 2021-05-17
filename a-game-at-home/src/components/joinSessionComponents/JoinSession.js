@@ -3,6 +3,7 @@ import SessionsFuncs from "../../Sessions";
 import TeamsFuncs from "../../Teams";
 import User from "../../User";
 import {Redirect} from "react-router";
+import {Helmet} from "react-helmet-async";
 
 class JoinSession extends React.Component{
   state = {
@@ -59,6 +60,9 @@ class JoinSession extends React.Component{
     const { error, availableSessions, teams, selectedSessionName, redirect, selectedSession, selectedTeam} = this.state;
     return (
       <div className="section">
+        <Helmet>
+          <title>Rejoindre une session - At Home A Game</title>
+        </Helmet>
         {redirect ? <Redirect
           to={{
             pathname: "/join/session/validation",

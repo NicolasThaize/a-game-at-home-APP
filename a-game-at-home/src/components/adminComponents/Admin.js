@@ -6,6 +6,7 @@ import NotValidatedProofs from "./adminProofValidateComponents/NotValidatedProof
 import {Link} from "react-router-dom";
 import '../../assets/css/adminSessions.min.css'
 import AdminArticle from "./adminArticlesComponents/AdminArticle";
+import {Helmet} from "react-helmet-async";
 
 class Admin extends React.Component{
   state = {
@@ -34,6 +35,9 @@ class Admin extends React.Component{
     const { currentActive } = this.state;
     return (
       <div className="columns mt-6 mb-6 ml-3 mr-3">
+        <Helmet>
+          <title>Panel admin - At Home A Game</title>
+        </Helmet>
         <aside className="menu column is-one-fifth">
           <p className="menu-label">
             Menu de gestion du site

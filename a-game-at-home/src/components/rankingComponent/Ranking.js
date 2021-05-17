@@ -3,6 +3,7 @@ import "../../assets/css/ranking.min.css";
 import axiosInstance from "../../axiosApi";
 import TeamsFuncs from "../../Teams";
 import TeamPoints from "../../TeamPoints";
+import {Helmet} from "react-helmet-async";
 
 class Ranking extends React.Component{
     constructor(props){
@@ -73,6 +74,9 @@ class Ranking extends React.Component{
 
         return (
             <div className="Ranking">
+                <Helmet>
+                    <title>Classements - At Home A Game</title>
+                </Helmet>
                 <h1>Classement des sessions</h1>
                 <div className="SessionSelector">
                     <select className="sessionOptions" onChange={this.selectSession}>

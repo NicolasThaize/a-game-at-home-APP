@@ -5,6 +5,7 @@ import Modify from "./Modify";
 import Sessions from "./Sessions";
 import Teams from "./Teams";
 import Logout from "../authComponents/Logout";
+import {Helmet} from "react-helmet-async";
 
 
 class MyAccount extends React.Component {
@@ -69,6 +70,9 @@ class MyAccount extends React.Component {
     const { tabList, currentActive, updateLogout } = this.state;
     return(
       <div className="m-6">
+        <Helmet>
+          <title>Mon compte - At Home A Game</title>
+        </Helmet>
         <div className="tabs">
           <ul>
             {tabList.map(tab =>
