@@ -14,6 +14,16 @@ class SendProofModal extends React.Component{
   }
 
   /**
+   * Is executed when props changes
+   * @param props
+   * @param state
+   */
+  static getDerivedStateFromProps(props, state) {
+    state.team = props.team
+    return state.session = props.session
+  }
+
+  /**
    * Triggers the modal using parent function (in this component to close it only)
    */
   closeModal = () => {
@@ -47,21 +57,25 @@ class SendProofModal extends React.Component{
     } else{
       formData.append("photo", files[0]);
     }
-    formData.append("challenge", [this.state.challenge.id]);
-    formData.append("session", [this.state.session.id]);
-    formData.append("team", [this.state.team.id]);
     this.setState({formData: formData})
   }
 
   sendProof = () => {
     const formData = this.state.formData;
-    axiosInstance.post('/proofs/',formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      }}).then(() => {
+    axiosInstance.post('/proofs/',formData, {headers: {"Content-Type": "multipart/form-data"}}).then(r => {
+      console.log(this.state.team, this.state.session.id, this.state.challenge.id)
+      axiosInstance.patch(`/proofs/${r.data.id}/`, {
+        challenge: [this.state.challenge.id],
+        session: [this.state.session.id],
+        team: [this.state.team.id]
+      }).then(r => {
+        console.log(r)
         this.closeModal()
+
+      })
     });
   }
+
 
   render() {
     const { error, svgUpload, challenge, fileName } = this.state;
