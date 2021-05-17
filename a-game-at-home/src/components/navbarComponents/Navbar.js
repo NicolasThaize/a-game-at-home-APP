@@ -39,20 +39,24 @@ class Navbar extends React.Component {
     }
   }
 
-  /**
-   * Toggles burgerActive (false/true)
-   * and if on mobile toggles dropMenuActive (false/true)
-   */
-  burgerClick = () => {
-    this.setState(prevState => ({
-      burgerActive: !prevState.burgerActive
-    }));
-    if (this.state.windowWidth < 1024){
-      this.setState(prevState => ({
-        dropMenuActive: !prevState.dropMenuActive
-      }));
+    /**
+     * Toggles burgerActive (false/true)
+     * and if on mobile toggles dropMenuActive (false/true)
+     */
+    burgerClick = () => {
+        this.setState(prevState => (
+            {
+                burgerActive: !prevState.burgerActive
+            }
+        ));
+        if (this.state.windowWidth < 1024) {
+            this.setState(prevState => (
+                {
+                    dropMenuActive: !prevState.dropMenuActive
+                }
+            ));
+        }
     }
-  }
 
   render() {
     const { logo, burgerActive, dropMenuActive,loggedIn, svgFb, svgTwt, isAdmin } = this.state;
@@ -80,19 +84,19 @@ class Navbar extends React.Component {
           </div>
         </div>
 
-        <div className={dropMenuActive ? "navbar-menu is-active" : "navbar-menu"}>
-          <div className="navbar-start has-text-weight-bold">
-            <Link to="/" className="navbar-item">
-              Accueil
-            </Link>
+                <div className={dropMenuActive ? "navbar-menu is-active" : "navbar-menu"}>
+                    <div className="navbar-start has-text-weight-bold">
+                        <Link to="/" className="navbar-item">
+                            Accueil
+                        </Link>
 
-            <Link to="/Presentation" className="navbar-item">
-              Presentation
-            </Link>
+                        <Link to="/Presentation" className="navbar-item">
+                            Presentation
+                        </Link>
 
-            <Link to="/" className="navbar-item">
-              Classements
-            </Link>
+                        <Link to="/" className="navbar-item">
+                            Classements
+                        </Link>
 
             <Link to="/Articles" className="navbar-item">
               Articles
