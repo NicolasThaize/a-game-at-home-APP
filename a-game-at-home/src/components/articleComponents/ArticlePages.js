@@ -10,6 +10,7 @@ class ArticlePages extends React.Component {
             currentPage: 1,
             articlesPerPage: 5,
             active: 1,
+            error: ''
         };
         this.handleClick = this.handleClick.bind(this);
         this.onClick = this.onClick.bind(this);
@@ -21,10 +22,10 @@ class ArticlePages extends React.Component {
         });
     }
 
-    componentDidMount(e) {
+    componentDidMount() {
         axiosApi.get('/articles/').then(response => {
             this.setState({articles: response.data})
-        })
+        }).catch(() => this.setState({error: 'Error while getting articles.'}))
     }
 
     toggleClass(number) {
@@ -85,13 +86,19 @@ class ArticlePages extends React.Component {
             );
         });
 
+        let display = renderArticles.length;
+
         return (
             <div className="ArticlePages">
                 <h1> Articles </h1>
-                {renderArticles}
-                <div className="pageSwitcher">
+                {display === 0 ? <p>Aucun article encore disponible</p> : renderArticles}
+
+                {display === 0 ? undefined :
+                  <div className="pageSwitcher">
                     {renderPageNumbers}
                 </div>
+                }
+                {this.state.error ? <p className='has-text-weight-bold has-text-danger'>{this.state.error}</p> : undefined}
             </div>
         )
     }
