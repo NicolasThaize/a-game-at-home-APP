@@ -9,11 +9,12 @@
   padding: 65px;
 }
 
-.carouselContainer p {
+.carouselContainer img {
   color: black;
   font-size: 2rem;
   padding: 20px;
-  background-color: hsla(0, 0%, 100%, 0.6);
+  width: 50%;
+  min-width: 190px;
 }
 
 /* END DEFINIG CAROUSEL THINGS */
@@ -26,7 +27,7 @@
   animation: zoominout 8s infinite alternate;
 }
 
-.carouselContainer > p {
+.carouselContainer > img {
   animation: zoominoutinv 8s infinite alternate;
 }
 
