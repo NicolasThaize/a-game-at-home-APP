@@ -12,29 +12,50 @@ class Presentation extends React.Component {
                     enim
                     metus sollicitudin enim, ac aliquet mauris tellus quis mi.<i>- Karim Binon</i>
                 </blockquote>
-                <div className="tile is-ancestor">
+                <div className="tile is-ancestor section">
                     <div className="tile is-vertical is-8">
                         <div className="tile">
-                            <div className="tile is-parent is-vertical">
-                                <article className="tile is-child notification is-primary">
-                                    <p className="title">Vertical...</p>
-                                    <p className="subtitle">Top tile</p>
-                                </article>
-                                <article className="tile is-child notification is-warning">
-                                    <p className="title">...tiles</p>
-                                    <p className="subtitle">Bottom tile</p>
+                            <div className="tile is-parent is-vertical"  style={{
+                                backgroundImage: "url('/img/presentation4.jpg')",
+                                backgroundPosition: "center",
+                                backgroundSize: "cover",
+                                margin: 10 + 'px'
+                            }}>
+                                <article className="tile is-child artificialHeight">
+                                    <p className="title has-text-white">Lorem ipsum</p>
+                                    <p className="subtitle has-text-white">sit amet, consectetur adipiscing elit. Mauris aliquam, lacus quis commodo ornare,
+                                        enim</p>
+                                    <div className='artificialHeight'/>
                                 </article>
                             </div>
-                            <div className="tile is-parent">
-                                <figure className="image is-4by3">
-                                    <img src="https://bulma.io/images/placeholders/640x480.png" alt="sample"/>
-                                </figure>
+                            <div className="tile is-parent" style={{
+                                backgroundImage: "url('/img/presentation3.jpg')",
+                                backgroundPosition: "center",
+                                backgroundSize: "cover",
+                                margin: 10 + 'px'
+                            }}>
+                                <article className="tile is-child">
+                                    <p className="title has-text-white">Lorem ipsum</p>
+                                    <p className="subtitle has-text-white">sit amet, consectetur adipiscing elit. Mauris aliquam, lacus quis commodo ornare,
+                                        enim</p>
+                                </article>
+                                <article className="tile is-child">
+                                    <p className="title has-text-white">Lorem ipsum</p>
+                                    <p className="subtitle has-text-white">sit amet, consectetur adipiscing elit. Mauris aliquam, lacus quis commodo ornare,
+                                        enim</p>
+                                </article>
                             </div>
                         </div>
-                        <div className="tile is-parent">
-                            <article className="tile is-child notification is-danger">
-                                <p className="title">Wide tile</p>
-                                <p className="subtitle">Aligned with the right tile</p>
+                        <div className="tile is-parent" style={{
+                            backgroundImage: "url('/img/presentation4.jpg')",
+                            backgroundPosition: "center",
+                            backgroundSize: "cover",
+                            margin: 10 + 'px'
+                        }}>
+                            <article className="tile is-child">
+                                <p className="title has-text-white">Lorem ipsum</p>
+                                <p className="subtitle has-text-white">sit amet, consectetur adipiscing elit. Mauris aliquam, lacus quis commodo ornare,
+                                    enim</p>
                                 <div className="content">
 
                                 </div>
@@ -42,14 +63,16 @@ class Presentation extends React.Component {
                         </div>
                     </div>
                     <div className="tile is-parent" style={{
-                        backgroundImage: "url('/img/mountain-png.png')",
+                        backgroundImage: "url('/img/presentation5.jpg')",
                         backgroundPosition: "center",
-                        backgroundSize: "cover"
+                        backgroundSize: "cover",
+                        margin: 10 + 'px'
                     }}>
                         <article className="tile is-child">
                             <div className="content">
-                                <p className="title">Tall tile</p>
-                                <p className="subtitle">With even more content</p>
+                                <p className="title has-text-white">Lorem ipsum</p>
+                                <p className="subtitle has-text-white">sit amet, consectetur adipiscing elit. Mauris aliquam, lacus quis commodo ornare,
+                                    enim</p>
                                 <div className="content">
                                 </div>
                             </div>
