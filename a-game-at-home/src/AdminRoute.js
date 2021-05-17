@@ -3,9 +3,14 @@ import {Redirect} from "react-router";
 function AdminRoute (props) {
   const adminUrls = [
     '/admin/',
+    '/admin,',
+    '/admin/sessions/',
     '/admin/sessions',
+    '/admin/challenges/',
     '/admin/challenges',
+    '/admin/proofs/',
     '/admin/proofs',
+    '/admin/notValidated/',
     '/admin/notValidated'
   ]
 
@@ -14,7 +19,7 @@ function AdminRoute (props) {
   const find = adminUrls.find(el => el === pathName);
 
   if (!props.authed && find){
-    return <Redirect to={{pathname: '/Presentation'}} />
+    return <Redirect to={{pathname: '/'}} />
   }
   return (
     <div>

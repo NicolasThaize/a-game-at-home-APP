@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Helmet, HelmetProvider} from 'react-helmet-async';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
 
 //Importing components
 import Footer from './components/footerComponents/Footer';
@@ -17,7 +17,7 @@ import JoinSession from "./components/joinSessionComponents/JoinSession";
 import JoinSessionValidation from "./components/joinSessionComponents/JoinSessionValidation";
 import ActualSession from "./components/actualSessionComponents/ActualSession";
 import MyAccount from "./components/myAccountComponents/MyAccount";
-
+import NotFound from "./components/notFoundComponents/NotFound";
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
@@ -27,6 +27,8 @@ import User from "./User";
 
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import {Redirect} from "react-router";
+
 
 
 
@@ -63,7 +65,6 @@ class App extends Component {
    * child components who needs a custom display when logged or not
    */
   componentDidMount() {
-    console.log(this.state)
     const isLogged = !!localStorage.getItem("refresh_token");
     this.setState({isLogged: isLogged} , () => {
       if (this.state.isLogged){
@@ -92,7 +93,6 @@ class App extends Component {
             </Helmet>
             <div className="App">
               <Navbar isLogged={isLogged} isAdmin={isAdmin}/>
-
               <Route exact path="/" component={Home} />
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
@@ -122,7 +122,10 @@ class App extends Component {
                   <Route exact path="/Admin/notValidated" component={Admin}/>
                 </AdminRoute>
               </PrivateRoute>
-
+              <Route path='/notfound' component={NotFound}/>
+                <Route path='/*' exact>
+                  <Redirect to='/notfound'/>
+                </Route>
               <Footer/>
             </div>
           </main>
