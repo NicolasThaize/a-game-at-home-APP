@@ -51,9 +51,9 @@ class ArticlePages extends React.Component {
             renderArticles.push(
                 <article key={article.id} className="media">
                     <figure className="media-left">
-                        <p className="image is-64x64">
+                        {/*<p className="image is-64x64">
                             <img src="https://bulma.io/images/placeholders/128x128.png" alt="placeholder"/>
-                        </p>
+                        </p>*/}
                     </figure>
                     <div className="media-content">
                         <div className="content">
