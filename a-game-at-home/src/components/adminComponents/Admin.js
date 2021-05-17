@@ -5,6 +5,7 @@ import Proofs from "./adminProofsComponents/Proofs";
 import NotValidatedProofs from "./adminProofValidateComponents/NotValidatedProofs";
 import {Link} from "react-router-dom";
 import '../../assets/css/adminSessions.min.css'
+import AdminArticle from "./adminArticlesComponents/AdminArticle";
 
 class Admin extends React.Component{
   state = {
@@ -38,6 +39,14 @@ class Admin extends React.Component{
             Menu de gestion du site
           </p>
           <ul className="menu-list">
+            <li>
+              <Link
+                to='/admin/articles'
+                className={currentActive === "articles" ? "is-active" : undefined}
+              >
+                Articles
+              </Link>
+            </li>
             <li>
               <Link
                 to='/admin/sessions'
@@ -79,6 +88,7 @@ class Admin extends React.Component{
         </aside>
         <div className="divider is-hidden-tablet mt-3 mb-3"/>
         <div className="column">
+          {currentActive === "articles" ? <AdminArticle/> : undefined}
           {currentActive === "sessions" ? <Sessions/> : undefined}
           {currentActive === "challenges" ? <Challenges/> : undefined}
           {currentActive === "proofs" ? <Proofs/> : undefined}

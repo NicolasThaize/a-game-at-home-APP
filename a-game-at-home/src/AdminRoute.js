@@ -10,6 +10,8 @@ function AdminRoute (props) {
     '/admin/challenges',
     '/admin/proofs/',
     '/admin/proofs',
+    '/admin/articles',
+    '/admin/articles/',
     '/admin/notValidated/',
     '/admin/notValidated'
   ]

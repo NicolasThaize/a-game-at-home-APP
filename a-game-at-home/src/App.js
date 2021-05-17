@@ -120,10 +120,11 @@ class App extends Component {
                   <Route exact path="/Admin/challenges" component={Admin}/>
                   <Route exact path="/Admin/proofs" component={Admin}/>
                   <Route exact path="/Admin/notValidated" component={Admin}/>
+                  <Route exact path="/Admin/articles" component={Admin}/>
                 </AdminRoute>
               </PrivateRoute>
               <Route path='/notfound' component={NotFound}/>
-                <Route path='/*' exact>
+                <Route path='*' exact>
                   <Redirect to='/notfound'/>
                 </Route>
               <Footer/>

@@ -20,6 +20,18 @@ function PrivateRoute (props) {
     '/join/session/validation/',
     '/join/session/actual',
     '/join/session/actual/',
+    '/admin/',
+    '/admin,',
+    '/admin/sessions/',
+    '/admin/sessions',
+    '/admin/challenges/',
+    '/admin/challenges',
+    '/admin/proofs/',
+    '/admin/proofs',
+    '/admin/articles',
+    '/admin/articles/',
+    '/admin/notValidated/',
+    '/admin/notValidated'
   ]
 
   const pathName  = window.location.pathname.toLowerCase()
