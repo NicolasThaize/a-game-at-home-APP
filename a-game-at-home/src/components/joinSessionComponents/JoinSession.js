@@ -68,17 +68,21 @@ class JoinSession extends React.Component{
         <h2 className="title is-2">Rejoindre une session</h2>
         <div className="columns section">
           <div className="columns">
-            <div className="column is-one-quarter has-text-centered">
+            <div className="column is-one-third has-text-centered">
               <h3 className="title is-3">Sélectionnez l'équipe qui rejoindra la session</h3>
-              <div className="select">
-                <select onChange={this.handleSelect}>
-                  {teams.map(team => {
-                    return(
-                      <option key={team.id} value={team.id}>{team.name}</option>
-                    )
-                  })}
-                </select>
-              </div>
+                {teams.length !== 0 ?
+                  <div className="select">
+
+                  <select onChange={this.handleSelect}>
+                    {teams.map(team => {
+                      return(
+                        <option key={team.id} value={team.id}>{team.name}</option>
+                      )
+                    })}
+                  </select>
+                  </div>
+                  : <p>Veuillez créer ou rejoindre une équipe</p>
+                }
             </div>
             <div className="column has-text-centered">
               <h3 className="title is-3">Sélectionnez une session à rejoindre

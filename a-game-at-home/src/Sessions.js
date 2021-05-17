@@ -72,7 +72,6 @@ class SessionsFuncs {
         result.push(session);
       }
     }
-    console.log(result)
     return result;
   }
 
