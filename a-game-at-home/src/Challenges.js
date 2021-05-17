@@ -9,6 +9,14 @@ class ChallengesFuncs {
     return result;
   }
 
+  async getChallengeFromId(id) {
+    let result;
+    await axiosInstance.get("/challenges/" + id + "/").then(r => {
+      result = r.data
+    }).catch(() => {throw Object.assign(new Error("Error while retreviewing the challenge."));})
+    return result;
+  }
+
   /**
    * Makes requests to return all challenges of a session
    * @param id

@@ -1,4 +1,6 @@
 import axiosInstance from "./axiosApi";
+import TeamPoints from "./TeamPoints";
+import ChallengesFuncs from "./Challenges";
 
 class ProofsFuncs {
 
@@ -71,9 +73,21 @@ class ProofsFuncs {
    * @returns {Promise<void>}
    */
   async validateProofByProofId(id){
+    let values;
     await axiosInstance.patch(`/proofs/${id}/`, {validated: 1}).then(r => {
-      return r.data
+      values = r.data
     }).catch(() => {throw Object.assign(new Error("Error while patching proof."));})
+
+    let challenge;
+    await ChallengesFuncs.prototype.getChallengeFromId(values.challenge[0]).then(r => {
+      challenge = r;
+    })
+
+    await TeamPoints.prototype.getTeamPointFromSessionAndTeamId(values.session[0], values.team[0]).then(async r => {
+      await TeamPoints.prototype.addPoints(r.id, challenge.points).then(r => {
+        return r;
+      })
+    }).catch(() => {throw Object.assign(new Error("Error while adding points."));})
   }
 
   /**

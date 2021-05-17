@@ -5,9 +5,7 @@ class TeamPoints {
      let tp;
     await axiosInstance.get(`/team_points/${id}/`).then(r => {
       tp = r.data
-    }).catch(() => {
-      throw Object.assign(new Error("No TeamPoint with this id."));
-    })
+    }).catch(() => {throw Object.assign(new Error("No TeamPoint with this id."));})
      return tp;
   }
 
@@ -27,8 +25,19 @@ class TeamPoints {
     return undefined;
   }
 
-  getTeamPointsFromSessionId(id){
-
+  async addPoints(id, points){
+       let field;
+       let result;
+       await this.getTeamPointFromId(id).then(r => {
+         field = r
+       }).catch(() => {throw Object.assign(new Error("No TeamPoint with this id."));})
+       let newPoints = field.points + points;
+        console.log(field)
+        console.log(newPoints)
+       await axiosInstance.patch(`/team_points/${id}/`, {points: newPoints}).then(r => {
+         result = r.data
+       }).catch(() => {throw Object.assign(new Error("Error while adding points."));})
+       return result
   }
 }
 
