@@ -18,7 +18,17 @@ class User {
           admin: decoded.admin
         });
       }
-    } catch (e) {throw Object.assign(new Error("No valid token stored in localStorage"))}
+    } catch (e) {
+      return ({
+        email: undefined,
+        first_name: undefined,
+        id: undefined,
+        last_name: undefined,
+        username: undefined,
+        birth_date: undefined,
+        admin: false
+      });
+    }
   }
 
   async getUserDataFromId(id) {

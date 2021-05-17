@@ -25,12 +25,15 @@ import './variable.scss';
 
 import User from "./User";
 
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+
 
 
 class App extends Component {
   state = {
-    isLogged: false,
-    isAdmin: false
+    isLogged: !!localStorage.getItem("refresh_token"),
+    isAdmin: User.prototype.getUserData().admin
   }
 
   /**
@@ -60,6 +63,7 @@ class App extends Component {
    * child components who needs a custom display when logged or not
    */
   componentDidMount() {
+    console.log(this.state)
     const isLogged = !!localStorage.getItem("refresh_token");
     this.setState({isLogged: isLogged} , () => {
       if (this.state.isLogged){
@@ -90,31 +94,34 @@ class App extends Component {
               <Navbar isLogged={isLogged} isAdmin={isAdmin}/>
 
               <Route exact path="/" component={Home} />
+              <Route exact path="/Presentation" component={Presentation} />
+              <Route exact path="/Articles" component={Articles} />
 
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />
 
-              <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
-              <Route exact path="/Profile/modify" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
-              <Route exact path="/Profile/sessions" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
-              <Route exact path="/Profile/teams" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
-              <Route exact path="/Profile/teams/:id" component={AddPlayerToTeam}/>
-              <Route exact path="/Profile/join/team" component={JoinTeam}/>
-              <Route exact path="/Profile/create/team" component={CreateTeam}/>
+              <PrivateRoute authed={this.state.isLogged}>
+                <Route exact path="/Profile" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+                <Route exact path="/Profile/modify" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+                <Route exact path="/Profile/sessions" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+                <Route exact path="/Profile/teams" render={() => <MyAccount updateLogout={this.updateLogout} />}/>
+                <Route exact path="/Profile/teams/:id" component={AddPlayerToTeam}/>
+                <Route exact path="/Profile/join/team" component={JoinTeam}/>
+                <Route exact path="/Profile/create/team" component={CreateTeam}/>
 
-              <Route exact path="/join/session" component={JoinSession}/>
-              <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
+                <Route exact path="/join/session" component={JoinSession}/>
+                <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
 
-              <Route exact path="/session/actual" component={ActualSession}/>
+                <Route exact path="/session/actual" component={ActualSession}/>
 
-              <Route exact path="/Presentation" component={Presentation} />
-              <Route exact path="/Articles" component={Articles} />
-
-              <Route exact path="/Admin" component={Admin}/>
-              <Route exact path="/Admin/sessions" component={Admin}/>
-              <Route exact path="/Admin/challenges" component={Admin}/>
-              <Route exact path="/Admin/proofs" component={Admin}/>
-              <Route exact path="/Admin/notValidated" component={Admin}/>
+                <AdminRoute authed={this.state.isAdmin}>
+                  <Route exact path="/Admin" component={Admin}/>
+                  <Route exact path="/Admin/sessions" component={Admin}/>
+                  <Route exact path="/Admin/challenges" component={Admin}/>
+                  <Route exact path="/Admin/proofs" component={Admin}/>
+                  <Route exact path="/Admin/notValidated" component={Admin}/>
+                </AdminRoute>
+              </PrivateRoute>
 
               <Footer/>
             </div>
