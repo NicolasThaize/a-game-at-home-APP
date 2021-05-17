@@ -97,7 +97,6 @@ class ModifySession extends React.Component{
     {
       if (option.selected) {
         selected.push(parseInt(option.value));
-        console.log(option.value)
       }
     }
     this.setState({selectedChallenges: selected})
@@ -112,7 +111,6 @@ class ModifySession extends React.Component{
       result[input.name] = input.value
     }
     result['challenges'] = this.state.selectedChallenges;
-    console.log(this.state.selectedChallenges)
     axiosInstance.patch(`/sessions/${this.state.session.id}/`, result).then(() => {
       this.props.refreshSessions();
       this.setState({selectedChallenges: [], challenges: []})

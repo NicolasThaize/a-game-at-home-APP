@@ -45,6 +45,47 @@ class ProofsFuncs {
     }
     return result;
   }
+
+
+  /**
+   * Makes a request to get all proofs and make a filter to get only the ones who has never been validated
+   * @returns {Promise<*[]>}
+   */
+  async getProofsNotValidated(){
+    let proofs = []
+    let result = []
+    await this.getAllProofs().then(r => {
+      proofs = r;
+    }).catch(() => {throw Object.assign(new Error("Error while retreviewing all proofs."));})
+    for (const proof of proofs){
+      if (proof.validated === 3){
+        result.push(proof)
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Makes a patch request on /proofs/:id and set validated to 1 (Validated)
+   * @param id
+   * @returns {Promise<void>}
+   */
+  async validateProofByProofId(id){
+    await axiosInstance.patch(`/proofs/${id}/`, {validated: 1}).then(r => {
+      return r.data
+    }).catch(() => {throw Object.assign(new Error("Error while patching proof."));})
+  }
+
+  /**
+   * Makes a patch request on /proofs/:id and set validated to 0 (failed)
+   * @param id
+   * @returns {Promise<void>}
+   */
+  async failedProofByProofId(id){
+    await axiosInstance.patch(`/proofs/${id}/`, {validated: 0}).then(r => {
+      return r.data
+    }).catch(() => {throw Object.assign(new Error("Error while patching proof."));})
+  }
 }
 
 export default ProofsFuncs;

@@ -27,6 +27,7 @@ class Proofs extends React.Component{
     const { proofs, isShowActive, selectedProof } = this.state;
     return (
       <div>
+        {proofs.length === 0 ? <p>Aucune preuve.</p> : undefined}
         <div className='columns is-hidden-mobile'>
           <div className='column'>
             <p><strong>Id de la preuve</strong></p>
