@@ -49,7 +49,7 @@ class ProofsState extends React.Component{
               break;
           }
           return (
-            <div key={challenge.id} className='box'>
+            <div key={challenge.id+challenge.state} className='box'>
               <h6 className='title is-6'>{challenge.name}</h6>
               <p>{challenge.description}</p>
               <p className={isValidated.class}>{isValidated.text}</p>

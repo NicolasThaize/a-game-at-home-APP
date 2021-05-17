@@ -5,7 +5,9 @@ class AvailableChallenges extends React.Component{
   state = {
     challenges: this.props.challenges,
     isSendProofActive: false,
-    activeChallenge: ''
+    activeChallenge: '',
+    session: this.props.session,
+    team: this.props.team
   }
 
   /**
@@ -25,7 +27,7 @@ class AvailableChallenges extends React.Component{
   }
 
   render() {
-    const {challenges ,isSendProofActive, activeChallenge} = this.state;
+    const {challenges ,isSendProofActive, activeChallenge, session,team} = this.state;
     return (
       <div>
         <h3 className="title is-3">Challenges restants</h3>
@@ -48,6 +50,8 @@ class AvailableChallenges extends React.Component{
           <SendProofModal
             triggerModal={this.triggerSendProofModal}
             challenge={activeChallenge}
+            session={session}
+            team={team}
           /> : undefined}
       </div>
     );

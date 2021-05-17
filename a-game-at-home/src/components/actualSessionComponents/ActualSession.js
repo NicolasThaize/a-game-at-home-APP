@@ -42,19 +42,20 @@ class ActualSession extends React.Component{
     })
 
     await ChallengesFuncs.prototype.getNotCompletedChallenges(this.state.session.id, this.state.proofs).then(r => {
-        this.setState({notFinishedChallenges: r})
-      }
+      this.setState({notFinishedChallenges: r})
+    }
     )
   }
 
+
   render() {
-    const { session, error, proofs, notFinishedChallenges } = this.state;
+    const { session, error, proofs, notFinishedChallenges, team } = this.state;
     return (
       <div className="section">
         <h2 className='title is-2'>Session: {session.name}</h2>
         <div className="columns">
           <div className='column'><ProofsState proofs={proofs}/></div>
-          <div className='column'><AvailableChallenges challenges={notFinishedChallenges}/></div>
+          <div className='column'><AvailableChallenges challenges={notFinishedChallenges} session={session} team={team}/></div>
         </div>
         {error ? <p className='has-text-weight-bold has-text-danger'>{error}</p> : undefined}
       </div>

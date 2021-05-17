@@ -32,7 +32,6 @@ class ChallengesFuncs {
 
   async getNotCompletedChallenges(sessionId, proofs){
     let challenges = [];
-    let result = [];
     let proofsIds = [];
 
     for (const proof of proofs){
@@ -44,13 +43,12 @@ class ChallengesFuncs {
     }).catch(() => {throw Object.assign(new Error("No challenge with this id."));})
 
     for (const challenge of challenges){
-      for (const challengeId of proofsIds){
-        if (challenge.id !== challengeId){
-          result.push(challenge);
-        }
+      let found = proofsIds.find(el => el === challenge.id)
+      if (found !== undefined){
+        challenges = challenges.filter(el => el.id !== found)
       }
     }
-    return result;
+    return challenges;
   }
 }
 

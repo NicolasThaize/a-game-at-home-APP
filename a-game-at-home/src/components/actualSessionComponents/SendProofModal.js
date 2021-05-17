@@ -1,12 +1,16 @@
 import React from "react";
+import axiosInstance from "../../axiosApi";
 
 class SendProofModal extends React.Component{
   state = {
     triggerModal: this.props.triggerModal,
+    session: this.props.session,
+    team: this.props.team,
     error:'',
     svgUpload: process.env.PUBLIC_URL + "/img/svgUpload.svg",
     challenge: this.props.challenge,
-    fileName: "Sélectionnez un fichier"
+    fileName: "Sélectionnez un fichier",
+    formData: ''
   }
 
   /**
@@ -21,17 +25,43 @@ class SendProofModal extends React.Component{
     if(files.length > 1){
       return this.setState({error: 'Veuillez sélectionner un seul fichier'})
     }
-    const formData = new FormData();
-    formData.append(
-      files[0].name,
-      files[0],
-      files[0].name
-    );
 
-    console.log(formData)
     this.setState({fileName: files[0].name})
-    console.log("files:", files)
-}
+
+    let extension = files[0].name.split('.');
+    extension = "." + extension[extension.length-1]
+    extension = extension.toLowerCase();
+
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg" && extension !== ".mp4"){
+      return this.setState({error: 'Veuillez sélectionner fichier au bon format (.png,.jpg,.jpeg,.mp4'})
+    }
+
+    const fileSize = files[0].size * 9.537*Math.pow(10, -7);
+    if (fileSize > 10){
+      return this.setState({error: 'Veuillez sélectionner fichier de moins de 10 MB'})
+    }
+
+    let formData = new FormData();
+    if (extension === '.mp4'){
+      formData.append("video", files[0]);
+    } else{
+      formData.append("photo", files[0]);
+    }
+    formData.append("challenge", [this.state.challenge.id]);
+    formData.append("session", [this.state.session.id]);
+    formData.append("team", [this.state.team.id]);
+    this.setState({formData: formData})
+  }
+
+  sendProof = () => {
+    const formData = this.state.formData;
+    axiosInstance.post('/proofs/',formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      }}).then(() => {
+        this.closeModal()
+    });
+  }
 
   render() {
     const { error, svgUpload, challenge, fileName } = this.state;
@@ -48,7 +78,7 @@ class SendProofModal extends React.Component{
             </div>
             <div className="file has-name is-boxed column">
               <label className="file-label">
-                <input className="file-input" type="file" name="resume" onChange={this.handleFileSelected}/>
+                <input className="file-input" type="file" accept=".png,.jpg,.jpeg,.mp4" onChange={this.handleFileSelected}/>
               <span className="file-cta">
                 <span className="file-icon">
                   <img src={svgUpload} alt='svg upload' />
@@ -60,11 +90,11 @@ class SendProofModal extends React.Component{
               <span className="file-name">{fileName}</span>
               </label>
             </div>
-            {error ? error : undefined}
           </section>
           <footer className="modal-card-foot">
-            <button className="button is-primary" onClick={this.saveChanges}>Envoyer</button>
+            <button className="button is-primary" onClick={this.sendProof}>Envoyer</button>
             <button className="button" onClick={this.closeModal}>Fermer</button>
+            {error ? <p className='has-text-weight-bold has-text-danger'>{error}</p> : undefined}
           </footer>
         </div>
         <button className="modal-close is-large" aria-label="close" type="button" onClick={this.closeModal}/>
