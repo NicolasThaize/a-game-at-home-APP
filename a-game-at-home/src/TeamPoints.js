@@ -12,9 +12,11 @@ class TeamPoints {
   }
 
   async getTeamPointFromSessionAndTeamId(sessionId, teamId){
+       teamId = parseInt(teamId);
+       sessionId = parseInt(sessionId);
     let tp;
     await axiosInstance.get(`/team_points/`).then(r => {
-      tp = r.data
+        tp = r.data
     }).catch(() => {
       throw Object.assign(new Error("No TeamPoint with this id."));
     })
@@ -24,7 +26,7 @@ class TeamPoints {
         return point
       }
     }
-    return undefined;
+    return tp;
   }
 
   getTeamPointsFromSessionId(id){
