@@ -1,7 +1,7 @@
 import React from "react";
 import Sessions from "./adminSessionsComponents/Sessions";
 import Challenges from "./adminChallengesComponents/Challenges";
-import Proofs from "./Proofs";
+import Proofs from "./adminProofsComponents/Proofs";
 import NotValidatedProofs from "./NotValidatedProofs";
 import {Link} from "react-router-dom";
 import '../../assets/css/adminSessions.min.css'
