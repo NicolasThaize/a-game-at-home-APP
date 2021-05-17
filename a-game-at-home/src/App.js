@@ -18,6 +18,8 @@ import JoinSessionValidation from "./components/joinSessionComponents/JoinSessio
 import ActualSession from "./components/actualSessionComponents/ActualSession";
 import MyAccount from "./components/myAccountComponents/MyAccount";
 import NotFound from "./components/notFoundComponents/NotFound";
+import Ranking from "./components/rankingComponent/Ranking";
+
 // Importing css for global css in the app
 import './assets/css/default.min.css';
 //Importing the variables of bulma to make custom variables work
@@ -113,6 +115,9 @@ class App extends Component {
                 <Route exact path="/join/session/validation" render={(props) => <JoinSessionValidation {...props}/>}/>
 
                 <Route exact path="/session/actual" component={ActualSession}/>
+                <Route exact path="/Presentation" component={Presentation} />
+                <Route exact path="/Articles" component={Articles} />
+                <Route exact path="/Ranking" component={Ranking} />
 
                 <AdminRoute authed={this.state.isAdmin}>
                   <Route exact path="/Admin" component={Admin}/>

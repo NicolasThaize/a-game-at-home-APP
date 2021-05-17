@@ -94,9 +94,9 @@ class Navbar extends React.Component {
                             Presentation
                         </Link>
 
-                        <Link to="/" className="navbar-item">
-                            Classements
-                        </Link>
+            <Link to="/Ranking" className="navbar-item">
+              Classements
+            </Link>
 
             <Link to="/Articles" className="navbar-item">
               Articles

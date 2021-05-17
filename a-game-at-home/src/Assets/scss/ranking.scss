@@ -1,0 +1,75 @@
+.Ranking{
+  h1{
+    margin-top:20px;
+    font-size:1.5em;
+    text-align:center;
+  }
+  .SessionSelector{
+    text-align:center;
+
+    display: flex;
+    flex-flow : row nowrap;
+    justify-content: center;
+    margin-top:20px;
+  }
+  .sessionOptions{
+    width:80%;
+  }
+
+.table-wrapper {
+  width: 90%;
+  height: auto;
+  overflow: auto;
+  border-radius: 10px;
+  margin: 20px auto 200px;
+  text-align: center;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+  0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+  0 12.5px 10px rgba(0, 0, 0, 0.06),
+  0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+  0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+  0 100px 80px rgba(0, 0, 0, 0.12);
+
+  table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border-style: hidden;
+    width: 100%;
+    max-width: 100%;
+
+    tr:nth-child(even) {
+      background-color: #f1f1f1;
+    }
+
+    th {
+      padding: 10px;
+      color: white;
+    }
+
+    td {
+      border-right: 1px solid lightgrey;
+      padding: 20px;
+    }
+  }
+}
+}
+
+@media screen and (min-width: 800px) and(max-width: 1500px) {
+  .Ranking{
+    .sessionOptions{
+      width:40%;
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .Ranking {
+    .sessionOptions {
+      width: 30%;
+    }
+
+    .table-wrapper {
+      width: 70%;
+    }
+  }
+}
