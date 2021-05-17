@@ -68,7 +68,7 @@ class JoinSession extends React.Component{
         <h2 className="title is-2">Rejoindre une session</h2>
         <div className="columns section">
           <div className="columns">
-            <div className="column is-one-third has-text-centered">
+            <div className="column is-one-fifth has-text-centered">
               <h3 className="title is-3">Sélectionnez l'équipe qui rejoindra la session</h3>
                 {teams.length !== 0 ?
                   <div className="select">
