@@ -63,13 +63,11 @@ class SendProofModal extends React.Component{
   sendProof = () => {
     const formData = this.state.formData;
     axiosInstance.post('/proofs/',formData, {headers: {"Content-Type": "multipart/form-data"}}).then(r => {
-      console.log(this.state.team, this.state.session.id, this.state.challenge.id)
       axiosInstance.patch(`/proofs/${r.data.id}/`, {
         challenge: [this.state.challenge.id],
         session: [this.state.session.id],
         team: [this.state.team.id]
       }).then(r => {
-        console.log(r)
         this.closeModal()
 
       })

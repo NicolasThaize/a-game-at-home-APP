@@ -34,8 +34,6 @@ class TeamPoints {
          field = r
        }).catch(() => {throw Object.assign(new Error("No TeamPoint with this id."));})
        let newPoints = field.points + points;
-        console.log(field)
-        console.log(newPoints)
        await axiosInstance.patch(`/team_points/${id}/`, {points: newPoints}).then(r => {
          result = r.data
        }).catch(() => {throw Object.assign(new Error("Error while adding points."));})

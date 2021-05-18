@@ -91,7 +91,6 @@ class User {
       response = r.data;
       }).catch(() => {throw Object.assign(new Error("Error while adding an user to a team."));})
     await axiosInstance.delete(`/user_team_authorized/${idToDelete}/`).then(r => {
-      console.log(r)
     }).catch(() => {throw Object.assign(new Error("Error while deleting an user team authorized."));})
     return response;
   }

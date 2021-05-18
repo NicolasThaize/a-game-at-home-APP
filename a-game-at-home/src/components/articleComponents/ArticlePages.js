@@ -48,7 +48,6 @@ class ArticlePages extends React.Component {
 
         let renderArticles = [];
         for (let article of currentArticles) {
-            console.log(article)
             renderArticles.push(
                 <article key={article.id} className="media">
                     <figure className="media-left">
