@@ -38,8 +38,8 @@ class ProofValidateModal extends React.Component{
             <p><strong>Nom du défi: </strong>{proof.challenge[0].name}</p>
             <p><strong>Description du défi: </strong>{proof.challenge[0].description}</p>
             <p><strong>Preuve de l'utilisateur: </strong></p>
-            { proof.photo !== "http://127.0.0.1:8000/media/proofsPhotos/None/No-photo.jpg" ? <img src={proof.photo} alt="proof"/> : undefined }
-            { proof.video !== "http://127.0.0.1:8000/media/proofsVideos/None/No-video.jpg" ? (
+            { proof.photo !== "http://192.168.0.5:8000/media/proofsPhotos/None/No-photo.jpg" ? <img src={proof.photo} alt="proof"/> : undefined }
+            { proof.video !== "http://192.168.0.5:8000/media/proofsVideos/None/No-video.jpg" ? (
               <video controls>
                 <source src={proof.video}
                         type="video/mp4" />

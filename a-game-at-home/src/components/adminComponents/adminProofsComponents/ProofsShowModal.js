@@ -20,8 +20,8 @@ class ProofsShowModal extends React.Component{
             <p className="modal-card-title">Preuve</p>
           </header>
           <section className="modal-card-body">
-            { proof.photo !== "http://127.0.0.1:8000/media/proofsPhotos/None/No-photo.jpg" ? <img src={proof.photo} alt="proof"/> : undefined }
-            { proof.video !== "http://127.0.0.1:8000/media/proofsVideos/None/No-video.jpg" ? (
+            { proof.photo !== "http://192.168.0.5:8000/media/proofsPhotos/None/No-photo.jpg" ? <img src={proof.photo} alt="proof"/> : undefined }
+            { proof.video !== "http://192.168.0.5:8000/media/proofsVideos/None/No-video.jpg" ? (
               <video controls>
               <source src={proof.video}
               type="video/mp4" />
