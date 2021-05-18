@@ -30,6 +30,7 @@ import User from "./User";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import {Redirect} from "react-router";
+import Contact from "./components/contactComponents/Contact";
 
 
 
@@ -99,6 +100,7 @@ class App extends Component {
               <Route exact path="/Presentation" component={Presentation} />
               <Route exact path="/Articles" component={Articles} />
               <Route exact path="/Ranking" component={Ranking} />
+              <Route exact path="/Contact" component={Contact} />
 
               <Route exact path="/Login"  render={() => <LoginRegisterButton updateLogin={this.updateLogin} />} />
               <Route exact path="/Register" component={LoginRegisterButton} />

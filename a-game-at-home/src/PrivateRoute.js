@@ -31,7 +31,9 @@ function PrivateRoute (props) {
     '/admin/articles',
     '/admin/articles/',
     '/admin/notValidated/',
-    '/admin/notValidated'
+    '/admin/notValidated',
+    '/admin/contact',
+    '/admin/notValidated/'
   ]
 
   const pathName  = window.location.pathname.toLowerCase()

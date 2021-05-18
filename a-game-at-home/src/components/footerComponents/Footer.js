@@ -14,7 +14,7 @@ class Footer extends React.Component {
                     <p className="columns is-centered is-vcentered">
                         © 2021&nbsp;<b>At Home a Game</b>.&nbsp;<Link to="/" className="noWrap">Conditions générales
                         d'utilisation</Link>,
-                        &nbsp;<Link to="link" className="button is-primary">Nous contacter</Link>
+                        &nbsp;<Link to="/contact" className="button is-primary">Nous contacter</Link>
                     </p>
                 </div>
             </footer>
