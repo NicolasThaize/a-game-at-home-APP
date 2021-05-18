@@ -48,6 +48,7 @@ class ArticlePages extends React.Component {
 
         let renderArticles = [];
         for (let article of currentArticles) {
+            console.log(article)
             renderArticles.push(
                 <article key={article.id} className="media">
                     <figure className="media-left">
@@ -58,10 +59,9 @@ class ArticlePages extends React.Component {
                     <div className="media-content">
                         <div className="content">
                             <strong>{article.author}</strong> <small className="nametag">@{article.author}</small>
-                            <small className="timecode">31m</small>
                             <br/>
                             <p className="title is-4"><i>{article.title}</i></p>
-                            {article.textContent}
+                            {article.text_content}
                             <br/>
                             <a href="https://bulma.io/">Like</a> - <a href="https://bulma.io/">Share</a>
                         </div>
