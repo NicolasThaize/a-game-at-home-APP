@@ -17,7 +17,6 @@ import JoinSession from "./components/joinSessionComponents/JoinSession";
 import JoinSessionValidation from "./components/joinSessionComponents/JoinSessionValidation";
 import ActualSession from "./components/actualSessionComponents/ActualSession";
 import MyAccount from "./components/myAccountComponents/MyAccount";
-import NotFound from "./components/notFoundComponents/NotFound";
 import Ranking from "./components/rankingComponent/Ranking";
 
 // Importing css for global css in the app
@@ -29,7 +28,6 @@ import User from "./User";
 
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
-import {Redirect} from "react-router";
 import Contact from "./components/contactComponents/Contact";
 
 
@@ -129,10 +127,6 @@ class App extends Component {
                   <Route exact path="/Admin/articles" component={Admin}/>
                 </AdminRoute>
               </PrivateRoute>
-              <Route path='/notfound' component={NotFound}/>
-                <Route path='*' exact>
-                  <Redirect to='/notfound'/>
-                </Route>
               <Footer/>
             </div>
           </main>
